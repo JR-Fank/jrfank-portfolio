@@ -1,0 +1,63 @@
+:root {
+  --font-display: "Cormorant Garamond", "Bodoni 72", Didot, "Times New Roman", serif;
+  --font-sans: "IBM Plex Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-tc: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --tracking-display: -0.1em;
+
+  --canvas: #0e1012;
+  --ink: #f3f6fa;
+  --panel: #111416;
+  --transition-surface: #0e1012;
+  --nav-surface: rgb(14 16 18 / 78%);
+  --hairline: rgb(243 246 250 / 76%);
+  --quiet: rgb(243 246 250 / 68%);
+  --media-radius: 32px;
+
+  --nav-height: 64px;
+  --page-gutter: 64px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --space-7: 64px;
+  --space-8: 96px;
+
+  --text-display-1: clamp(4.5rem, 7.5vw, 6.75rem);
+  --text-display-2: clamp(3.5rem, 6.8vw, 6.125rem);
+  --text-footer: clamp(2rem, 3vw, 2.625rem);
+  --text-body: 1rem;
+  --text-label: 0.625rem;
+
+  --z-grain: 5;
+  --z-nav: 80;
+  --z-menu: 70;
+  --z-transition: 100;
+}
+
+html.light-mode {
+  --canvas: #e8e5f0;
+  --ink: #1a4572;
+  --panel: #fff;
+  --transition-surface: #fff;
+  --nav-surface: rgb(232 229 240 / 75%);
+  --hairline: rgb(26 69 114 / 74%);
+  --quiet: rgb(26 69 114 / 68%);
+}
+
+@media (max-width: 991px) {
+  :root { --page-gutter: 48px; }
+}
+
+@media (max-width: 767px) {
+  :root { --page-gutter: 32px; }
+}
+
+@media (max-width: 479px) {
+  :root {
+    --page-gutter: 24px;
+    --media-radius: 30px;
+    --text-display-1: 12.2vw;
+  }
+}

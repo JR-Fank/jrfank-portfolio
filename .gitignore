@@ -1,0 +1,30 @@
+# Dependencies and generated application output
+node_modules/
+.next/
+out/
+
+# Local environment and deployment credentials
+.env
+.env.*
+!.env.example
+.dev.vars
+.dev.vars.*
+
+# Temporary validation artifacts and local caches
+work/
+.playwright-cli/
+*.tsbuildinfo
+*.log
+.cache/
+.turbo/
+.vercel/
+.wrangler/
+coverage/
+playwright-report/
+test-results/
+
+# OS and editor metadata
+.DS_Store
+Thumbs.db
+*.swp
+*.swo

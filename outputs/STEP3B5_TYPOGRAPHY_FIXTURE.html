@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>STEP 3B.5 Typography Metric Fixture</title>
+  <style>
+    @font-face {
+      font-family: "Fixture Bodoni Moda";
+      src: url("../node_modules/@fontsource-variable/bodoni-moda/files/bodoni-moda-latin-wght-normal.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 400 900;
+      font-display: block;
+    }
+
+    @font-face {
+      font-family: "Fixture Cormorant Garamond";
+      src: url("../node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-400-normal.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 400;
+      font-display: block;
+    }
+
+    @font-face {
+      font-family: "Fixture IBM Plex Sans";
+      src: url("../node_modules/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-500-normal.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 500;
+      font-display: block;
+    }
+
+    @font-face {
+      font-family: "Fixture Work Sans";
+      src: url("../node_modules/@fontsource-variable/work-sans/files/work-sans-latin-wght-normal.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: block;
+    }
+
+    @font-face {
+      font-family: "Fixture Noto Sans TC";
+      src: url("../node_modules/@fontsource/noto-sans-tc/files/noto-sans-tc-chinese-traditional-500-normal.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 500;
+      font-display: block;
+    }
+
+    :root {
+      --paper: #e8e5f0;
+      --ink: #173f69;
+      --hairline: rgb(23 63 105 / 28%);
+      --quiet: rgb(23 63 105 / 64%);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Fixture IBM Plex Sans", sans-serif;
+      font-size: 12px;
+    }
+
+    main { width: min(1312px, calc(100% - 64px)); margin: 0 auto; padding: 54px 0 96px; }
+    header { display: grid; margin-bottom: 68px; grid-template-columns: 1fr auto; align-items: end; }
+    h1 { margin: 0; font-size: 18px; font-weight: 500; letter-spacing: -.02em; }
+    .status { color: var(--quiet); font-size: 10px; letter-spacing: .05em; text-transform: uppercase; }
+    section { padding: 36px 0 42px; border-top: 1px solid var(--hairline); }
+    .section-head { display: grid; margin-bottom: 26px; grid-template-columns: 180px 1fr; }
+    h2 { margin: 0; font-size: 10px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; }
+    .note { max-width: 720px; margin: 0; color: var(--quiet); line-height: 1.55; }
+    .specimen { display: grid; margin-top: 14px; grid-template-columns: 180px 1fr; align-items: start; }
+    .label { padding-top: 8px; color: var(--quiet); font-size: 10px; letter-spacing: .04em; text-transform: uppercase; }
+    .display { font-size: 108px; font-weight: 400; letter-spacing: 0; line-height: 1; text-transform: uppercase; }
+    .display span { display: block; width: max-content; max-width: 100%; }
+    .bodoni { font-family: "Fixture Bodoni Moda", serif; font-optical-sizing: auto; }
+    .cormorant { font-family: "Fixture Cormorant Garamond", serif; }
+    .cormorant-calibrated { letter-spacing: -.1em; font-variant-numeric: lining-nums; }
+    .system-display { font-family: "Bodoni 72 Smallcaps", "Bodoni 72", Didot, serif; }
+    .ui-row { display: flex; min-height: 52px; align-items: center; gap: 8px; }
+    .pill { display: inline-flex; height: 32px; align-items: center; padding: 0 14px; border: 1px solid currentColor; border-radius: 999px; font-size: 10px; font-weight: 500; line-height: 1; text-transform: uppercase; }
+    .ibm { font-family: "Fixture IBM Plex Sans", sans-serif; }
+    .work { font-family: "Fixture Work Sans", sans-serif; }
+    .system-sans { font-family: "Helvetica Neue", Helvetica, sans-serif; }
+    .project { font-size: 98px; letter-spacing: -.025em; line-height: 1; text-transform: uppercase; }
+    .meta { display: flex; align-items: baseline; gap: 14px; font-size: 11px; font-weight: 500; text-transform: uppercase; }
+    .tc { font-family: "Fixture Noto Sans TC", "PingFang TC", sans-serif; font-size: 54px; font-weight: 500; letter-spacing: .08em; line-height: 1.2; }
+    .tc-system { font-family: "PingFang TC", sans-serif; }
+    .metrics { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    .metrics th, .metrics td { padding: 10px 8px; border-bottom: 1px solid var(--hairline); text-align: left; }
+    .metrics th { color: var(--quiet); font-size: 9px; font-weight: 500; text-transform: uppercase; }
+    .metrics td:nth-child(n+3) { text-align: right; }
+
+    @media (max-width: 767px) {
+      main { width: calc(100% - 48px); padding-top: 32px; }
+      header, .section-head, .specimen { grid-template-columns: 1fr; gap: 12px; }
+      .display { font-size: 14vw; }
+      .project { font-size: 13vw; }
+      .label { padding-top: 0; }
+      .metrics { font-size: 9px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>STEP 3B.5 / TYPOGRAPHY METRIC FIXTURE</h1>
+      <span class="status">1440 × 900 reference scale · 108/108 display</span>
+    </header>
+
+    <section>
+      <div class="section-head">
+        <h2>Display heading</h2>
+        <p class="note">The Reference measurement string is used only as a metric specimen. Compare glyph width, cap height, contrast, spacing, line breaks, and density—not brand identity.</p>
+      </div>
+      <div class="specimen">
+        <span class="label">Bodoni Moda</span>
+        <div class="display bodoni" data-family="Bodoni Moda"><span>GIULIA GARTNER</span><span>PHOTOGRAPHER &amp;</span><span>FILMMAKER</span></div>
+      </div>
+      <div class="specimen">
+        <span class="label">Cormorant Garamond</span>
+        <div class="display cormorant" data-family="Cormorant Garamond"><span>GIULIA GARTNER</span><span>PHOTOGRAPHER &amp;</span><span>FILMMAKER</span></div>
+      </div>
+      <div class="specimen">
+        <span class="label">Cormorant / calibrated</span>
+        <div class="display cormorant cormorant-calibrated" data-family="Cormorant calibrated"><span>GIULIA GARTNER</span><span>PHOTOGRAPHER &amp;</span><span>FILMMAKER</span></div>
+      </div>
+      <div class="specimen">
+        <span class="label">Existing system stack</span>
+        <div class="display system-display" data-family="Bodoni 72 system"><span>GIULIA GARTNER</span><span>PHOTOGRAPHER &amp;</span><span>FILMMAKER</span></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>Project title</h2>
+        <p class="note">Representative 98/98 project title with a neutral, project-owned placeholder.</p>
+      </div>
+      <div class="specimen"><span class="label">Bodoni Moda</span><div class="project bodoni">PROJECT 01</div></div>
+      <div class="specimen"><span class="label">Cormorant Garamond</span><div class="project cormorant">PROJECT 01</div></div>
+      <div class="specimen"><span class="label">Cormorant / calibrated</span><div class="project cormorant cormorant-calibrated">PROJECT 01</div></div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>Navigation + metadata</h2>
+        <p class="note">Reference UI is compact, uppercase, and dense at 10–11 px. Pill geometry remains fixed at 32 px.</p>
+      </div>
+      <div class="specimen"><span class="label">IBM Plex Sans</span><div class="ui-row ibm"><span class="pill">Stills</span><span class="pill">Motion</span><span class="pill">About</span><span class="meta">2026 · Hong Kong · 香港</span></div></div>
+      <div class="specimen"><span class="label">Work Sans</span><div class="ui-row work"><span class="pill">Stills</span><span class="pill">Motion</span><span class="pill">About</span><span class="meta">2026 · Hong Kong · 香港</span></div></div>
+      <div class="specimen"><span class="label">Existing system stack</span><div class="ui-row system-sans"><span class="pill">Stills</span><span class="pill">Motion</span><span class="pill">About</span><span class="meta">2026 · Hong Kong · 香港</span></div></div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>Traditional Chinese</h2>
+        <p class="note">The TC test covers display-scale glyph density and compact metadata. The production token remains independently replaceable.</p>
+      </div>
+      <div class="specimen"><span class="label">Noto Sans TC</span><div class="tc" data-family="Noto Sans TC">攝影與動態影像<br><span class="meta">香港 · 作品集 · 專案 01</span></div></div>
+      <div class="specimen"><span class="label">PingFang TC system</span><div class="tc tc-system" data-family="PingFang TC">攝影與動態影像<br><span class="meta">香港 · 作品集 · 專案 01</span></div></div>
+    </section>
+
+    <section>
+      <div class="section-head"><h2>Measured widths</h2><p class="note">Values are generated after `document.fonts.ready` at the fixture's rendered scale.</p></div>
+      <table class="metrics">
+        <thead><tr><th>Family</th><th>String</th><th>Width</th><th>Height</th><th>Reference target</th><th>Width delta</th></tr></thead>
+        <tbody id="metrics-body"></tbody>
+      </table>
+    </section>
+  </main>
+  <script>
+    document.fonts.ready.then(() => {
+      const body = document.querySelector('#metrics-body');
+      const selectors = ['.display[data-family] span', '.tc[data-family]'];
+      const targets = new Map([
+        ['GIULIA GARTNER', 690],
+        ['PHOTOGRAPHER &', 771],
+        ['FILMMAKER', 506],
+      ]);
+      for (const element of document.querySelectorAll(selectors.join(','))) {
+        const owner = element.matches('.tc') ? element : element.parentElement;
+        const rect = element.getBoundingClientRect();
+        const text = element.textContent.trim();
+        const target = targets.get(text);
+        const delta = target ? ((rect.width / target) - 1) * 100 : null;
+        const row = document.createElement('tr');
+        row.innerHTML = `<td>${owner.dataset.family}</td><td>${text}</td><td>${rect.width.toFixed(1)} px</td><td>${rect.height.toFixed(1)} px</td><td>${target ? `${target} px` : '—'}</td><td>${delta === null ? '—' : `${delta >= 0 ? '+' : ''}${delta.toFixed(1)}%`}</td>`;
+        body.append(row);
+      }
+      document.documentElement.dataset.fontsReady = 'true';
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+:lang(zh-Hant) {
+  font-family: var(--font-tc);
+}
+
+h1,
+h2,
+h3,
+.site-wordmark,
+.menu-links,
+.footer-email {
+  font-family: var(--font-display);
+  font-variant-numeric: lining-nums;
+  font-weight: 400;
+}
+
+.outline-pill,
+.placeholder-eyebrow,
+.placeholder-copy p,
+.foundation-marker,
+.footer-helper,
+.footer-meta {
+  font-family: var(--font-sans);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  text-transform: uppercase;
+}

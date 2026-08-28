@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "generatedAt": "2026-08-28T05:54:00.000Z",
+  "sourceFingerprint": "step-3b5-neutral-mock-v2",
+  "assets": {
+    "site.home-hero": {
+      "kind": "image",
+      "id": "site.home-hero",
+      "width": 1920,
+      "height": 1200,
+      "aspectRatio": 1.6,
+      "alt": "Abstract blue placeholder field",
+      "dominantColor": "#27465a",
+      "focalPoint": { "x": 0.5, "y": 0.5 },
+      "variants": [
+        { "width": 640, "format": "avif", "key": "site/home/home-hero-640-mockv1.avif", "bytes": 0, "hash": "mockv1" },
+        { "width": 1280, "format": "avif", "key": "site/home/home-hero-1280-mockv1.avif", "bytes": 0, "hash": "mockv1" },
+        { "width": 1920, "format": "avif", "key": "site/home/home-hero-1920-mockv1.avif", "bytes": 0, "hash": "mockv1" },
+        { "width": 640, "format": "webp", "key": "site/home/home-hero-640-mockv1.webp", "bytes": 0, "hash": "mockv1" },
+        { "width": 1280, "format": "webp", "key": "site/home/home-hero-1280-mockv1.webp", "bytes": 0, "hash": "mockv1" },
+        { "width": 1920, "format": "webp", "key": "site/home/home-hero-1920-mockv1.webp", "bytes": 0, "hash": "mockv1" },
+        { "width": 640, "format": "jpg", "key": "site/home/home-hero-640-mockv1.jpg", "bytes": 0, "hash": "mockv1" },
+        { "width": 1280, "format": "jpg", "key": "site/home/home-hero-1280-mockv1.jpg", "bytes": 0, "hash": "mockv1" },
+        { "width": 1920, "format": "jpg", "key": "site/home/home-hero-1920-mockv1.jpg", "bytes": 0, "hash": "mockv1" }
+      ]
+    },
+    "stills.project-01.cover": {
+      "kind": "image",
+      "id": "stills.project-01.cover",
+      "width": 1600,
+      "height": 2000,
+      "aspectRatio": 0.8,
+      "alt": "Abstract ochre and blue placeholder field",
+      "dominantColor": "#6d8892",
+      "focalPoint": { "x": 0.5, "y": 0.45 },
+      "variants": [
+        { "width": 640, "format": "avif", "key": "stills/project-01/cover/project-01-cover-640-mockv1.avif", "bytes": 0, "hash": "mockv1" },
+        { "width": 1280, "format": "avif", "key": "stills/project-01/cover/project-01-cover-1280-mockv1.avif", "bytes": 0, "hash": "mockv1" },
+        { "width": 640, "format": "webp", "key": "stills/project-01/cover/project-01-cover-640-mockv1.webp", "bytes": 0, "hash": "mockv1" },
+        { "width": 1280, "format": "webp", "key": "stills/project-01/cover/project-01-cover-1280-mockv1.webp", "bytes": 0, "hash": "mockv1" },
+        { "width": 640, "format": "jpg", "key": "stills/project-01/cover/project-01-cover-640-mockv1.jpg", "bytes": 0, "hash": "mockv1" },
+        { "width": 1280, "format": "jpg", "key": "stills/project-01/cover/project-01-cover-1280-mockv1.jpg", "bytes": 0, "hash": "mockv1" }
+      ]
+    },
+    "motion.project-01.poster": {
+      "kind": "image",
+      "id": "motion.project-01.poster",
+      "width": 1920,
+      "height": 1080,
+      "aspectRatio": 1.7777777778,
+      "alt": "Abstract charcoal and amber motion poster placeholder",
+      "dominantColor": "#342b28",
+      "focalPoint": { "x": 0.5, "y": 0.5 },
+      "variants": [
+        { "width": 640, "format": "avif", "key": "motion/project-01/poster/project-01-poster-640-mockv1.avif", "bytes": 0, "hash": "mockv1" },
+        { "width": 1280, "format": "avif", "key": "motion/project-01/poster/project-01-poster-1280-mockv1.avif", "bytes": 0, "hash": "mockv1" },
+        { "width": 1920, "format": "avif", "key": "motion/project-01/poster/project-01-poster-1920-mockv1.avif", "bytes": 0, "hash": "mockv1" },
+        { "width": 640, "format": "webp", "key": "motion/project-01/poster/project-01-poster-640-mockv1.webp", "bytes": 0, "hash": "mockv1" },
+        { "width": 1280, "format": "webp", "key": "motion/project-01/poster/project-01-poster-1280-mockv1.webp", "bytes": 0, "hash": "mockv1" },
+        { "width": 1920, "format": "webp", "key": "motion/project-01/poster/project-01-poster-1920-mockv1.webp", "bytes": 0, "hash": "mockv1" },
+        { "width": 640, "format": "jpg", "key": "motion/project-01/poster/project-01-poster-640-mockv1.jpg", "bytes": 0, "hash": "mockv1" },
+        { "width": 1280, "format": "jpg", "key": "motion/project-01/poster/project-01-poster-1280-mockv1.jpg", "bytes": 0, "hash": "mockv1" },
+        { "width": 1920, "format": "jpg", "key": "motion/project-01/poster/project-01-poster-1920-mockv1.jpg", "bytes": 0, "hash": "mockv1" }
+      ]
+    },
+    "motion.project-01.preview": {
+      "kind": "video",
+      "id": "motion.project-01.preview",
+      "width": 1920,
+      "height": 1080,
+      "aspectRatio": 1.7777777778,
+      "duration": 8,
+      "posterId": "motion.project-01.poster",
+      "variants": []
+    },
+    "about.portrait": {
+      "kind": "image",
+      "id": "about.portrait",
+      "width": 1600,
+      "height": 2400,
+      "aspectRatio": 0.6666666667,
+      "alt": "Abstract lavender portrait placeholder",
+      "dominantColor": "#786f83",
+      "focalPoint": { "x": 0.5, "y": 0.42 },
+      "variants": [
+        { "width": 640, "format": "avif", "key": "about/portrait/about-portrait-640-mockv1.avif", "bytes": 0, "hash": "mockv1" },
+        { "width": 1280, "format": "avif", "key": "about/portrait/about-portrait-1280-mockv1.avif", "bytes": 0, "hash": "mockv1" },
+        { "width": 640, "format": "webp", "key": "about/portrait/about-portrait-640-mockv1.webp", "bytes": 0, "hash": "mockv1" },
+        { "width": 1280, "format": "webp", "key": "about/portrait/about-portrait-1280-mockv1.webp", "bytes": 0, "hash": "mockv1" },
+        { "width": 640, "format": "jpg", "key": "about/portrait/about-portrait-640-mockv1.jpg", "bytes": 0, "hash": "mockv1" },
+        { "width": 1280, "format": "jpg", "key": "about/portrait/about-portrait-1280-mockv1.jpg", "bytes": 0, "hash": "mockv1" }
+      ]
+    },
+    "site.light-detail": {
+      "kind": "image",
+      "id": "site.light-detail",
+      "width": 1536,
+      "height": 1024,
+      "aspectRatio": 1.5,
+      "alt": "Original pale salt-flat mock photograph with reflective water and fine mineral detail",
+      "dominantColor": "#d9dce0",
+      "focalPoint": { "x": 0.52, "y": 0.58 },
+      "variants": [
+        { "width": 768, "format": "avif", "key": "site/light-detail/light-detail-768-mockv1.avif", "bytes": 0, "hash": "mockv1" },
+        { "width": 1536, "format": "avif", "key": "site/light-detail/light-detail-1536-mockv1.avif", "bytes": 0, "hash": "mockv1" },
+        { "width": 768, "format": "webp", "key": "site/light-detail/light-detail-768-mockv1.webp", "bytes": 0, "hash": "mockv1" },
+        { "width": 1536, "format": "webp", "key": "site/light-detail/light-detail-1536-mockv1.webp", "bytes": 0, "hash": "mockv1" },
+        { "width": 768, "format": "jpg", "key": "site/light-detail/light-detail-768-mockv1.jpg", "bytes": 0, "hash": "mockv1" },
+        { "width": 1536, "format": "jpg", "key": "site/light-detail/light-detail-1536-mockv1.jpg", "bytes": 0, "hash": "mockv1" }
+      ]
+    },
+    "site.social-default": {
+      "kind": "image",
+      "id": "site.social-default",
+      "width": 1200,
+      "height": 630,
+      "aspectRatio": 1.9047619048,
+      "alt": "Portfolio social preview placeholder",
+      "dominantColor": "#27465a",
+      "variants": [
+        { "width": 1200, "format": "jpg", "key": "site/social/social-default-1200-mockv1.jpg", "bytes": 0, "hash": "mockv1" }
+      ]
+    }
+  }
+}
