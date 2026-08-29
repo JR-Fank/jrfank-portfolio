@@ -15,16 +15,17 @@ import { siteIndexable, siteUrl } from '@/lib/metadata';
 import '@/styles/tokens.css';
 import '@/styles/typography.css';
 import '@/styles/globals.css';
+import '@/styles/home.css';
 
 const defaultDescription = 'A bilingual editorial photography and film portfolio foundation.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: { default: 'Portfolio', template: '%s — Portfolio' },
+  title: { default: siteConfig.name, template: `%s — ${siteConfig.name}` },
   description: defaultDescription,
   robots: { index: siteIndexable, follow: siteIndexable },
   openGraph: {
-    title: 'Portfolio',
+    title: siteConfig.name,
     description: defaultDescription,
     type: 'website',
     images: [{ url: getSocialImage('site.social-default'), width: 1200, height: 630 }],

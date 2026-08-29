@@ -1,26 +1,15 @@
 import type { Metadata } from 'next';
 
-import { PlaceholderPage } from '@/components/sections/placeholder-page';
-import { siteConfig } from '@/content';
+import { HomeExperience } from '@/components/home/home-experience';
+import { homeContent, siteConfig } from '@/content';
 import { createPageMetadata } from '@/lib/metadata';
 
 export const metadata: Metadata = createPageMetadata({
   title: 'Home',
-  description: 'Bilingual photography and film portfolio foundation.',
+  description: 'JRFANK is an independent bilingual photography and film practice working between Hong Kong and Tokyo.',
   path: '/',
 });
 
 export default function HomePage() {
-  return (
-    <PlaceholderPage
-      site={siteConfig}
-      eyebrow="FOUNDATION 01"
-      title="PHOTOGRAPHY & FILM"
-      titleZh="作品集"
-      location="HONG KONG"
-      locationZh="香港"
-      mediaId="site.home-hero"
-      cta={{ label: 'VIEW STILLS', href: '/stills/' }}
-    />
-  );
+  return <HomeExperience content={homeContent} site={siteConfig} />;
 }

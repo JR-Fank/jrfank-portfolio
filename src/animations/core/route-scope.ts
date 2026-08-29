@@ -12,6 +12,7 @@ export class RouteAnimationScope {
   private disposed = false;
 
   mount(root: HTMLElement): void {
+    this.disposed = false;
     this.context = getGsap().context(() => undefined, root);
     activeScope?.dispose();
     activeScope = this;

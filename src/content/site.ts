@@ -1,7 +1,7 @@
 import type { SiteConfig } from './types';
 
 export const siteConfig = {
-  name: 'Portfolio',
+  name: 'JRFANK',
   navigation: [
     { label: { en: 'Stills', zhHant: '攝影' }, href: '/stills/', placement: 'primary' },
     { label: { en: 'Motion', zhHant: '動態' }, href: '/motion/', placement: 'primary' },
@@ -11,8 +11,8 @@ export const siteConfig = {
   ],
   contact: {
     email: 'HELLO@EXAMPLE.COM',
-    copyright: 'PORTFOLIO © 2026',
-    credit: 'FOUNDATION BUILD',
+    copyright: 'JRFANK © 2026',
+    credit: 'HONG KONG · TOKYO',
     social: [
       { label: { en: 'YouTube' }, href: 'https://www.youtube.com/', external: true, placement: 'menu' },
       { label: { en: 'Instagram' }, href: 'https://www.instagram.com/', external: true, placement: 'menu' },
