@@ -29,9 +29,12 @@ function HomeHero({ content }: { readonly content: HomeContent['hero'] }) {
         <div className="home-hero-shade" aria-hidden="true" />
         <div className="home-hero-copy">
           <h1 id="home-hero-title" aria-label={`${content.title.join(' ')} ${content.titleZh}`}>
-            {content.title.map((line) => (
-              <span className="home-hero-line-window" key={line} aria-hidden="true">
-                <span data-home-hero-line>{line}</span>
+            {content.title.map((line, index) => (
+              <span className={`home-hero-line-window home-hero-line-window-${index + 1}`} key={line} aria-hidden="true">
+                <span data-home-hero-line>
+                  <span className="home-hero-line-desktop">{line}</span>
+                  <span className="home-hero-line-mobile">{content.titleMobile[index]}</span>
+                </span>
               </span>
             ))}
           </h1>
@@ -47,28 +50,32 @@ function HomeIntro({ content }: { readonly content: HomeContent['intro'] }) {
     <section className="home-intro" data-home-section="H02" aria-labelledby="home-intro-title">
       <div className="home-intro-heading-wrap">
         <h2 id="home-intro-title" className="home-intro-heading" aria-label={content.accessibleHeading}>
-          {content.segments.map((segment, index) =>
-            segment.type === 'text' ? (
-              <span className="home-intro-piece" data-home-intro-piece aria-hidden="true" key={`${segment.value}-${index}`}>
-                {segment.value}
-              </span>
-            ) : (
-              <span
-                className={`home-intro-inline-media home-intro-inline-media-${segment.shape}`}
-                data-home-intro-piece
-                aria-hidden="true"
-                key={`${segment.mediaId}-${index}`}
-              >
-                <MediaPicture id={segment.mediaId} imageClassName="home-media-image" size="rail-thumb" alt="" />
-              </span>
-            ),
-          )}
+          {content.lines.map((line, lineIndex) => (
+            <span className="home-intro-line" key={`line-${lineIndex}`}>
+              {line.map((segment, segmentIndex) =>
+                segment.type === 'text' ? (
+                  <span className="home-intro-piece" data-home-intro-piece data-home-intro-text aria-hidden="true" key={`${segment.value}-${segmentIndex}`}>
+                    {segment.value}
+                  </span>
+                ) : (
+                  <span
+                    className={`home-intro-inline-media home-intro-inline-media-${segment.shape}`}
+                    data-home-intro-piece
+                    data-home-intro-media
+                    aria-hidden="true"
+                    key={`${segment.mediaId}-${segmentIndex}`}
+                  >
+                    <MediaPicture id={segment.mediaId} imageClassName="home-media-image" size="rail-thumb" alt="" />
+                  </span>
+                ),
+              )}
+            </span>
+          ))}
         </h2>
         <p className="home-intro-zh" lang="zh-Hant" data-home-intro-support>{content.headingZh}</p>
       </div>
       <div className="home-intro-support" data-home-intro-support>
         <p>{content.body}</p>
-        <p lang="zh-Hant">{content.bodyZh}</p>
         <TransitionLink className="outline-pill home-intro-cta" href={content.href}>{content.cta}</TransitionLink>
       </div>
     </section>

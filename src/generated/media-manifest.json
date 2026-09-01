@@ -109,6 +109,90 @@
         { "width": 1536, "format": "jpg", "key": "site/light-detail/light-detail-1536-mockv1.jpg", "bytes": 0, "hash": "mockv1" }
       ]
     },
+    "home.r1.hero": {
+      "kind": "image",
+      "id": "home.r1.hero",
+      "width": 1536,
+      "height": 1024,
+      "aspectRatio": 1.5,
+      "alt": "Original dark-blue coastal water mock photograph",
+      "dominantColor": "#263c50",
+      "focalPoint": { "x": 0.5, "y": 0.5 },
+      "variants": [
+        { "width": 640, "format": "webp", "key": "home-r1/hero/hero-640-mockr1.webp", "bytes": 0, "hash": "mockr1" },
+        { "width": 1280, "format": "webp", "key": "home-r1/hero/hero-1280-mockr1.webp", "bytes": 0, "hash": "mockr1" },
+        { "width": 1536, "format": "webp", "key": "home-r1/hero/hero-1536-mockr1.webp", "bytes": 0, "hash": "mockr1" },
+        { "width": 640, "format": "jpg", "key": "home-r1/hero/hero-640-mockr1.jpg", "bytes": 0, "hash": "mockr1" },
+        { "width": 1280, "format": "jpg", "key": "home-r1/hero/hero-1280-mockr1.jpg", "bytes": 0, "hash": "mockr1" },
+        { "width": 1536, "format": "jpg", "key": "home-r1/hero/hero-1536-mockr1.jpg", "bytes": 0, "hash": "mockr1" }
+      ]
+    },
+    "home.r1.ice-boat": {
+      "kind": "image",
+      "id": "home.r1.ice-boat",
+      "width": 1152,
+      "height": 1439,
+      "aspectRatio": 0.8005559416,
+      "alt": "Original small boat on misty blue water mock photograph",
+      "dominantColor": "#a7b9c6",
+      "focalPoint": { "x": 0.5, "y": 0.7 },
+      "variants": [
+        { "width": 640, "format": "webp", "key": "home-r1/ice-boat/ice-boat-640-mockr1.webp", "bytes": 0, "hash": "mockr1" },
+        { "width": 1152, "format": "webp", "key": "home-r1/ice-boat/ice-boat-1152-mockr1.webp", "bytes": 0, "hash": "mockr1" },
+        { "width": 640, "format": "jpg", "key": "home-r1/ice-boat/ice-boat-640-mockr1.jpg", "bytes": 0, "hash": "mockr1" },
+        { "width": 1152, "format": "jpg", "key": "home-r1/ice-boat/ice-boat-1152-mockr1.jpg", "bytes": 0, "hash": "mockr1" }
+      ]
+    },
+    "home.r1.waterfall": {
+      "kind": "image",
+      "id": "home.r1.waterfall",
+      "width": 1152,
+      "height": 1439,
+      "aspectRatio": 0.8005559416,
+      "alt": "Original forest waterfall mock photograph",
+      "dominantColor": "#1e3a28",
+      "focalPoint": { "x": 0.58, "y": 0.48 },
+      "variants": [
+        { "width": 640, "format": "webp", "key": "home-r1/waterfall/waterfall-640-mockr1.webp", "bytes": 0, "hash": "mockr1" },
+        { "width": 1152, "format": "webp", "key": "home-r1/waterfall/waterfall-1152-mockr1.webp", "bytes": 0, "hash": "mockr1" },
+        { "width": 640, "format": "jpg", "key": "home-r1/waterfall/waterfall-640-mockr1.jpg", "bytes": 0, "hash": "mockr1" },
+        { "width": 1152, "format": "jpg", "key": "home-r1/waterfall/waterfall-1152-mockr1.jpg", "bytes": 0, "hash": "mockr1" }
+      ]
+    },
+    "home.r1.warm-tree": {
+      "kind": "image",
+      "id": "home.r1.warm-tree",
+      "width": 1152,
+      "height": 1439,
+      "aspectRatio": 0.8005559416,
+      "alt": "Original solitary tree and reflective pool mock photograph",
+      "dominantColor": "#a05d2c",
+      "focalPoint": { "x": 0.42, "y": 0.46 },
+      "variants": [
+        { "width": 640, "format": "webp", "key": "home-r1/warm-tree/warm-tree-640-mockr1.webp", "bytes": 0, "hash": "mockr1" },
+        { "width": 1152, "format": "webp", "key": "home-r1/warm-tree/warm-tree-1152-mockr1.webp", "bytes": 0, "hash": "mockr1" },
+        { "width": 640, "format": "jpg", "key": "home-r1/warm-tree/warm-tree-640-mockr1.jpg", "bytes": 0, "hash": "mockr1" },
+        { "width": 1152, "format": "jpg", "key": "home-r1/warm-tree/warm-tree-1152-mockr1.jpg", "bytes": 0, "hash": "mockr1" }
+      ]
+    },
+    "home.r1.rain-film": {
+      "kind": "image",
+      "id": "home.r1.rain-film",
+      "width": 1536,
+      "height": 864,
+      "aspectRatio": 1.7777777778,
+      "alt": "Original cinematic rain-streaked window mock photograph",
+      "dominantColor": "#25323a",
+      "focalPoint": { "x": 0.48, "y": 0.5 },
+      "variants": [
+        { "width": 640, "format": "webp", "key": "home-r1/rain-film/rain-film-640-mockr1.webp", "bytes": 0, "hash": "mockr1" },
+        { "width": 1280, "format": "webp", "key": "home-r1/rain-film/rain-film-1280-mockr1.webp", "bytes": 0, "hash": "mockr1" },
+        { "width": 1536, "format": "webp", "key": "home-r1/rain-film/rain-film-1536-mockr1.webp", "bytes": 0, "hash": "mockr1" },
+        { "width": 640, "format": "jpg", "key": "home-r1/rain-film/rain-film-640-mockr1.jpg", "bytes": 0, "hash": "mockr1" },
+        { "width": 1280, "format": "jpg", "key": "home-r1/rain-film/rain-film-1280-mockr1.jpg", "bytes": 0, "hash": "mockr1" },
+        { "width": 1536, "format": "jpg", "key": "home-r1/rain-film/rain-film-1536-mockr1.jpg", "bytes": 0, "hash": "mockr1" }
+      ]
+    },
     "site.social-default": {
       "kind": "image",
       "id": "site.social-default",

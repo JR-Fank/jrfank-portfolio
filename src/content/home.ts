@@ -4,6 +4,8 @@ export type HomeIntroSegment =
   | { readonly type: 'text'; readonly value: string }
   | { readonly type: 'media'; readonly mediaId: MediaId; readonly shape: 'portrait' | 'landscape' };
 
+export type HomeIntroLine = readonly HomeIntroSegment[];
+
 export interface HomeFeaturedStill {
   readonly id: 'H03' | 'H04';
   readonly date: string;
@@ -20,15 +22,15 @@ export interface HomeFeaturedStill {
 export interface HomeContent {
   readonly hero: {
     readonly title: readonly [string, string, string];
+    readonly titleMobile: readonly [string, string, string];
     readonly titleZh: string;
     readonly mediaId: MediaId;
   };
   readonly intro: {
     readonly accessibleHeading: string;
-    readonly segments: readonly HomeIntroSegment[];
+    readonly lines: readonly [HomeIntroLine, HomeIntroLine, HomeIntroLine];
     readonly headingZh: string;
     readonly body: string;
-    readonly bodyZh: string;
     readonly cta: string;
     readonly href: string;
   };
@@ -48,24 +50,32 @@ export interface HomeContent {
 
 export const homeContent = {
   hero: {
-    title: ['JRFANK', 'PHOTOGRAPHY', '& FILMS'],
-    titleZh: '攝影與影像',
-    mediaId: 'site.home-hero',
+    title: ['JR FANK', 'PHOTOGRAPHER &', 'FILMMAKER'],
+    titleMobile: ['JR FANK', 'PHOTOGRAPHER', '& FILMMAKER'],
+    titleZh: '攝影師 · 影像創作者',
+    mediaId: 'home.r1.hero',
   },
   intro: {
-    accessibleHeading: 'Between harbour light and distant weather, the work began.',
-    segments: [
-      { type: 'text', value: 'BETWEEN' },
-      { type: 'media', mediaId: 'stills.project-01.cover', shape: 'portrait' },
-      { type: 'text', value: 'HARBOUR LIGHT AND' },
-      { type: 'media', mediaId: 'about.portrait', shape: 'portrait' },
-      { type: 'text', value: 'DISTANT WEATHER, THE WORK BEGAN.' },
-      { type: 'media', mediaId: 'site.light-detail', shape: 'landscape' },
+    accessibleHeading: 'A quiet harbour morning where the work began.',
+    lines: [
+      [
+        { type: 'text', value: 'A' },
+        { type: 'media', mediaId: 'home.r1.ice-boat', shape: 'portrait' },
+        { type: 'text', value: 'quiet harbour' },
+      ],
+      [
+        { type: 'text', value: 'morning' },
+        { type: 'media', mediaId: 'home.r1.warm-tree', shape: 'portrait' },
+        { type: 'text', value: 'where the' },
+      ],
+      [
+        { type: 'text', value: 'work began…' },
+        { type: 'media', mediaId: 'home.r1.rain-film', shape: 'landscape' },
+      ],
     ],
-    headingZh: '在海港的光與遙遠天氣之間，影像開始。',
+    headingZh: '從一個安靜的海港清晨，影像工作由此開始。',
     body: 'JRFANK is an independent photography and film practice working between Hong Kong and Tokyo, following landscape, movement, and quiet human traces.',
-    bodyZh: '以香港與東京為座標，記錄風景、移動與安靜的人之痕跡。',
-    cta: 'ABOUT THE STUDIO',
+    cta: 'READ MY STORY',
     href: '/about/',
   },
   featuredStills: [
@@ -77,7 +87,7 @@ export const homeContent = {
       titleZh: '港灣習作',
       href: '/stills/project-01/',
       cta: 'SEE CASE STUDY',
-      mediaIds: ['stills.project-01.cover', 'site.light-detail'],
+      mediaIds: ['home.r1.ice-boat', 'site.light-detail'],
       palette: ['#14242d', '#315a68', '#7f9da4', '#d7d9d2', '#d3b17e'],
       direction: 'standard',
     },
@@ -89,7 +99,7 @@ export const homeContent = {
       titleZh: '靜流',
       href: '/stills/project-01/',
       cta: 'SEE CASE STUDY',
-      mediaIds: ['about.portrait', 'site.home-hero'],
+      mediaIds: ['home.r1.warm-tree', 'home.r1.waterfall'],
       palette: ['#332b35', '#6e6978', '#a99fae', '#d8b88b', '#c9d3d8'],
       direction: 'reverse',
     },
@@ -102,7 +112,7 @@ export const homeContent = {
     titleZh: '雨後',
     href: '/motion/project-01/',
     cta: 'SEE CASE STUDY',
-    mainMediaId: 'motion.project-01.poster',
-    satelliteMediaIds: ['site.home-hero', 'about.portrait', 'site.light-detail'],
+    mainMediaId: 'home.r1.rain-film',
+    satelliteMediaIds: ['home.r1.hero', 'home.r1.ice-boat', 'home.r1.waterfall'],
   },
 } satisfies HomeContent;

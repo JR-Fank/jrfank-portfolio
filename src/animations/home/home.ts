@@ -64,6 +64,8 @@ export function setupHomeAnimations(root: HTMLElement, scope: RouteAnimationScop
         const heroLines = gsap.utils.toArray<HTMLElement>('[data-home-hero-line]', root);
         const intro = root.querySelector<HTMLElement>('[data-home-section="H02"]');
         const introPieces = gsap.utils.toArray<HTMLElement>('[data-home-intro-piece]', root);
+        const introText = gsap.utils.toArray<HTMLElement>('[data-home-intro-text]', root);
+        const introMedia = gsap.utils.toArray<HTMLElement>('[data-home-intro-media]', root);
         const introSupport = gsap.utils.toArray<HTMLElement>('[data-home-intro-support]', root);
         const featuredSections = gsap.utils.toArray<HTMLElement>('[data-home-featured-still]', root);
         const motion = root.querySelector<HTMLElement>('[data-home-section="H05"]');
@@ -85,12 +87,12 @@ export function setupHomeAnimations(root: HTMLElement, scope: RouteAnimationScop
         if (hero && heroCard && heroLines.length > 0) {
           gsap
             .timeline({ defaults: { ease: 'power3.out' } })
-            .fromTo(heroCard, { scale: 0.94, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.25 })
+            .fromTo(heroCard, { scale: 0 }, { scale: 1, duration: 1.2 })
             .fromTo(
               heroLines,
-              { yPercent: 116, rotate: 7, filter: 'blur(10px)' },
+              { yPercent: 100, rotate: 16, filter: 'blur(10px)' },
               { yPercent: 0, rotate: 0, filter: 'blur(0px)', duration: 1.08, stagger: 0.1 },
-              0.17,
+              0.22,
             );
 
           gsap
@@ -102,11 +104,10 @@ export function setupHomeAnimations(root: HTMLElement, scope: RouteAnimationScop
                 scrub: 0.65,
               },
             })
-            .to(heroCard, { scale: 0.88, yPercent: 11, borderRadius: 48, ease: 'none' }, 0)
-            .to(heroLines, { yPercent: -34, opacity: 0, stagger: 0.03, ease: 'none' }, 0.08);
+            .to(heroLines, { yPercent: -16, opacity: 0, stagger: 0.03, ease: 'none' }, 0.08);
         }
 
-        if (intro && introPieces.length > 0) {
+        if (intro && introText.length > 0 && introMedia.length > 0) {
           gsap
             .timeline({
               scrollTrigger: {
@@ -116,11 +117,17 @@ export function setupHomeAnimations(root: HTMLElement, scope: RouteAnimationScop
               },
             })
             .fromTo(
-              introPieces,
-              { yPercent: 75, rotateX: -78, opacity: 0, transformOrigin: '50% 100%' },
-              { yPercent: 0, rotateX: 0, opacity: 1, duration: 0.92, stagger: 0.045, ease: 'power3.out' },
+              introText,
+              { rotateX: -90, opacity: 0, transformOrigin: '50% 100%' },
+              { rotateX: 0, opacity: 1, duration: 0.8, stagger: 0.07, ease: 'power2.out' },
             )
-            .fromTo(introSupport, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.65, stagger: 0.08 }, 0.36);
+            .fromTo(
+              introMedia,
+              { yPercent: (index) => 48 + index * 18, rotate: (index) => (index - 1) * 3, opacity: 0 },
+              { yPercent: 0, rotate: 0, opacity: 1, duration: 0.84, stagger: 0.12, ease: 'power2.out' },
+              0.08,
+            )
+            .fromTo(introSupport, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.65, stagger: 0.08 }, 0.72);
         }
 
         featuredSections.forEach((section) => setupFeaturedStill(section, section.dataset.direction === 'reverse'));
