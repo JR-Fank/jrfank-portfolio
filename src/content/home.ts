@@ -24,7 +24,7 @@ export interface HomeContent {
     readonly title: readonly [string, string, string];
     readonly titleMobile: readonly [string, string, string];
     readonly titleZh: string;
-    readonly mediaId: MediaId;
+    readonly videoMediaId: MediaId;
   };
   readonly intro: {
     readonly accessibleHeading: string;
@@ -53,7 +53,7 @@ export const homeContent = {
     title: ['JR FANK', 'PHOTOGRAPHER &', 'FILMMAKER'],
     titleMobile: ['JR FANK', 'PHOTOGRAPHER', '& FILMMAKER'],
     titleZh: '攝影師 · 影像創作者',
-    mediaId: 'home.r1.hero',
+    videoMediaId: 'home.r1.hero-video',
   },
   intro: {
     accessibleHeading: 'A quiet harbour morning where the work began.',

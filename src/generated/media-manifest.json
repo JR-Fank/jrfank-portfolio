@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-28T05:54:00.000Z",
-  "sourceFingerprint": "step-3b5-neutral-mock-v2",
+  "generatedAt": "2026-09-01T00:00:00.000Z",
+  "sourceFingerprint": "step-3c-r2-authoritative-motion-v1",
   "assets": {
     "site.home-hero": {
       "kind": "image",
@@ -125,6 +125,18 @@
         { "width": 640, "format": "jpg", "key": "home-r1/hero/hero-640-mockr1.jpg", "bytes": 0, "hash": "mockr1" },
         { "width": 1280, "format": "jpg", "key": "home-r1/hero/hero-1280-mockr1.jpg", "bytes": 0, "hash": "mockr1" },
         { "width": 1536, "format": "jpg", "key": "home-r1/hero/hero-1536-mockr1.jpg", "bytes": 0, "hash": "mockr1" }
+      ]
+    },
+    "home.r1.hero-video": {
+      "kind": "video",
+      "id": "home.r1.hero-video",
+      "width": 1280,
+      "height": 720,
+      "aspectRatio": 1.7777777778,
+      "duration": 8,
+      "posterId": "home.r1.hero",
+      "variants": [
+        { "width": 1280, "format": "mp4", "key": "home-r1/hero-video/hero-coast-loop-1280-mockr2.mp4", "bytes": 1418680, "hash": "b4944784e444ee0e12caecfa3854242160c57d6d6c7ca21c194cbb117a2d366e" }
       ]
     },
     "home.r1.ice-boat": {

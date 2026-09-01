@@ -116,6 +116,12 @@ a:focus-visible {
   pointer-events: none;
 }
 
+body:has([data-home-root]) .site-header {
+  opacity: 0;
+  transform: translateY(-8px);
+  will-change: opacity, transform;
+}
+
 .site-navigation {
   display: grid;
   width: 100%;

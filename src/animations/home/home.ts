@@ -7,7 +7,7 @@ type HomeMotionContext = {
   readonly reduce: boolean;
 };
 
-function setupFeaturedStill(section: HTMLElement, reverse: boolean): void {
+function setupFeaturedStill(section: HTMLElement): void {
   const gsap = getGsap();
   const left = section.querySelector<HTMLElement>('[data-home-still="left"]');
   const right = section.querySelector<HTMLElement>('[data-home-still="right"]');
@@ -16,7 +16,6 @@ function setupFeaturedStill(section: HTMLElement, reverse: boolean): void {
     return;
   }
 
-  const direction = reverse ? -1 : 1;
   const timeline = gsap.timeline({
     scrollTrigger: {
       trigger: section,
@@ -29,18 +28,22 @@ function setupFeaturedStill(section: HTMLElement, reverse: boolean): void {
   timeline
     .fromTo(
       left,
-      { xPercent: -118 * direction, yPercent: 24, rotate: -5 * direction },
-      { xPercent: 118 * direction, yPercent: -24, rotate: 4 * direction, ease: 'none', duration: 1 },
+      { xPercent: 34, rotate: -3 },
+      { xPercent: -138, rotate: -1, ease: 'none', duration: 1 },
       0,
     )
     .fromTo(
       right,
-      { xPercent: 118 * direction, yPercent: -20, rotate: 5 * direction },
-      { xPercent: -118 * direction, yPercent: 28, rotate: -4 * direction, ease: 'none', duration: 1 },
+      { xPercent: -34, rotate: 3 },
+      { xPercent: 138, rotate: 1, ease: 'none', duration: 1 },
       0,
     )
-    .fromTo(center, { opacity: 0.12, scale: 0.95 }, { opacity: 1, scale: 1, ease: 'none', duration: 0.28 }, 0.06)
-    .to(center, { opacity: 0.12, scale: 0.95, ease: 'none', duration: 0.28 }, 0.72);
+    .fromTo(left, { yPercent: 108 }, { yPercent: 0, ease: 'power2.out', duration: 0.32 }, 0)
+    .to(left, { yPercent: -14, ease: 'none', duration: 0.68 }, 0.32)
+    .fromTo(right, { yPercent: 104 }, { yPercent: 0, ease: 'power2.out', duration: 0.32 }, 0)
+    .to(right, { yPercent: -18, ease: 'none', duration: 0.68 }, 0.32)
+    .fromTo(center, { opacity: 0.2, scale: 0.98 }, { opacity: 1, scale: 1, ease: 'none', duration: 0.16 }, 0.04)
+    .to(center, { opacity: 0.14, scale: 0.98, ease: 'none', duration: 0.2 }, 0.72);
 }
 
 export function setupHomeAnimations(root: HTMLElement, scope: RouteAnimationScope): void {
@@ -59,7 +62,11 @@ export function setupHomeAnimations(root: HTMLElement, scope: RouteAnimationScop
         const conditions = context.conditions as HomeMotionContext;
         const hero = root.querySelector<HTMLElement>('[data-home-section="H01"]');
         const heroCard = root.querySelector<HTMLElement>('[data-home-hero-card]');
-        const heroLines = gsap.utils.toArray<HTMLElement>('[data-home-hero-line]', root);
+        const heroLines = gsap.utils.toArray<HTMLElement>('[data-home-hero-display-line]', root);
+        const heroLineWindows = gsap.utils.toArray<HTMLElement>('.home-hero-line-window', root);
+        const heroZh = root.querySelector<HTMLElement>('[data-home-hero-zh]');
+        const heroVideo = root.querySelector<HTMLVideoElement>('[data-home-hero-video]');
+        const siteHeader = document.querySelector<HTMLElement>('.site-header');
         const intro = root.querySelector<HTMLElement>('[data-home-section="H02"]');
         const introPieces = gsap.utils.toArray<HTMLElement>('[data-home-intro-piece]', root);
         const introText = gsap.utils.toArray<HTMLElement>('[data-home-intro-text]', root);
@@ -71,7 +78,7 @@ export function setupHomeAnimations(root: HTMLElement, scope: RouteAnimationScop
         const motionSatellites = gsap.utils.toArray<HTMLElement>('[data-home-motion-satellite]', root);
 
         if (conditions.reduce) {
-          gsap.set([heroCard, ...heroLines, ...introPieces, ...introSupport, ...featuredSections, motionMain, ...motionSatellites], {
+          gsap.set([siteHeader, heroCard, ...heroLineWindows, ...heroLines, heroZh, ...introPieces, ...introSupport, ...featuredSections, motionMain, ...motionSatellites], {
             clearProps: 'all',
           });
           updateDiagnostics({ scrollTriggers: scrollTrigger.getAll().length });
@@ -83,15 +90,15 @@ export function setupHomeAnimations(root: HTMLElement, scope: RouteAnimationScop
         }
 
         if (hero && heroCard && heroLines.length > 0) {
-          gsap
-            .timeline({ defaults: { ease: 'power3.out' } })
-            .fromTo(heroCard, { scale: 0 }, { scale: 1, duration: 1.2 })
-            .fromTo(
-              heroLines,
-              { yPercent: 100, rotate: 16, filter: 'blur(10px)' },
-              { yPercent: 0, rotate: 0, filter: 'blur(0px)', duration: 1.08, stagger: 0.1 },
-              0.22,
-            );
+          void heroVideo?.play().catch(() => undefined);
+          const entrance = gsap.timeline({ defaults: { ease: 'power3.out' } });
+          if (siteHeader) {
+            entrance.fromTo(siteHeader, { autoAlpha: 0, y: -8 }, { autoAlpha: 1, y: 0, duration: 0.58 }, 1.42);
+          }
+          entrance.fromTo(heroCard, { scale: 0.14 }, { scale: 1, duration: 1 }, 1.45);
+          if (heroZh) {
+            entrance.fromTo(heroZh, { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.52 }, 2.33);
+          }
 
           gsap
             .timeline({
@@ -102,7 +109,7 @@ export function setupHomeAnimations(root: HTMLElement, scope: RouteAnimationScop
                 scrub: 0.65,
               },
             })
-            .to(heroLines, { yPercent: -16, opacity: 0, stagger: 0.03, ease: 'none' }, 0.08);
+            .to([...heroLineWindows, heroZh].filter(Boolean), { yPercent: -16, opacity: 0, stagger: 0.03, ease: 'none' }, 0.08);
         }
 
         if (intro && introText.length > 0 && introMedia.length > 0) {
@@ -128,7 +135,7 @@ export function setupHomeAnimations(root: HTMLElement, scope: RouteAnimationScop
             .fromTo(introSupport, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.65, stagger: 0.08 }, 0.72);
         }
 
-        featuredSections.forEach((section) => setupFeaturedStill(section, section.dataset.direction === 'reverse'));
+        featuredSections.forEach(setupFeaturedStill);
 
         if (motion && motionMain) {
           gsap

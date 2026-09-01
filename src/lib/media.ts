@@ -52,6 +52,12 @@ export interface ResolvedImageSources {
   readonly sizes: string;
 }
 
+export interface ResolvedVideoSources {
+  readonly asset: VideoMediaAsset;
+  readonly poster: string;
+  readonly sources: readonly { readonly format: 'mp4'; readonly src: string }[];
+}
+
 const sizePresets: Record<ImageSizePreset, string> = {
   viewport: '100vw',
   'page-wide': '(max-width: 479px) calc(100vw - 48px), (max-width: 767px) calc(100vw - 64px), (max-width: 991px) calc(100vw - 96px), calc(100vw - 128px)',
@@ -125,6 +131,17 @@ export function getImageSources(id: MediaId, size: ImageSizePreset): ResolvedIma
     src: joinMediaUrl(mediaBaseUrl(), fallback.key),
     sources,
     sizes: sizePresets[size],
+  };
+}
+
+export function getVideoSources(id: MediaId): ResolvedVideoSources {
+  const asset = getVideoAsset(id);
+  return {
+    asset,
+    poster: getImageSources(asset.posterId, 'viewport').src,
+    sources: asset.variants
+      .filter((variant) => variant.format === 'mp4')
+      .map((variant) => ({ format: 'mp4' as const, src: joinMediaUrl(mediaBaseUrl(), variant.key) })),
   };
 }
 

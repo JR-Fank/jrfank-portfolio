@@ -28,6 +28,7 @@
   overflow: hidden;
   border-radius: var(--media-radius);
   background: #27465a;
+  transform: scale(0.14);
   will-change: transform;
 }
 
@@ -35,6 +36,11 @@
 .home-hero-shade {
   position: absolute;
   inset: 0;
+}
+
+.home-hero-media {
+  object-fit: cover;
+  object-position: 50% 50%;
 }
 
 .home-hero-shade {
@@ -68,9 +74,19 @@
 
 .home-hero-line-window > span {
   display: block;
+  transform: translateY(108%);
   transform-origin: 50% 100%;
   will-change: filter, opacity, transform;
 }
+
+@keyframes home-hero-line-reveal {
+  from { transform: translateY(108%); }
+  to { transform: translateY(0); }
+}
+
+.home-hero-line-window-1 > span { animation: home-hero-line-reveal 700ms cubic-bezier(.215, .61, .355, 1) 1720ms both; }
+.home-hero-line-window-2 > span { animation: home-hero-line-reveal 700ms cubic-bezier(.215, .61, .355, 1) 1990ms both; }
+.home-hero-line-window-3 > span { animation: home-hero-line-reveal 700ms cubic-bezier(.215, .61, .355, 1) 2260ms both; }
 
 .home-hero-line-mobile { display: none; }
 
@@ -81,6 +97,8 @@
   font-weight: 500;
   letter-spacing: 0.18em;
   line-height: 1;
+  opacity: 0;
+  transform: translateY(14px);
   will-change: opacity, transform;
 }
 
@@ -144,11 +162,22 @@
   border-radius: inherit;
   pointer-events: none;
   transform-origin: 50% 50%;
-  transition: transform 460ms cubic-bezier(.215, .61, .355, 1);
+  transition: transform 420ms cubic-bezier(.215, .61, .355, 1);
   will-change: transform;
 }
 
-.home-intro-inline-media-scaler picture { position: absolute; inset: 0; }
+.home-intro-inline-media-scaler picture {
+  position: absolute;
+  inset: 0;
+  transition: filter 160ms cubic-bezier(.215, .61, .355, 1);
+  will-change: filter;
+}
+
+@keyframes home-intro-blur-pulse {
+  0% { filter: blur(0); }
+  32% { filter: blur(7px); }
+  100% { filter: blur(0); }
+}
 
 @media (hover: hover) and (pointer: fine) {
   .home-intro-inline-media:hover {
@@ -158,7 +187,11 @@
 
   .home-intro-inline-media:hover .home-intro-inline-media-scaler {
     transform: scale(1.8);
-    transition-duration: 380ms;
+    transition-duration: 320ms;
+  }
+
+  .home-intro-inline-media:hover .home-intro-inline-media-scaler picture {
+    animation: home-intro-blur-pulse 320ms cubic-bezier(.215, .61, .355, 1) both;
   }
 }
 
@@ -204,10 +237,8 @@
   will-change: transform;
 }
 
-.home-still-media-left { left: -3vw; }
-.home-still-media-right { right: -3vw; }
-.home-featured-still[data-direction="reverse"] .home-still-media-left { left: auto; right: -3vw; }
-.home-featured-still[data-direction="reverse"] .home-still-media-right { right: auto; left: -3vw; }
+.home-still-media-left { right: calc(50% + 1vw); left: auto; }
+.home-still-media-right { right: auto; left: calc(50% + 1vw); }
 
 .home-still-center {
   position: relative;
@@ -375,10 +406,8 @@
   .home-intro-support { width: 86vw; font-size: clamp(0.875rem, 3.9vw, 1rem); line-height: 1.55; }
   .home-featured-still { height: 134svh; min-height: 1000px; }
   .home-still-media { top: 18svh; width: 62vw; height: 60svh; max-height: 540px; }
-  .home-still-media-left { left: -40vw; }
-  .home-still-media-right { right: -40vw; }
-  .home-featured-still[data-direction="reverse"] .home-still-media-left { right: -40vw; }
-  .home-featured-still[data-direction="reverse"] .home-still-media-right { left: -40vw; }
+  .home-still-media-left { right: calc(50% + 2vw); left: auto; }
+  .home-still-media-right { right: auto; left: calc(50% + 2vw); }
   .home-still-center h2 { font-size: clamp(3.65rem, 16vw, 5.6rem); line-height: 0.82; }
   .home-project-meta { gap: 7px; }
   .home-project-meta span + span::before { margin-right: 7px; }
@@ -402,8 +431,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  body:has([data-home-root]) .site-header,
   .home [data-home-hero-card],
-  .home [data-home-hero-line],
+  .home [data-home-hero-display-line],
+  .home [data-home-hero-zh],
   .home [data-home-intro-piece],
   .home [data-home-intro-support],
   .home [data-home-still],
@@ -413,4 +444,8 @@
     opacity: 1 !important;
     transform: none !important;
   }
+
+  .home-intro-inline-media-scaler picture { animation: none !important; }
+
+  .home-hero-line-window > span { animation: none !important; }
 }

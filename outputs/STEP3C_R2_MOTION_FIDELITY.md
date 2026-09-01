@@ -1,228 +1,182 @@
-# STEP 3C-R2 — Motion fidelity / scroll architecture correction
+# STEP 3C-R2 — Authoritative motion fidelity correction
 
-Completed on 2026-09-01. Scope stops at STEP 3C-R2 Home motion correction; STEP 3D was not started.
+Completed on 2026-09-01 against the corrected 59.92 fps Reference recording. This update supersedes the earlier R2 interpretation. Scope stops at Home motion correction; STEP 3D was not started.
 
-## 1. Root cause of dead scroll
+## 1. Exact root cause of the previous dead scroll
 
-The P1 failure was structural and independent of Lenis smoothing.
+The original H03/H04 timeline used two separated side-media tween windows inside a 2.0-unit timeline:
 
-Each H03/H04 timeline previously occupied 2.0 normalized timeline units:
+- entry: `0.00–0.62`;
+- no side-media tween: `0.62–1.38`;
+- exit: `1.38–2.00`.
 
-- side-media entry: 0.00–0.62;
-- no side-media tween: 0.62–1.38;
-- side-media exit: 1.38–2.00.
+The empty 0.76-unit interval mapped to roughly 970 px of desktop document travel across the 205 svh sticky project section. Both media transforms therefore stayed constant while the page kept scrolling. Lenis smoothing did not cause the plateau; it only exposed a structurally empty GSAP interval.
 
-The ScrollTrigger spanned approximately 2556 px on desktop. The empty 0.76-unit interval therefore mapped to roughly 970 px of document travel while both project images retained the same transforms. The 205 svh CSS-sticky section made this read as a frozen composition followed by a late threshold transition.
+The first R2 pass removed that interval but interpreted the motion as cross-through travel. The new full recording proved that model wrong: the left image must always continue left, the right image must always continue right, and neither image may collapse toward the center at the bottom.
 
-Measured R1 evidence confirmed identical side-media coordinates from scrollY 1800 through 2391, with visible movement resuming only near 2791.
+## 2. Final shared ProjectStage architecture
 
-## 2. Previous H03–H05 architecture
-
-- H03 and H04 each used a 205 svh desktop / 134 svh mobile section.
-- A 100 svh child stage used CSS `position: sticky; top: 0`.
-- No GSAP `pin` or `pinSpacing` was used, but the sticky stage plus the long empty timeline interval produced a full-section pinned feeling.
-- Separate entry and exit tweens surrounded an unanimated hold.
-- H03 and H04 triggers overlapped only late in H03 exit, after the dead interval.
-- H05 remained a naturally scrolling 100 svh desktop / 68 svh mobile composition with one route-scoped scrub timeline.
-
-## 3. New H03–H05 architecture
-
-- Section and responsive stage geometry remain unchanged to preserve the validated R1 static composition.
-- CSS sticky remains the stable central/stage anchor; GSAP enhances spatial travel rather than adding scroll spacers.
-- Each side image now follows one uninterrupted entrance-to-exit trajectory across the full project trigger.
-- Center content can remain relatively stable, but side media never enters a static hold.
-- H05 remains naturally scrolling and overlaps the end of H04 through its existing trigger range.
-
-## 4. Pinning decision
-
-Full GSAP pinning was not retained or introduced.
-
-- `pin`: absent;
-- `pinSpacing`: absent;
-- scroll snap/discrete project state: absent;
-- CSS sticky: retained for the 100 svh visual anchor because it matches the Reference's stable central-information behavior without adding an artificial spacer.
-
-This is the requested sticky-plus-natural-flow model: document sections remain in normal flow while continuous scrubbed transforms provide the parallax/travel response.
-
-## 5. Exact ScrollTrigger / sticky model
-
-For both H03 and H04:
+H03 and H04 now use one shared, direction-independent choreography:
 
 ```text
-section height: 205svh desktop / 134svh mobile
-stage: position: sticky; top: 0; height: 100svh
-ScrollTrigger start: top bottom
-ScrollTrigger end: bottom top
+section: 205svh desktop / 134svh mobile
+stage: CSS sticky, top 0, height 100svh
+ScrollTrigger: top bottom → bottom top
 scrub: 0.45
-pin: false
-pinSpacing: false
+GSAP pin / pinSpacing: absent
 ```
 
-Side-media trajectories use `ease: none` for reversible scroll mapping:
+Horizontal movement occupies the complete normalized `0.00–1.00` trigger range with `ease: none`:
 
 ```text
-left:
-  xPercent -118*direction → +118*direction
-  yPercent +24 → -24
-  rotate -5*direction → +4*direction
-
-right:
-  xPercent +118*direction → -118*direction
-  yPercent -20 → +28
-  rotate +5*direction → -4*direction
+physical left media:  xPercent +34 → -138
+physical right media: xPercent -34 → +138
 ```
 
-Center information fades/scales into its stable interval and leaves from 0.72–1.00. Only the center can hold visually; both side images continue moving for the entire 0.00–1.00 project progress.
+Both images enter below the viewport close to the center. Vertical entry resolves during the first 0.32 of progress, while X continues linearly through the full range. After entry, each image keeps drifting upward while moving farther outward. At the bottom, left remains left/offscreen and right remains right/offscreen; no shrink, fade-primary exit, second collapse, threshold swap, or bottom snap exists.
 
-Home retains five standard-motion ScrollTriggers: H01 departure, H02 reveal, H03, H04, and H05. Reduced motion applies no Home scroll transforms.
+The center metadata/title/CTA/palette reaches full readability by progress 0.20, remains stable through the editorial middle, and fades only as the sticky section leaves. H03 and H04 use identical motion code; project content is the only difference.
 
-## 6. H02 hover implementation
+## 3. Forward and reverse scroll result
 
-The existing inline-media element retains its measured layout box and the GSAP entrance transform. A new inner scaler owns hover transform, so scroll entrance and pointer hover never compete for the same `transform` property.
+Pass at 1440 × 900 and 390 × 844.
 
-- enabled only inside `@media (hover: hover) and (pointer: fine)`;
-- transform-based, centered origin;
-- no width/height/layout mutation;
-- parent overflow remains visible;
-- inner scaler retains rounded clipping;
-- hovered element rises to z-index 8;
-- z-index release is delayed until the scale-down completes;
-- inner scaler ignores pointer events, keeping the original inline box as the reliable hover target.
+Desktop H03 checkpoints show monotonic outward travel:
 
-All three measured layout boxes remained 64 x 80, 64 x 80, and 120 x 80 before, during, and after hover.
+| Approx. project progress | Left x | Right x | Visible state |
+|---:|---:|---:|---|
+| 0.00 | 289 | 514 | below viewport, close/overlapping |
+| 0.24 | 45 | 764 | entered and separating |
+| 0.50 | -215 | 1030 | separated at side edges |
+| 0.67 | -394 | 1214 | outgoing at far edges; H04 begins below |
+| 0.90 | -626 | 1451 | fully offscreen outward |
 
-## 7. Calibrated hover values
+H04 reconstructs the same geometry. At the H03/H04 overlap boundary, H03 remains near the outer edges while H04 is entering below and close to center. At H04/H05, the side media remains outward while H05 enters naturally from below.
+
+Reverse-scroll checkpoints reproduced their forward coordinates within 1–3 px after scrub settling:
+
+- H04 at scrollY 4641.5 forward: approximately `x -473 / 1294`;
+- H04 at scrollY 4645.5 reverse: approximately `x -475 / 1297`;
+- H04 at scrollY 3951.5 forward: approximately `x -217 / 1032`;
+- H04 at scrollY 3956 reverse: approximately `x -220 / 1035`.
+
+The reverse path is therefore the same continuous mapping: offscreen/outward → inward → close only near the section entry. No sampled range retained constant X coordinates, so the previous dead-scroll plateau is absent.
+
+Evidence: `outputs/step3c-authoritative-motion/desktop/h03-*.png`, `h04-*.png`, and `reverse-*.png`; mobile evidence is under `outputs/step3c-authoritative-motion/mobile/`.
+
+## 4. Hero initial-load choreography
+
+The Hero is now a real `<video>` surface with a poster fallback. The initial DOM/CSS state is a centered frame at scale `0.14` on the audited charcoal canvas.
 
 ```text
-scale: 1.8
+0.00s: small centered playing video frame; chrome and display lines hidden
+1.42s: chrome begins, 0.58s, power3.out
+1.45s: Hero frame expands from scale 0.14 to 1.00
+1.45–2.45s: spatial expansion, 1.00s, power3.out
+2.33s: Traditional Chinese support line begins, 0.52s
+~3.00s: complete entrance state
+```
+
+The video is already playing while the card expands. The implementation uses `autoplay`, `muted`, `playsInline`, `loop`, `preload="auto"`, a manifest-resolved MP4 source, and the authorized coastal mock image as poster/fallback. Playback checks returned `paused: false`, `readyState: 4`, and increasing `currentTime`.
+
+Temporary Hero media: `public/mock-media/home-r1/hero-video/hero-coast-loop-1280-mockr2.mp4` (H.264, 1280 × 720, 8 seconds, 1.42 MB). It is a project-owned camera-motion loop derived from the authorized coastal mock photograph. It is explicitly non-final and does not claim to be captured footage.
+
+## 5. Masked Hero typography reveal
+
+The three display lines retain separate overflow-hidden windows and rise independently from `translateY(108%)` to `0`:
+
+```text
+line 1 start: 1.72s
+line 2 start: 1.99s
+line 3 start: 2.26s
+duration: 0.70s each
+stagger: 0.27s
+ease: cubic-bezier(.215, .61, .355, 1), calibrated power3.out character
+```
+
+The first line starts before the Hero expansion completes. There is no whole-heading fade, rotation, or blur substitute. Reduced motion removes the animations and reveals all lines immediately.
+
+## 6. H02 inline-image hover
+
+All three inline images retain their layout boxes, so text never reflows. The inner scaler owns pointer motion while the parent continues to own the scroll entrance transform.
+
+```text
+scale: 1.00 → 1.80
+enter: 320ms
+enter ease: cubic-bezier(.215, .61, .355, 1)
+blur: 0 → 7px at 32% (~102ms) → 0 by 320ms
+mouseleave scale: 420ms with the same curve
+mouseleave filter settling: 160ms
+hover z-index: 8; release delay: 460ms
 transform origin: 50% 50%
-mouseenter: 380ms cubic-bezier(.215, .61, .355, 1)
-mouseleave: 460ms cubic-bezier(.215, .61, .355, 1)
 ```
 
-The curve is the CSS equivalent used elsewhere for the audited power3-out interaction character. Captures confirm no text reflow, no clipping, and a clean release for all three images.
+Measured line rectangles were identical before, during, and after hover. The blur pulse resolves to a sharp enlarged image, the scaler cannot capture pointer events, and mouseleave returns every scaler/filter/z-index to its base state.
 
-Evidence:
+Evidence: `outputs/step3c-authoritative-motion/desktop/h02-*.png` and the validation recording.
 
-- `outputs/step3c-r2-validation/final/desktop/h02-normal.jpg`
-- `outputs/step3c-r2-validation/final/desktop/h02-hover-1.jpg`
-- `outputs/step3c-r2-validation/final/desktop/h02-hover-2.jpg`
-- `outputs/step3c-r2-validation/final/desktop/h02-hover-3.jpg`
-- `outputs/step3c-r2-validation/final/desktop/h02-release.jpg`
+## 7. Background correction
 
-## 8. Exit-animation model
-
-Opacity is not the primary side-media exit.
-
-Each image continues the same transform trajectory used for entry, crosses its measured central range, keeps independent vertical/parallax travel, and exits through the opposite spatial boundary. Rotation changes gradually across the same progress. This makes entry and exit opposite ends of one reversible path rather than separate state animations.
-
-The title/metadata opacity changes only to manage editorial focus while media remains spatially continuous.
-
-## 9. Project overlap model
-
-With `start: top bottom` and `end: bottom top`, adjacent project triggers overlap by exactly one viewport:
-
-- desktop overlap: 900 px;
-- mobile overlap: 844 px.
-
-During that range, H03 media is still physically exiting while H04 media is physically entering. Both project DOM trees remain present, and no swap, crossfade-only handoff, threshold state, or scroll snap exists.
-
-The H04/H05 boundary also overlaps: H04 continues its final spatial exit while H05 begins its existing natural-flow motion entrance.
-
-## 10. Background token before / after
-
-Normalized blank-region sampling across several Reference Home frames returned a stable median near RGB 19/20/22. The previous Local render sampled near RGB 16/17/19.
+The authoritative dark canvas is now:
 
 ```text
-before token: #0e1012
-after token:  #111315
-corrected Local rendered median: approximately RGB 18/19/21
-Reference rendered median: approximately RGB 19/20/22
+--canvas: #101114
+--transition-surface: #101114
+--nav-surface: rgb(16 17 20 / 78%)
+dark theme-color: #101114
 ```
 
-Matching dark transition and nav surfaces were updated from 14/16/18 to 17/19/21. The resulting charcoal/blue-black remains non-black and is materially closer to the normalized Reference. Light mode remains `#e8e5f0`, and Hero overlay copy remains `rgb(243, 246, 250)`.
+Light mode remains `#e8e5f0`; Hero overlay copy remains `rgb(243 246 250)` in both themes.
 
-## 11. Forward-scroll test
+## 8. Runtime regression result
 
-Pass at 1440 x 900 and 390 x 844.
+Pass on the optimized static production build.
 
-- Desktop H03 was sampled at approximately 149–200 px steps from scrollY 1600 through 3188. Every step changed both active side-media coordinates.
-- H03 50%, 75%, overlap, H04 entry, H04 50%, H04 75%, and H04 exit/H05 entry were captured from the checked export.
-- Mobile entry/25%/50%/overlap/H04 entry/50%/75%/exit frames show uninterrupted positional travel and zero horizontal overflow.
-- No sampled interval reproduced the old constant-transform plateau.
+- Repeated Home/About/Home, Home/Stills/Home, and Home/Motion/Home cycles retained one route-content root, one active route-scope wrapper, one transition overlay, eleven body children, and zero horizontal growth.
+- The global Lenis provider, GSAP ticker driver, route-scope owner, transition provider, menu state machine, and theme provider source files were not modified.
+- Browser Back restored Home to the exact tested scrollY 700; Forward returned to About at scrollY 0.
+- Dark/light F-stop behavior and cross-route persistence pass. Light-mode Hero copy remains white. Desktop and mobile labels remain F/24 and F/23.
+- Mobile menu remains x 24, y 64, 342 × 326 with Stills focused on open, Escape close, and trigger-focus restoration.
+- Reduced motion reports the media query active, clears Hero/project transforms, leaves opacity at 1, and produces zero horizontal overflow.
+- Production console review returned zero errors, warnings, or hydration messages.
 
-Forward evidence:
+## 9. Code, export, and asset-safety result
 
-- `outputs/step3c-r2-validation/final/desktop/forward-*.jpg`
-- `outputs/step3c-r2-validation/final/mobile/`
-- `outputs/step3c-r2-validation/comparisons/desktop-project-motion-contact-sheet.jpg`
+`npm run check` passes strict TypeScript, content/media validation, the optimized Next.js 16.3.3 build, and all eleven static/SSG pages. The updated manifest validates thirteen media assets.
 
-## 12. Reverse-scroll test
+The static server returned HTTP 200 for `/`, `/about/`, `/stills/`, `/stills/project-01/`, `/motion/`, `/motion/project-01/`, `/robots.txt`, `/sitemap.xml`, and the Hero MP4.
 
-Pass.
+Safety review passes:
 
-The required sequence HARBOUR → QUIET → HARBOUR → QUIET was exercised slowly.
+- no unauthorized Reference production asset was added;
+- no Roslindale, Mint Grotesk, or other copied commercial font binary exists;
+- no `.env`, Cloudflare/R2 credential, private key, token, RAW/private media master, or private EXIF data is present;
+- `.next`, `out`, local caches, and temporary recording frames remain ignored;
+- the new binaries are the intentional project-owned Hero mock loop, the required Chrome validation video, and QA evidence captures.
 
-- Desktop reverse checkpoints at H04 75%, H04 50%, H04 entry, overlap, H03 75%, H03 50%, and H03 25% reconstructed the corresponding forward positions within the expected scrub settling tolerance.
-- Mobile reverse samples at 189–191 px steps changed active-media coordinates at every step from H04 exit through H03 center.
-- No image teleported, title swapped, trigger desynchronized, or media disappeared before leaving the viewport.
+## 10. Validation recording
 
-Reverse evidence: `outputs/step3c-r2-validation/final/desktop/reverse-*.jpg`.
+`outputs/STEP3C_R2_VALIDATION_1440x900.mp4`
 
-## 13. Runtime regression result
+- Chrome layout viewport: 1440 × 900;
+- visual scale: 1.0 / 100%;
+- output raster: 1440 × 900 H.264;
+- duration: 18.17 seconds;
+- sampled walkthrough: 218 exact-size Chrome frames at 12 fps;
+- includes full refresh, Hero entrance/video/title reveal, all three H02 hovers, slow H03/H04 forward travel, H04/H05 transition, and reverse travel back to the H03 entry range.
 
-Pass.
+The 12 fps output is a browser-screenshot validation sequence rather than a native 60 fps screen recording. It is sufficient to review direction, continuity, overlap, and state timing; final micro-easing judgment remains a human-review item.
 
-- Global runtime providers were not modified: ownership remains one Lenis instance, one GSAP ticker driver, and one route scope.
-- Repeated Home/Stills/Home, Home/Motion/Home, Home/About/Home, and Home/Stills-case/Home cycles retained one route-content root, one transition overlay, ten body children, and zero horizontal growth.
-- Back restored Home to scrollY 1497 after leaving at 1496; Forward returned to About at scrollY 0.
-- Dark/light F-stop behavior and cross-route persistence pass. Desktop/mobile labels remain F/24 and F/23.
-- Mobile menu remains x 24, y 64, 342 x 326 with the audited link order, Escape close, scroll release, and focus restoration.
-- Reduced motion shows all Hero/project content at opacity 1 with no transforms and completed the tested route change within the 250 ms observation window.
-- Production console review returned zero warnings, errors, or hydration messages.
-- No temporary motion diagnostic was committed.
+## 11. Remaining P1 / P2 / P3 issues
 
-## 14. Static export result
-
-Pass.
-
-- `npm run check`: pass.
-- Strict TypeScript: pass.
-- Content/media validation: 2 placeholder projects and 12 media assets.
-- Optimized Next.js build: pass.
-- Static/SSG generation: 11 pages.
-- HTTP 200 from `out/`: `/`, `/about/`, `/stills/`, `/stills/project-01/`, `/motion/`, `/motion/project-01/`, `/robots.txt`, and `/sitemap.xml`.
-
-## 15. Remaining P2 / P3 motion differences
-
-- Remaining P1: none.
-- Remaining actionable P2 motion issue: none.
-- Accepted P2 font constraint: legal substitute fonts do not exactly match Roslindale/Mint metrics.
-- Accepted P2 media constraint: temporary original mock photography matches role, geometry, and crop weight rather than protected Reference subjects.
-- P3: exact edge silhouettes differ with the owned subjects/crops.
-- P3: `scrub: 0.45` can visually trail an unusually fast wheel impulse for a fraction of a second; slow continuous and reverse review remains synchronized and spatially continuous.
-- H05 choreography itself was not redesigned because no H05 dead-scroll regression was found; its natural-flow entrance remains the validated R1 structure.
-
-`design-qa.md` records `final result: passed`.
-
-## 16. Repository safety and commit
-
-Safety review passed.
-
-- No `.env` file, Cloudflare/R2 credential, private key, secret value, copied commercial font, RAW/private media master, or new Reference production asset was staged.
-- The only new binaries are local browser validation captures and Reference/Local comparison evidence.
-- No `.next`, `out`, local cache, or temporary diagnostic artifact was committed.
-- `next-env.d.ts` contains the Next 16 build-managed production route-type references and is intentionally tracked per the repository's Next.js agent guidance.
-- `git diff --check` passed.
-
-Completed correction implementation and evidence commit:
-
-`8840b83cc5fa587270132425e46b8e9dd214d9d5`
-
-Subject: `fix: correct home motion fidelity`
-
-This summary is committed immediately afterward so it can record the stable implementation hash without a self-referential hash.
+- P1: none found in the implemented motion architecture.
+- P2: the Hero MP4 is a temporary still-derived camera-motion loop, not final moving footage.
+- P2: Cormorant Garamond and IBM Plex Sans remain legal temporary substitutes; Cormorant is not visually equivalent to Roslindale Condensed despite replaceable tokens and approximate width calibration.
+- P2: the validation video is 12 fps sampled evidence, so a human should judge the final micro-easing in the live Chrome preview as well as the recording.
+- P3: project-owned mock subjects and edge silhouettes differ from protected Reference photography.
+- P3: `scrub: 0.45` can visibly trail an unusually fast wheel impulse for a fraction of a second; the required slow forward and reverse paths remain continuous and deterministic.
+- H05 was not redesigned because the corrected evidence did not identify an H05 regression.
 
 ## Stop point
 
-STEP 3C-R2 is complete and ready for human 60 fps visual review. STEP 3D was not started.
+STEP 3C-R2 implementation and automated validation are complete. The pass is stopped for human video review. STEP 3D was not started.

@@ -9,6 +9,7 @@ import { MediaPicture } from '@/components/media/media-picture';
 import { TransitionLink } from '@/components/primitives/transition-link';
 import { RouteAnimationBoundary, useRouteAnimationScope } from '@/components/runtime/route-animation-boundary';
 import type { HomeContent, HomeFeaturedStill, SiteConfig } from '@/content';
+import { getVideoSources } from '@/lib/media';
 
 interface HomeExperienceProps {
   readonly content: HomeContent;
@@ -16,29 +17,39 @@ interface HomeExperienceProps {
 }
 
 function HomeHero({ content }: { readonly content: HomeContent['hero'] }) {
+  const media = getVideoSources(content.videoMediaId);
+
   return (
     <section className="home-hero" data-home-section="H01" aria-labelledby="home-hero-title">
       <div className="home-hero-card" data-home-hero-card>
-        <MediaPicture
-          id={content.mediaId}
-          className="home-hero-media"
-          imageClassName="home-media-image"
-          size="viewport"
-          loading="eager"
-        />
+        <video
+          className="home-hero-media home-media-image"
+          data-home-hero-video
+          data-preload="critical"
+          autoPlay
+          muted
+          playsInline
+          loop
+          preload="auto"
+          poster={media.poster}
+          aria-hidden="true"
+          tabIndex={-1}
+        >
+          {media.sources.map((source) => <source src={source.src} type={`video/${source.format}`} key={source.src} />)}
+        </video>
         <div className="home-hero-shade" aria-hidden="true" />
         <div className="home-hero-copy">
           <h1 id="home-hero-title" aria-label={`${content.title.join(' ')} ${content.titleZh}`}>
             {content.title.map((line, index) => (
               <span className={`home-hero-line-window home-hero-line-window-${index + 1}`} key={line} aria-hidden="true">
-                <span data-home-hero-line>
+                <span data-home-hero-display-line>
                   <span className="home-hero-line-desktop">{line}</span>
                   <span className="home-hero-line-mobile">{content.titleMobile[index]}</span>
                 </span>
               </span>
             ))}
           </h1>
-          <span className="home-hero-zh" lang="zh-Hant" data-home-hero-line aria-hidden="true">{content.titleZh}</span>
+          <span className="home-hero-zh" lang="zh-Hant" data-home-hero-zh aria-hidden="true">{content.titleZh}</span>
         </div>
       </div>
     </section>
@@ -156,12 +167,24 @@ function HomeRoute({ content, site }: HomeExperienceProps) {
     let cancelled = false;
     const prepare = async () => {
       const root = rootRef.current;
-      const criticalImage = root?.querySelector<HTMLImageElement>('img[data-preload="critical"]');
+      const criticalVideo = root?.querySelector<HTMLVideoElement>('video[data-preload="critical"]');
+      const videoReady = criticalVideo && criticalVideo.readyState < HTMLMediaElement.HAVE_CURRENT_DATA
+        ? new Promise<void>((resolve) => {
+            const settle = () => {
+              criticalVideo.removeEventListener('loadeddata', settle);
+              criticalVideo.removeEventListener('error', settle);
+              resolve();
+            };
+            criticalVideo.addEventListener('loadeddata', settle, { once: true });
+            criticalVideo.addEventListener('error', settle, { once: true });
+          })
+        : Promise.resolve();
       await Promise.all([
         document.fonts?.ready ?? Promise.resolve(),
-        criticalImage?.decode?.().catch(() => undefined) ?? Promise.resolve(),
+        Promise.race([videoReady, new Promise<void>((resolve) => setTimeout(resolve, 3500))]),
       ]);
       if (!cancelled && root) {
+        await criticalVideo?.play().catch(() => undefined);
         setupHomeAnimations(root, scope);
       }
     };

@@ -4,11 +4,11 @@
   --font-tc: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
   --tracking-display: -0.1em;
 
-  --canvas: #111315;
+  --canvas: #101114;
   --ink: #f3f6fa;
   --panel: #111416;
-  --transition-surface: #111315;
-  --nav-surface: rgb(17 19 21 / 78%);
+  --transition-surface: #101114;
+  --nav-surface: rgb(16 17 20 / 78%);
   --hairline: rgb(243 246 250 / 76%);
   --quiet: rgb(243 246 250 / 68%);
   --media-radius: 32px;
