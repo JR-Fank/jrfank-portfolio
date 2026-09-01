@@ -1,91 +1,94 @@
-# STEP 3C-R1 Design QA
+# STEP 3C-R2 Design QA
 
 ## Comparison target
 
-- Source visual truth: `reference/desktop/1440x900/home/000.jpg` through `100.jpg`, and `reference/mobile/390x844/home/000.jpg` through `100.jpg`.
+- Source visual truth: `reference/desktop/1440x900/home/030.jpg` through `080.jpg`, `reference/mobile/390x844/home/050.jpg` through `070.jpg`, the STEP 1 interaction evidence, and the supplied 60 fps review observations.
 - Rendered implementation: `http://localhost:4173/` from the checked static export.
-- Desktop implementation evidence: `outputs/step3c-r1-validation/final-desktop/`.
-- Mobile implementation evidence: `outputs/step3c-r1-validation/final-mobile/`.
-- True side-by-side evidence: `outputs/step3c-r1-validation/comparisons/desktop/` and `outputs/step3c-r1-validation/comparisons/mobile/`.
-- State: dark theme, menu closed, route idle, Home scroll checkpoints 0% through 100% in 10% increments.
+- Desktop implementation evidence: `outputs/step3c-r2-validation/final/desktop/`.
+- Mobile implementation evidence: `outputs/step3c-r2-validation/final/mobile/`.
+- True combined comparisons: `outputs/step3c-r2-validation/comparisons/desktop/`.
+- State: dark theme, menu closed, forward and reverse project scroll, plus H02 normal/hover/release.
 
 ## Viewport and normalization
 
 - Desktop source: 1440 x 900 pixels at a 1440 x 900 CSS viewport, density 1.
-- Desktop implementation: browser CSS viewport verified as 1440 x 900 with `scrollWidth === 1440`; the in-app capture surface emitted 1391 x 900 raster frames. Those raw frames are retained, and comparison-only copies in `final-desktop-normalized/` were normalized to 1440 x 900.
+- Desktop implementation: CSS viewport verified at 1440 x 900 with no horizontal overflow. The in-app capture surface emitted 1392 x 900 JPEG rasters; comparison-only copies were normalized to 1440 x 900 before side-by-side composition.
 - Mobile source and implementation: 390 x 844 pixels at a 390 x 844 CSS viewport, density 1; no normalization was required.
-- Desktop scroll height: 6661 pixels. Mobile scroll height: 5066 pixels. Captures use the same normalized 0%–100% document progress as the Reference evidence.
+- Document dimensions remain 6661 px desktop and 5066 px mobile, retaining the audited section cadence.
 
 ## Full-view comparison evidence
 
-- Desktop contact sheet: `outputs/step3c-r1-validation/comparisons/desktop-reference-local-contact-sheet.jpg`.
-- Mobile contact sheet: `outputs/step3c-r1-validation/comparisons/mobile-reference-local-contact-sheet.jpg`.
-- Individual combined comparisons are retained for all 22 viewport/checkpoint combinations.
+- Desktop project-motion contact sheet: `outputs/step3c-r2-validation/comparisons/desktop-project-motion-contact-sheet.jpg`.
+- Individual Reference/Local comparisons cover H03 entry, H03 center, project overlap, H04 entry, H04 center, and H04 exit/H05 entry.
 
 ## Focused comparison evidence
 
-- H01 desktop/mobile: `comparisons/desktop/000-reference-local.jpg`, `comparisons/mobile/000-reference-local.jpg`.
-- H02 entrance and settled states: desktop/mobile `010-reference-local.jpg` and `020-reference-local.jpg`.
-- H03/H04 paired-media choreography: desktop/mobile `030` through `080` comparisons.
-- H05 and footer arrival: desktop/mobile `090-reference-local.jpg` and `100-reference-local.jpg`.
+- H02 normal/hover/release: `outputs/step3c-r2-validation/final/desktop/h02-normal.jpg`, `h02-hover-1.jpg`, `h02-hover-2.jpg`, `h02-hover-3.jpg`, and `h02-release.jpg`.
+- Forward project trajectory: `outputs/step3c-r2-validation/final/desktop/forward-*.jpg`.
+- Reverse project trajectory: `outputs/step3c-r2-validation/final/desktop/reverse-*.jpg`.
+- Mobile project trajectory: `outputs/step3c-r2-validation/final/mobile/`.
 
-Focused comparisons were required because the full contact sheets make display-font metrics, inline-media proportions, mobile title wrapping, palette geometry, and satellite-image placement too small to judge reliably.
+Focused evidence was required because a static normalized-scroll contact sheet hid the long no-motion interval reported in the 60 fps review. The final pass therefore measured media coordinates at short forward and reverse scroll increments in addition to judging screenshots.
 
 ## Required fidelity surfaces
 
-- Fonts and typography: the calibrated Cormorant Garamond, IBM Plex Sans, and Noto Sans TC token stack preserves the Reference hierarchy and current line structure. Roslindale/Mint construction and optical density remain an accepted non-actionable P2 until licensed originals are supplied.
-- Spacing and layout rhythm: H01–H05 retain the audited viewport heights, dominant gutters, sticky stages, central title columns, media radii, and negative-space cadence. The mobile H01 line structure and H03/H04 clear center column were corrected in the final pass.
-- Colors and visual tokens: dark/light tokens, white media-overlay copy, compact five-segment project palettes, and theme-aware chrome match the observed functional roles.
-- Image quality and asset fidelity: every Reference photographic role is represented by original project-owned raster mock media with responsive WebP/JPEG derivatives. No abstract CSS/SVG stand-in remains in H01 or H02. Subject matter is intentionally different and accepted until final owned media is supplied.
-- Copy and content: identity, biography, project names, metadata, and bilingual copy are project-owned and content-driven. Their different lexical widths are intentional and remain replaceable.
+- Fonts and typography: the R1 substitute font stack, line breaks, title hierarchy, and metadata density are unchanged. Licensed Roslindale/Mint metric differences remain an accepted external constraint.
+- Spacing and layout rhythm: H01/H02 geometry, 205 svh desktop and 134 svh mobile project heights, sticky 100 svh stage, media radii, and central title column remain unchanged. Only the scroll-to-transform mapping changed.
+- Colors and tokens: normalized blank-region sampling returned a Reference median near RGB 19/20/22. The prior Local median was 16/17/19; the corrected Local median is 18/19/21. The dark token changed from `#0e1012` to `#111315`, with the matching transition/nav dark surfaces updated. Light mode remains `#e8e5f0` and Hero overlay copy remains white.
+- Image quality and asset fidelity: all R1 original project-owned mock photographs and crops are unchanged. No new production asset, CSS/SVG substitute, or copied Reference asset was introduced.
+- Copy and content: all project-owned English and Traditional Chinese strings remain content-driven and unchanged.
+- Interaction states: all three H02 images scale to 1.8 without changing their 64 x 80, 64 x 80, and 120 x 80 layout boxes. Enter is 380 ms and release is 460 ms with a power3-out-equivalent cubic curve; z-index remains elevated through release.
+- Accessibility/responsiveness: hover is gated by `(hover: hover) and (pointer: fine)`. Reduced motion clears Home transforms and keeps every section visible. Desktop and mobile have zero horizontal overflow.
 
 ## Findings
 
-- No actionable P0 issues remain.
-- No actionable P1 issues remain.
-- No actionable P2 issues remain within the authorized media/font scope.
-- Accepted P2 constraint: substitute display/UI/Traditional Chinese fonts cannot exactly reproduce licensed Roslindale/Mint/system metrics.
-- Accepted P2 constraint: temporary original mock photographs reproduce geometry and crop weight, not protected Reference subjects or final project art direction.
-- P3: some identity/project-copy widths and the exact intermediate mobile scroll-phase silhouettes differ slightly from the Reference while preserving the same section choreography.
+- No actionable P0 issue remains.
+- No actionable P1 issue remains. The project dead-scroll interval and abrupt A-to-B handoff are resolved.
+- No actionable P2 motion issue remains.
+- Accepted P2 constraints: substitute font metrics and temporary owned mock-photo subjects remain different from the protected Reference materials.
+- P3: exact image-edge silhouettes differ because Local uses different photographic subjects/aspect crops, and ScrollTrigger scrub smoothing can trail a very fast wheel impulse by a fraction of a second. Slow continuous and reverse input remain spatially continuous.
 
 ## Comparison history
 
-### Pass 0 — interrupted baseline
+### Pass 0 — R1 motion baseline
 
-- Earlier finding: H01 used an abstract visual field and incorrect role-copy metrics; H02 used a different editorial composition; H03–H05 included abstract stand-ins; palette dots did not match the compact strips.
-- Fix: replaced H01 with a dominant photographic Hero, rebuilt H02 as three controlled editorial lines with three inline photographs, replaced H03–H05 stand-ins with original photographic mock media, and changed project palettes to compact segmented strips.
-- Evidence: `baseline-desktop/`, `baseline-mobile/`, and the corresponding `final-*` captures.
+- P1: each project timeline ran for 2.0 normalized units, but side-media entry ended at 0.62 and exit did not begin until 1.38. Across the audited 205 svh desktop section this created about 970 px of document travel with unchanged side-media transforms.
+- P1: adjacent projects overlapped only at the late exit/entry boundary, after the frozen interval, making the handoff read as a threshold change in motion.
+- P1: H02 photographic glyphs had no hover enlargement.
+- P2: the rendered dark background was about three RGB levels darker than the normalized Reference blank regions.
 
-### Pass 1 — matched-state correction
+### Pass 1 — continuous project architecture
 
-- P1: mobile H01 centered and wrapped the role copy into four visual lines instead of the Reference-like left-aligned three-line structure.
-- P2: H02 heading and biography density were visibly too small, especially at 390 x 844.
-- P1: mobile H03/H04 images were too wide and crowded the central editorial title column.
-- Fix: added content-driven mobile Hero line breaks, left-aligned the mobile Hero copy, increased H02 display/body metrics, and reduced/repositioned mobile paired-media widths to restore the central column.
-- Post-fix evidence: `comparisons/mobile/000-reference-local.jpg`, `020-reference-local.jpg`, `040-reference-local.jpg`, and `060-reference-local.jpg`.
+- Fix: replaced split entry/hold/exit tweens with one continuous start-to-end spatial trajectory for each side image.
+- Fix: project triggers now run from `top bottom` to `bottom top` with `scrub: 0.45`; no GSAP pin or pin spacing is used. CSS sticky remains solely as the central/stage anchor.
+- Fix: adjacent H03/H04 active ranges overlap by one viewport (900 px desktop, 844 px mobile), so outgoing and incoming media coexist and reconstruct identically in reverse.
+- Post-fix evidence: every sampled 149–200 px desktop step and 189–191 px mobile reverse step changed the active media coordinates; no constant-value interval remained.
 
-### Pass 2 — final verification
+### Pass 2 — hover, tone, and final visual comparison
 
-- H01–H05 were re-captured at every 10% desktop and mobile checkpoint.
-- No wrong architecture, unusable interaction, clearly different macro composition, or actionable spacing/scale/crop/timing mismatch remains.
-- Remaining differences are the accepted font/media constraints and P3 copy/phase polish listed above.
+- Fix: separated H02 scroll entrance transforms from hover transforms with an inner scaler, avoiding competing transform owners and text reflow.
+- Fix: calibrated hover to 1.8 scale, 380 ms enter, 460 ms leave, centered origin, retained clipping radius, and delayed z-index release.
+- Fix: updated the measured dark token and revalidated light mode.
+- Post-fix evidence: combined Reference/Local project frames, five H02 states, desktop/mobile forward and reverse trajectories, and runtime regression all pass.
 
 ## Runtime verification
 
-- Repeated Home to Stills, Motion, About, and Stills case-study lifecycles returned to one Home root, one route-content surface, and one transition overlay without DOM growth.
-- Browser Back restored Home from About to `scrollY` 1754 after leaving at 1752; Forward returned to About at the top.
-- Desktop and mobile F-stop states passed, including light-theme Hero contrast and cross-route persistence.
-- Mobile menu passed audited geometry, focus trap, inert state, Escape close, focus restoration, and F/23 label behavior.
-- Reduced motion showed H01/H02 content at opacity 1 with no transforms and completed the tested route change within the 250 ms observation window.
-- Browser console review returned zero warnings, errors, or hydration messages.
-- `npm run check` passed typecheck, content validation, optimized build, and all 11 static/SSG pages.
+- Home source ownership remains one Lenis provider, one GSAP ticker driver, and one route scope. Global runtime source files were not modified.
+- Home retains five standard-motion ScrollTriggers: Hero departure, H02 reveal, H03, H04, and H05. Reduced motion creates no Home scroll transforms.
+- Repeated Home/Stills/Home, Home/Motion/Home, Home/About/Home, and Home/case/Home cycles retained one route-content root, one transition overlay, ten body children, and no horizontal growth.
+- Back restored Home to scrollY 1497 after leaving at 1496; Forward returned to About at scrollY 0.
+- Theme persistence, white light-mode Hero copy, desktop/mobile F-stop labels, mobile menu 24/64/342 x 326 geometry, link order, Escape close, and focus restoration pass.
+- Reduced motion rendered all Hero/project elements at opacity 1 with no transforms and completed the tested route change within the 250 ms observation window.
+- Production console review returned zero warnings, errors, or hydration messages.
+- `npm run check` passed strict TypeScript, content validation, optimized build, and all 11 static/SSG pages. Eight tested export URLs returned HTTP 200.
 
 ## Implementation checklist
 
-- [x] Resolve all P0 and P1 structural fidelity findings.
-- [x] Resolve technically reasonable P2 scale, spacing, wrapping, and crop findings.
-- [x] Validate 1440 x 900 and 390 x 844 at all required checkpoints.
-- [x] Verify route, theme, menu, reduced-motion, Back/Forward, console, and static-export behavior.
-- [x] Preserve project-owned content and legally generated/authorized media only.
+- [x] Remove all project dead-scroll intervals.
+- [x] Preserve continuous forward and reverse spatial motion.
+- [x] Make outgoing/incoming project media overlap without a content swap or opacity-only transition.
+- [x] Add non-reflowing pointer hover for all three H02 images.
+- [x] Correct the measured dark background tone and recheck light mode.
+- [x] Validate desktop, mobile, reduced motion, routes, theme, menu, console, and static export.
 
 final result: passed

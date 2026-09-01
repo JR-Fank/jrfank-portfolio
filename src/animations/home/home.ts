@@ -20,29 +20,27 @@ function setupFeaturedStill(section: HTMLElement, reverse: boolean): void {
   const timeline = gsap.timeline({
     scrollTrigger: {
       trigger: section,
-      start: 'top 82%',
-      end: 'bottom 3%',
-      scrub: 0.8,
+      start: 'top bottom',
+      end: 'bottom top',
+      scrub: 0.45,
     },
   });
 
   timeline
     .fromTo(
       left,
-      { xPercent: -118 * direction, yPercent: 14, rotate: -5 * direction },
-      { xPercent: -5 * direction, yPercent: 0, rotate: -1.2 * direction, ease: 'none', duration: 0.62 },
+      { xPercent: -118 * direction, yPercent: 24, rotate: -5 * direction },
+      { xPercent: 118 * direction, yPercent: -24, rotate: 4 * direction, ease: 'none', duration: 1 },
       0,
     )
     .fromTo(
       right,
-      { xPercent: 118 * direction, yPercent: -10, rotate: 5 * direction },
-      { xPercent: 5 * direction, yPercent: 0, rotate: 1.2 * direction, ease: 'none', duration: 0.62 },
+      { xPercent: 118 * direction, yPercent: -20, rotate: 5 * direction },
+      { xPercent: -118 * direction, yPercent: 28, rotate: -4 * direction, ease: 'none', duration: 1 },
       0,
     )
-    .fromTo(center, { opacity: 0.14, scale: 0.94 }, { opacity: 1, scale: 1, ease: 'none', duration: 0.48 }, 0.12)
-    .to(left, { xPercent: 118 * direction, yPercent: -10, rotate: 4 * direction, ease: 'none', duration: 0.62 }, 1.38)
-    .to(right, { xPercent: -118 * direction, yPercent: 12, rotate: -4 * direction, ease: 'none', duration: 0.62 }, 1.38)
-    .to(center, { opacity: 0.12, scale: 0.95, ease: 'none', duration: 0.48 }, 1.5);
+    .fromTo(center, { opacity: 0.12, scale: 0.95 }, { opacity: 1, scale: 1, ease: 'none', duration: 0.28 }, 0.06)
+    .to(center, { opacity: 0.12, scale: 0.95, ease: 'none', duration: 0.28 }, 0.72);
 }
 
 export function setupHomeAnimations(root: HTMLElement, scope: RouteAnimationScope): void {

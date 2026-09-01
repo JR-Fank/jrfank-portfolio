@@ -65,7 +65,9 @@ function HomeIntro({ content }: { readonly content: HomeContent['intro'] }) {
                     aria-hidden="true"
                     key={`${segment.mediaId}-${segmentIndex}`}
                   >
-                    <MediaPicture id={segment.mediaId} imageClassName="home-media-image" size="rail-thumb" alt="" />
+                    <span className="home-intro-inline-media-scaler">
+                      <MediaPicture id={segment.mediaId} imageClassName="home-media-image" size="rail-thumb" alt="" />
+                    </span>
                   </span>
                 ),
               )}
