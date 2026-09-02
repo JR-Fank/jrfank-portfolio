@@ -1,0 +1,335 @@
+.about {
+  overflow: clip;
+}
+
+.about picture,
+.about-media-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.about-media-image {
+  object-fit: cover;
+  object-position: var(--media-focal-x) var(--media-focal-y);
+}
+
+.about-hero {
+  position: relative;
+  height: 142svh;
+  min-height: 1080px;
+}
+
+.about-hero-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  min-height: 720px;
+  overflow: hidden;
+}
+
+.about-hero h1 {
+  position: absolute;
+  z-index: 1;
+  top: 46%;
+  left: 50%;
+  display: flex;
+  margin: 0;
+  align-items: center;
+  flex-direction: column;
+  font-size: clamp(7.5rem, 12vw, 11rem);
+  letter-spacing: -0.09em;
+  line-height: 0.67;
+  text-align: center;
+  text-transform: uppercase;
+  transform: translate(-50%, -50%);
+  will-change: opacity, transform;
+}
+
+.about-hero-portrait {
+  position: absolute;
+  z-index: 2;
+  top: 65%;
+  left: 50%;
+  width: min(35vw, 500px);
+  aspect-ratio: 0.72;
+  overflow: hidden;
+  border-radius: var(--media-radius);
+  background: var(--panel);
+  transform: translateX(-50%);
+  will-change: opacity, transform;
+}
+
+.about-intro {
+  position: relative;
+  min-height: 170svh;
+  padding: 17svh 0 20svh;
+}
+
+.about-intro-copy {
+  width: min(900px, calc(100% - 2 * var(--page-gutter)));
+  margin: 0 auto 16svh;
+  text-align: center;
+}
+
+.about-intro-copy h2 {
+  margin: 0;
+  font-size: clamp(2.65rem, 4.25vw, 4rem);
+  letter-spacing: -0.06em;
+  line-height: 0.98;
+}
+
+.about-intro-copy p {
+  width: min(540px, 80%);
+  margin: 32px auto 0;
+  color: var(--quiet);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  line-height: 1.7;
+}
+
+.about-film-window {
+  position: relative;
+  width: 100%;
+  height: min(52vw, 640px);
+}
+
+.about-film-strip {
+  position: absolute;
+  top: 4%;
+  left: -13%;
+  display: flex;
+  width: max-content;
+  align-items: center;
+  gap: 12px;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.about-film-frame {
+  flex: none;
+  overflow: hidden;
+  border-radius: 18px;
+  background: var(--panel);
+}
+
+.about-film-frame-1 { width: 22vw; height: 34vw; max-height: 490px; }
+.about-film-frame-2 { width: 36vw; height: 29vw; max-height: 420px; }
+.about-film-frame-3 { width: 20vw; height: 35vw; max-height: 505px; }
+.about-film-frame-4 { width: 42vw; height: 28vw; max-height: 405px; }
+
+.about-statement {
+  display: grid;
+  min-height: 106svh;
+  padding: 18svh var(--page-gutter);
+  align-items: center;
+  gap: 8vw;
+  grid-template-columns: 1.05fr 0.95fr;
+}
+
+.about-statement h2 {
+  display: flex;
+  margin: 0;
+  flex-direction: column;
+  font-size: clamp(5rem, 8vw, 8.2rem);
+  letter-spacing: -0.085em;
+  line-height: 0.76;
+}
+
+.about-statement-zh {
+  margin: 40px 0 0;
+  color: var(--quiet);
+  font-size: 0.78rem;
+  letter-spacing: 0.13em;
+}
+
+.about-statement-body {
+  align-self: center;
+  font-size: clamp(1rem, 1.55vw, 1.35rem);
+  line-height: 1.5;
+}
+
+.about-statement-body p { margin: 0; }
+
+.about-statement-body [lang="zh-Hant"] {
+  margin-top: 28px;
+  color: var(--quiet);
+  font-size: 0.74em;
+  letter-spacing: 0.06em;
+}
+
+.about-story {
+  display: grid;
+  min-height: 122svh;
+  padding: 16svh var(--page-gutter) 20svh;
+  align-items: start;
+  gap: 8vw;
+  grid-template-columns: 1fr 1fr;
+}
+
+.about-story-media {
+  position: sticky;
+  top: 14svh;
+  height: 72svh;
+  min-height: 560px;
+  overflow: hidden;
+  border-radius: var(--media-radius);
+  background: var(--panel);
+}
+
+.about-story-copy {
+  padding-top: 8svh;
+  font-size: clamp(1rem, 1.5vw, 1.35rem);
+  line-height: 1.55;
+}
+
+.about-story-copy h2 {
+  margin: 0 0 10svh;
+  font-size: clamp(3.5rem, 5.5vw, 5.5rem);
+  letter-spacing: -0.075em;
+  line-height: 0.83;
+}
+
+.about-story-copy p { margin: 0 0 2rem; }
+
+.about-story-copy .about-story-zh {
+  margin-top: 4rem;
+  color: var(--quiet);
+  font-size: 0.72em;
+  letter-spacing: 0.07em;
+}
+
+.about-information {
+  display: grid;
+  min-height: 76svh;
+  padding: 18svh var(--page-gutter) 14svh;
+  align-items: start;
+  gap: 7vw;
+  grid-template-columns: minmax(280px, 0.65fr) 1.35fr;
+}
+
+.about-information header h2 {
+  margin: 0;
+  font-size: clamp(4.5rem, 7vw, 7rem);
+  letter-spacing: -0.085em;
+  line-height: 0.78;
+}
+
+.about-information header p {
+  margin: 30px 0 0;
+  color: var(--quiet);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+}
+
+.about-information-rows {
+  border-top: 1px solid color-mix(in srgb, var(--ink) 18%, transparent);
+}
+
+.about-information-rows > div,
+.about-information-rows > a {
+  display: grid;
+  min-height: 92px;
+  align-items: center;
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 18%, transparent);
+  gap: 24px;
+  grid-template-columns: 1fr 1fr auto auto;
+}
+
+.about-information-primary {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 2.4vw, 2.5rem);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 1;
+}
+
+.about-information-secondary,
+.about-information-meta {
+  font-size: 0.65rem;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.about-information-secondary { color: var(--quiet); }
+
+.about-information-rows > a svg {
+  transition: transform 180ms cubic-bezier(.23, 1, .32, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .about-information-rows > a:hover svg { transform: translate(3px, -3px); }
+}
+
+.about [data-about-section="A09"] .site-footer {
+  min-height: 100svh;
+}
+
+@media (max-width: 991px) {
+  .about-hero { height: 134svh; }
+  .about-hero h1 { font-size: clamp(7rem, 14vw, 10rem); }
+  .about-hero-portrait { width: min(44vw, 470px); }
+  .about-intro { min-height: 150svh; }
+  .about-statement,
+  .about-story { gap: 6vw; }
+  .about-information { grid-template-columns: 0.72fr 1.28fr; }
+  .about-information-rows > div,
+  .about-information-rows > a { gap: 14px; grid-template-columns: 1fr 0.9fr auto auto; }
+}
+
+@media (max-width: 767px) {
+  .about-hero { height: 118svh; min-height: 900px; }
+  .about-hero-stage { min-height: 680px; }
+  .about-hero h1 { top: 42%; font-size: clamp(6rem, 25vw, 9rem); line-height: 0.7; }
+  .about-hero-portrait { top: 55%; width: min(68vw, 420px); }
+  .about-intro { min-height: 138svh; padding-top: 12svh; }
+  .about-intro-copy { margin-bottom: 10svh; }
+  .about-intro-copy h2 { font-size: clamp(2.35rem, 10.5vw, 4rem); }
+  .about-intro-copy p { width: 92%; }
+  .about-film-window { height: 74vw; }
+  .about-film-strip { left: -38%; gap: 8px; }
+  .about-film-frame-1 { width: 44vw; height: 65vw; }
+  .about-film-frame-2 { width: 70vw; height: 56vw; }
+  .about-film-frame-3 { width: 40vw; height: 68vw; }
+  .about-film-frame-4 { width: 78vw; height: 54vw; }
+  .about-statement,
+  .about-story,
+  .about-information { display: block; }
+  .about-statement { min-height: 110svh; padding-top: 15svh; }
+  .about-statement h2 { font-size: clamp(4.2rem, 18vw, 7rem); }
+  .about-statement-body { width: 88%; margin-top: 14svh; margin-left: auto; }
+  .about-story { min-height: 0; padding-top: 10svh; }
+  .about-story-media { position: relative; top: auto; height: 70svh; min-height: 500px; }
+  .about-story-copy { padding-top: 12svh; }
+  .about-story-copy h2 { margin-bottom: 8svh; font-size: clamp(3.5rem, 15vw, 5.4rem); }
+  .about-information { min-height: 0; padding-top: 14svh; padding-bottom: 14svh; }
+  .about-information header { margin-bottom: 10svh; }
+  .about-information header h2 { font-size: clamp(4rem, 18vw, 6rem); }
+  .about-information-rows > div,
+  .about-information-rows > a { min-height: 104px; grid-template-columns: 1fr auto; }
+  .about-information-secondary { grid-column: 1 / 2; }
+  .about-information-meta { grid-row: 1; grid-column: 2; }
+  .about-information-rows > a svg { grid-row: 2; grid-column: 2; }
+}
+
+@media (max-width: 479px) {
+  .about-hero { height: 112svh; }
+  .about-hero h1 { font-size: 24vw; }
+  .about-hero-portrait { width: 72vw; border-radius: 26px; }
+  .about-intro-copy h2 { font-size: 10.6vw; }
+  .about-statement h2 { font-size: 17.5vw; }
+  .about-statement-body { width: 100%; }
+  .about-story-media { height: 64svh; min-height: 460px; }
+  .about-information header h2 { font-size: 16vw; overflow-wrap: anywhere; }
+  .about-information-primary { font-size: 1.65rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about [data-about-hero-title],
+  .about [data-about-hero-portrait],
+  .about [data-about-film-strip] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

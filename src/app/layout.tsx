@@ -16,6 +16,7 @@ import '@/styles/tokens.css';
 import '@/styles/typography.css';
 import '@/styles/globals.css';
 import '@/styles/home.css';
+import '@/styles/about.css';
 
 const defaultDescription = 'A bilingual editorial photography and film portfolio foundation.';
 

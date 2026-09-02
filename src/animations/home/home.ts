@@ -61,12 +61,9 @@ export function setupHomeAnimations(root: HTMLElement, scope: RouteAnimationScop
       (context) => {
         const conditions = context.conditions as HomeMotionContext;
         const hero = root.querySelector<HTMLElement>('[data-home-section="H01"]');
-        const heroCard = root.querySelector<HTMLElement>('[data-home-hero-card]');
-        const heroLines = gsap.utils.toArray<HTMLElement>('[data-home-hero-display-line]', root);
         const heroLineWindows = gsap.utils.toArray<HTMLElement>('.home-hero-line-window', root);
         const heroZh = root.querySelector<HTMLElement>('[data-home-hero-zh]');
         const heroVideo = root.querySelector<HTMLVideoElement>('[data-home-hero-video]');
-        const siteHeader = document.querySelector<HTMLElement>('.site-header');
         const intro = root.querySelector<HTMLElement>('[data-home-section="H02"]');
         const introPieces = gsap.utils.toArray<HTMLElement>('[data-home-intro-piece]', root);
         const introText = gsap.utils.toArray<HTMLElement>('[data-home-intro-text]', root);
@@ -78,7 +75,7 @@ export function setupHomeAnimations(root: HTMLElement, scope: RouteAnimationScop
         const motionSatellites = gsap.utils.toArray<HTMLElement>('[data-home-motion-satellite]', root);
 
         if (conditions.reduce) {
-          gsap.set([siteHeader, heroCard, ...heroLineWindows, ...heroLines, heroZh, ...introPieces, ...introSupport, ...featuredSections, motionMain, ...motionSatellites], {
+          gsap.set([...heroLineWindows, heroZh, ...introPieces, ...introSupport, ...featuredSections, motionMain, ...motionSatellites], {
             clearProps: 'all',
           });
           updateDiagnostics({ scrollTriggers: scrollTrigger.getAll().length });
@@ -89,17 +86,8 @@ export function setupHomeAnimations(root: HTMLElement, scope: RouteAnimationScop
           return;
         }
 
-        if (hero && heroCard && heroLines.length > 0) {
+        if (hero && heroLineWindows.length > 0) {
           void heroVideo?.play().catch(() => undefined);
-          const entrance = gsap.timeline({ defaults: { ease: 'power3.out' } });
-          if (siteHeader) {
-            entrance.fromTo(siteHeader, { autoAlpha: 0, y: -8 }, { autoAlpha: 1, y: 0, duration: 0.58 }, 1.42);
-          }
-          entrance.fromTo(heroCard, { scale: 0.14 }, { scale: 1, duration: 1 }, 1.45);
-          if (heroZh) {
-            entrance.fromTo(heroZh, { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.52 }, 2.33);
-          }
-
           gsap
             .timeline({
               scrollTrigger: {

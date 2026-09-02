@@ -1,26 +1,15 @@
 import type { Metadata } from 'next';
 
-import { PlaceholderPage } from '@/components/sections/placeholder-page';
-import { siteConfig } from '@/content';
+import { AboutExperience } from '@/components/about/about-experience';
+import { aboutContent, siteConfig } from '@/content';
 import { createPageMetadata } from '@/lib/metadata';
 
 export const metadata: Metadata = createPageMetadata({
   title: 'About',
-  description: 'About page foundation.',
+  description: 'A bilingual editorial introduction to the photography and film practice.',
   path: '/about/',
 });
 
 export default function AboutPage() {
-  return (
-    <PlaceholderPage
-      site={siteConfig}
-      eyebrow="ABOUT"
-      title="ABOUT"
-      titleZh="關於"
-      location="HONG KONG"
-      locationZh="香港"
-      mediaId="about.portrait"
-      portrait
-    />
-  );
+  return <AboutExperience content={aboutContent} site={siteConfig} />;
 }

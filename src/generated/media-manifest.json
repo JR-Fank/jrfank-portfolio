@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "generatedAt": "2026-09-01T00:00:00.000Z",
-  "sourceFingerprint": "step-3c-r2-authoritative-motion-v1",
+  "generatedAt": "2026-09-02T00:00:00.000Z",
+  "sourceFingerprint": "step-3c-r3-about-authorized-mock-v1",
   "assets": {
     "site.home-hero": {
       "kind": "image",
@@ -76,19 +76,17 @@
     "about.portrait": {
       "kind": "image",
       "id": "about.portrait",
-      "width": 1600,
-      "height": 2400,
+      "width": 1024,
+      "height": 1536,
       "aspectRatio": 0.6666666667,
-      "alt": "Abstract lavender portrait placeholder",
-      "dominantColor": "#786f83",
-      "focalPoint": { "x": 0.5, "y": 0.42 },
+      "alt": "Temporary original monochrome editorial portrait mock of a fictional creative professional outdoors",
+      "dominantColor": "#363636",
+      "focalPoint": { "x": 0.5, "y": 0.56 },
       "variants": [
-        { "width": 640, "format": "avif", "key": "about/portrait/about-portrait-640-mockv1.avif", "bytes": 0, "hash": "mockv1" },
-        { "width": 1280, "format": "avif", "key": "about/portrait/about-portrait-1280-mockv1.avif", "bytes": 0, "hash": "mockv1" },
-        { "width": 640, "format": "webp", "key": "about/portrait/about-portrait-640-mockv1.webp", "bytes": 0, "hash": "mockv1" },
-        { "width": 1280, "format": "webp", "key": "about/portrait/about-portrait-1280-mockv1.webp", "bytes": 0, "hash": "mockv1" },
-        { "width": 640, "format": "jpg", "key": "about/portrait/about-portrait-640-mockv1.jpg", "bytes": 0, "hash": "mockv1" },
-        { "width": 1280, "format": "jpg", "key": "about/portrait/about-portrait-1280-mockv1.jpg", "bytes": 0, "hash": "mockv1" }
+        { "width": 640, "format": "webp", "key": "about/portrait-r3/about-portrait-640-mockr3.webp", "bytes": 20058, "hash": "e7b8e1d46e3bc77a2d546b1b9739c5b49aa84f7ab784029098e6b1680ca0ce98" },
+        { "width": 1024, "format": "webp", "key": "about/portrait-r3/about-portrait-1024-mockr3.webp", "bytes": 48322, "hash": "e81353a69e7ca28d805df04a9162e66e93545c6724cd7c438daad964c3c4bf1c" },
+        { "width": 640, "format": "jpg", "key": "about/portrait-r3/about-portrait-640-mockr3.jpg", "bytes": 33408, "hash": "f1033271d24602f97704d8dfc9a59924e235290178024eb0b589164d593f6aaa" },
+        { "width": 1024, "format": "jpg", "key": "about/portrait-r3/about-portrait-1024-mockr3.jpg", "bytes": 87641, "hash": "79dd731a886ae4cd551c06af89a9e0d190b665462b0aa9563e02e3ddf5391fa8" }
       ]
     },
     "site.light-detail": {

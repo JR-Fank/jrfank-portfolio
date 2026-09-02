@@ -8,7 +8,7 @@ import { SiteFooter } from '@/components/chrome/site-footer';
 import { MediaPicture } from '@/components/media/media-picture';
 import { TransitionLink } from '@/components/primitives/transition-link';
 import { RouteAnimationBoundary, useRouteAnimationScope } from '@/components/runtime/route-animation-boundary';
-import type { HomeContent, HomeFeaturedStill, SiteConfig } from '@/content';
+import type { HomeContent, HomeFeaturedStill, HomeIntroSegment, SiteConfig } from '@/content';
 import { getVideoSources } from '@/lib/media';
 
 interface HomeExperienceProps {
@@ -56,6 +56,66 @@ function HomeHero({ content }: { readonly content: HomeContent['hero'] }) {
   );
 }
 
+function InlineIntroMedia({ segment }: { readonly segment: Extract<HomeIntroSegment, { type: 'media' }> }) {
+  const rootRef = useRef<HTMLSpanElement>(null);
+  const blurAnimation = useRef<Animation | null>(null);
+
+  useEffect(() => () => blurAnimation.current?.cancel(), []);
+
+  const animateBlur = (peak: number, duration: number, peakOffset: number) => {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      return;
+    }
+    const picture = rootRef.current?.querySelector<HTMLElement>('picture');
+    if (!picture) {
+      return;
+    }
+    blurAnimation.current?.cancel();
+    blurAnimation.current = picture.animate(
+      [
+        { filter: 'blur(0px)', offset: 0 },
+        { filter: `blur(${peak}px)`, offset: peakOffset },
+        { filter: 'blur(0px)', offset: 1 },
+      ],
+      { duration, easing: 'linear' },
+    );
+  };
+
+  const enter = () => {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches || !rootRef.current) {
+      return;
+    }
+    rootRef.current.dataset.active = 'true';
+    animateBlur(9, 280, 0.54);
+  };
+
+  const leave = () => {
+    if (!rootRef.current) {
+      return;
+    }
+    rootRef.current.dataset.active = 'false';
+    animateBlur(6, 200, 0.42);
+  };
+
+  return (
+    <span
+      ref={rootRef}
+      className={`home-intro-inline-media home-intro-inline-media-${segment.shape}`}
+      data-home-intro-piece
+      data-home-intro-media
+      data-active="false"
+      aria-hidden="true"
+      onPointerEnter={enter}
+      onPointerLeave={leave}
+      onPointerCancel={leave}
+    >
+      <span className="home-intro-inline-media-scaler">
+        <MediaPicture id={segment.mediaId} imageClassName="home-media-image" size="rail-thumb" alt="" />
+      </span>
+    </span>
+  );
+}
+
 function HomeIntro({ content }: { readonly content: HomeContent['intro'] }) {
   return (
     <section className="home-intro" data-home-section="H02" aria-labelledby="home-intro-title">
@@ -68,19 +128,7 @@ function HomeIntro({ content }: { readonly content: HomeContent['intro'] }) {
                   <span className="home-intro-piece" data-home-intro-piece data-home-intro-text aria-hidden="true" key={`${segment.value}-${segmentIndex}`}>
                     {segment.value}
                   </span>
-                ) : (
-                  <span
-                    className={`home-intro-inline-media home-intro-inline-media-${segment.shape}`}
-                    data-home-intro-piece
-                    data-home-intro-media
-                    aria-hidden="true"
-                    key={`${segment.mediaId}-${segmentIndex}`}
-                  >
-                    <span className="home-intro-inline-media-scaler">
-                      <MediaPicture id={segment.mediaId} imageClassName="home-media-image" size="rail-thumb" alt="" />
-                    </span>
-                  </span>
-                ),
+                ) : <InlineIntroMedia segment={segment} key={`${segment.mediaId}-${segmentIndex}`} />,
               )}
             </span>
           ))}
