@@ -1,0 +1,21 @@
+# Decision Log
+
+- Use Next.js App Router with TypeScript as a static site generator; production output is `out/`, not an SSR application.
+- GitHub is the durable project source of truth.
+- `main` represents the latest human-approved stable state. Future major phases use dedicated branches and merge only after validation and approval.
+- Cloudflare Pages is planned for site hosting, but is not connected or deployed yet.
+- Cloudflare R2 is planned for production media, but is not connected yet.
+- The likely production domain is `jrfank.cc`.
+- `401688.xyz` may be used as a beta/test domain.
+- A later media host will likely be `media.jrfank.cc` or `media.401688.xyz`.
+- There is no database.
+- There is no authentication currently.
+- The portfolio is intended to be private or unlisted; public reachability is not equivalent to access control.
+- SEO is secondary to fidelity and controlled presentation.
+- No visitor analytics is installed currently.
+- Reference commercial fonts must not be copied. Roslindale remains the preferred final display-font direction only if legally licensed.
+- All final identity, photography, video, biography, and copy must be project-owned.
+- Reference fidelity takes precedence over creative reinterpretation.
+- Project mock media remains local and tracked only when it is required to run and validate development layouts.
+- Large motion-review recordings are local/external evidence, not durable repository content. Markdown fidelity reports retain the durable measurements and findings.
+- Code deployment and R2 media publishing remain separately authorized workflows.

@@ -13,6 +13,11 @@ out/
 # Temporary validation artifacts and local caches
 work/
 .playwright-cli/
+/outputs/*.mp4
+/outputs/**/*.mp4
+/outputs/*.mov
+/outputs/**/*.mov
+/*.mov
 *.tsbuildinfo
 *.log
 .cache/
