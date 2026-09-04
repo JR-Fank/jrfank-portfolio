@@ -1,5 +1,6 @@
 .about {
-  overflow: clip;
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 .about picture,
@@ -37,7 +38,7 @@
   margin: 0;
   align-items: center;
   flex-direction: column;
-  font-size: clamp(7.5rem, 12vw, 11rem);
+  font-size: clamp(7.5rem, 12vw, 14rem);
   letter-spacing: -0.09em;
   line-height: 0.67;
   text-align: center;
@@ -268,7 +269,6 @@
 
 @media (max-width: 991px) {
   .about-hero { height: 134svh; }
-  .about-hero h1 { font-size: clamp(7rem, 14vw, 10rem); }
   .about-hero-portrait { width: min(44vw, 470px); }
   .about-intro { min-height: 150svh; }
   .about-statement,
@@ -281,7 +281,7 @@
 @media (max-width: 767px) {
   .about-hero { height: 118svh; min-height: 900px; }
   .about-hero-stage { min-height: 680px; }
-  .about-hero h1 { top: 42%; font-size: clamp(6rem, 25vw, 9rem); line-height: 0.7; }
+  .about-hero h1 { top: 42%; font-size: clamp(6rem, 22vw, 7.5rem); line-height: 0.7; }
   .about-hero-portrait { top: 55%; width: min(68vw, 420px); }
   .about-intro { min-height: 138svh; padding-top: 12svh; }
   .about-intro-copy { margin-bottom: 10svh; }
@@ -297,15 +297,15 @@
   .about-story,
   .about-information { display: block; }
   .about-statement { min-height: 110svh; padding-top: 15svh; }
-  .about-statement h2 { font-size: clamp(4.2rem, 18vw, 7rem); }
+  .about-statement h2 { font-size: clamp(4.2rem, 10.6vw, 5.1rem); }
   .about-statement-body { width: 88%; margin-top: 14svh; margin-left: auto; }
   .about-story { min-height: 0; padding-top: 10svh; }
   .about-story-media { position: relative; top: auto; height: 70svh; min-height: 500px; }
   .about-story-copy { padding-top: 12svh; }
-  .about-story-copy h2 { margin-bottom: 8svh; font-size: clamp(3.5rem, 15vw, 5.4rem); }
+  .about-story-copy h2 { margin-bottom: 8svh; font-size: 3.5rem; }
   .about-information { min-height: 0; padding-top: 14svh; padding-bottom: 14svh; }
   .about-information header { margin-bottom: 10svh; }
-  .about-information header h2 { font-size: clamp(4rem, 18vw, 6rem); }
+  .about-information header h2 { font-size: clamp(4rem, 9.4vw, 4.5rem); }
   .about-information-rows > div,
   .about-information-rows > a { min-height: 104px; grid-template-columns: 1fr auto; }
   .about-information-secondary { grid-column: 1 / 2; }
@@ -315,13 +315,11 @@
 
 @media (max-width: 479px) {
   .about-hero { height: 112svh; }
-  .about-hero h1 { font-size: 24vw; }
   .about-hero-portrait { width: 72vw; border-radius: 26px; }
   .about-intro-copy h2 { font-size: 10.6vw; }
-  .about-statement h2 { font-size: 17.5vw; }
   .about-statement-body { width: 100%; }
   .about-story-media { height: 64svh; min-height: 460px; }
-  .about-information header h2 { font-size: 16vw; overflow-wrap: anywhere; }
+  .about-information header h2 { overflow-wrap: anywhere; }
   .about-information-primary { font-size: 1.65rem; }
 }
 

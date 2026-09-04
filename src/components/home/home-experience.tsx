@@ -1,6 +1,6 @@
 'use client';
 
-import { Play } from '@phosphor-icons/react';
+import { Play } from '@phosphor-icons/react/Play';
 import { useEffect, useRef } from 'react';
 
 import { setupHomeAnimations } from '@/animations/home/home';

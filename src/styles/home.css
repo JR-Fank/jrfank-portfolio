@@ -1,5 +1,6 @@
 .home {
-  overflow: clip;
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 .home picture,
@@ -241,8 +242,8 @@ body:has([data-home-root]) .site-header {
   position: absolute;
   z-index: 1;
   top: 10svh;
-  width: min(42vw, 600px);
-  height: min(80svh, 720px);
+  width: clamp(400px, 42vw, 680px);
+  height: min(80svh, 760px);
   overflow: hidden;
   border-radius: var(--media-radius);
   background: var(--panel);
@@ -404,7 +405,7 @@ body:has([data-home-root]) .site-header {
 @media (max-width: 767px) {
   .home-hero { min-height: 660px; }
   .home-hero-copy { padding: 0 18px; place-content: center stretch; text-align: left; }
-  .home-hero-copy h1 { font-size: clamp(3rem, 12.2vw, 5rem); line-height: 0.88; }
+  .home-hero-copy h1 { font-size: clamp(3rem, 9.9vw, 5rem); line-height: 0.88; }
   .home-hero-line-window { padding-right: 0; padding-left: 0; }
   .home-hero-line-desktop { display: none; }
   .home-hero-line-mobile { display: inline; }
@@ -417,15 +418,15 @@ body:has([data-home-root]) .site-header {
   .home-intro-inline-media-landscape { width: 82px; }
   .home-intro-support { width: 86vw; font-size: clamp(0.875rem, 3.9vw, 1rem); line-height: 1.55; }
   .home-featured-still { height: 134svh; min-height: 1000px; }
-  .home-still-media { top: 18svh; width: 62vw; height: 60svh; max-height: 540px; }
+  .home-still-media { top: 18svh; width: clamp(240px, 58vw, 440px); height: 60svh; max-height: 540px; }
   .home-still-media-left { right: calc(50% + 2vw); left: auto; }
   .home-still-media-right { right: auto; left: calc(50% + 2vw); }
-  .home-still-center h2 { font-size: clamp(3.65rem, 16vw, 5.6rem); line-height: 0.82; }
+  .home-still-center h2 { font-size: clamp(3.65rem, 9.8vw, 5.6rem); line-height: 0.82; }
   .home-project-meta { gap: 7px; }
   .home-project-meta span + span::before { margin-right: 7px; }
   .home-motion { height: 68svh; min-height: 574px; }
   .home-motion-heading { top: 6%; width: 100%; }
-  .home-motion-heading h2 { font-size: clamp(3.8rem, 16vw, 5.5rem); }
+  .home-motion-heading h2 { font-size: clamp(3.8rem, 9.9vw, 5.5rem); }
   .home-motion-main { width: 109vw; }
   .home-motion-satellite-1 { top: 25%; left: -9%; width: 34vw; height: 19vh; }
   .home-motion-satellite-2 { right: -8%; bottom: 13%; width: 32vw; height: 24vh; }
@@ -435,7 +436,6 @@ body:has([data-home-root]) .site-header {
 
 @media (max-width: 479px) {
   .home-hero { padding-bottom: 48px; }
-  .home-hero-copy h1 { font-size: 12.2vw; }
   .home-hero-zh { margin-top: 20px; }
   .home-intro { padding-right: 24px; padding-left: 24px; }
   .home-intro-support { width: 86vw; }

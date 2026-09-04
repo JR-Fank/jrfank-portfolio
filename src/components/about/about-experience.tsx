@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowUpRight } from '@phosphor-icons/react';
+import { ArrowUpRight } from '@phosphor-icons/react/ArrowUpRight';
 import { useEffect, useRef } from 'react';
 
 import { setupAboutAnimations } from '@/animations/about/about';

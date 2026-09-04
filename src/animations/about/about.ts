@@ -50,6 +50,7 @@ export function setupAboutAnimations(root: HTMLElement, scope: RouteAnimationSco
                 start: 'top top',
                 end: 'bottom top',
                 scrub: 0.6,
+                invalidateOnRefresh: true,
               },
             })
             .to(heroTitle, { yPercent: -24, ease: 'none' }, 0)
@@ -70,6 +71,7 @@ export function setupAboutAnimations(root: HTMLElement, scope: RouteAnimationSco
                 start: 'top bottom',
                 end: 'bottom top',
                 scrub: 0.55,
+                invalidateOnRefresh: true,
               },
             },
           );

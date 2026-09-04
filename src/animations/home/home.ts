@@ -9,12 +9,18 @@ type HomeMotionContext = {
 
 function setupFeaturedStill(section: HTMLElement): void {
   const gsap = getGsap();
+  const stage = section.querySelector<HTMLElement>('.home-still-stage');
   const left = section.querySelector<HTMLElement>('[data-home-still="left"]');
   const right = section.querySelector<HTMLElement>('[data-home-still="right"]');
   const center = section.querySelector<HTMLElement>('[data-home-still="center"]');
-  if (!left || !right || !center) {
+  if (!stage || !left || !right || !center) {
     return;
   }
+
+  const overshoot = () => Math.min(44, Math.max(16, stage.clientWidth * 0.02));
+  const closeOffset = (element: HTMLElement) => Math.min(element.offsetWidth * 0.34, stage.clientWidth * 0.22);
+  const leftExit = () => -(left.offsetLeft + left.offsetWidth + overshoot());
+  const rightExit = () => stage.clientWidth - right.offsetLeft + overshoot();
 
   const timeline = gsap.timeline({
     scrollTrigger: {
@@ -22,20 +28,21 @@ function setupFeaturedStill(section: HTMLElement): void {
       start: 'top bottom',
       end: 'bottom top',
       scrub: 0.45,
+      invalidateOnRefresh: true,
     },
   });
 
   timeline
     .fromTo(
       left,
-      { xPercent: 34, rotate: -3 },
-      { xPercent: -138, rotate: -1, ease: 'none', duration: 1 },
+      { x: () => closeOffset(left), rotate: -3 },
+      { x: leftExit, rotate: -1, ease: 'none', duration: 1 },
       0,
     )
     .fromTo(
       right,
-      { xPercent: -34, rotate: 3 },
-      { xPercent: 138, rotate: 1, ease: 'none', duration: 1 },
+      { x: () => -closeOffset(right), rotate: 3 },
+      { x: rightExit, rotate: 1, ease: 'none', duration: 1 },
       0,
     )
     .fromTo(left, { yPercent: 108 }, { yPercent: 0, ease: 'power2.out', duration: 0.32 }, 0)
