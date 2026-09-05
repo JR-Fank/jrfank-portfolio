@@ -5,10 +5,11 @@ import { useCallback, useEffect, useRef, useState, type MouseEvent } from 'react
 import { MediaPicture } from '@/components/media/media-picture';
 import { useRouteAnimationScope } from '@/components/runtime/route-animation-boundary';
 import { useSmoothScroll } from '@/components/runtime/smooth-scroll-provider';
-import type { MediaId } from '@/content/types';
+import type { GapPreset, MediaId } from '@/content/types';
 
 interface GallerySequenceProps {
   readonly mediaIds: readonly [MediaId, MediaId, ...MediaId[]];
+  readonly gap: GapPreset;
 }
 
 function scoreItem(item: HTMLElement, focusLine: number): number {
@@ -19,7 +20,7 @@ function scoreItem(item: HTMLElement, focusLine: number): number {
   return Math.min(Math.abs(rect.top - focusLine), Math.abs(rect.bottom - focusLine));
 }
 
-export function GallerySequence({ mediaIds }: GallerySequenceProps) {
+export function GallerySequence({ mediaIds, gap }: GallerySequenceProps) {
   const rootRef = useRef<HTMLElement>(null);
   const scope = useRouteAnimationScope();
   const { scrollToTarget } = useSmoothScroll();
@@ -43,9 +44,6 @@ export function GallerySequence({ mediaIds }: GallerySequenceProps) {
     }
     const nextId = selected.id;
     setActiveId((current) => current === nextId ? current : nextId);
-    if (window.location.hash && window.location.hash !== `#${nextId}`) {
-      window.history.replaceState(window.history.state, '', `#${nextId}`);
-    }
   }, []);
 
   const scrollToHash = useCallback((hash: string, immediate = false) => {
@@ -93,27 +91,32 @@ export function GallerySequence({ mediaIds }: GallerySequenceProps) {
     root.addEventListener('load', scheduleSelection, true);
     window.addEventListener('hashchange', onHistory);
     window.addEventListener('popstate', onHistory);
-    scope.addCleanup(() => {
+    let cancelled = false;
+    const initialHash = window.location.hash;
+    void document.fonts.ready.then(() => {
+      if (cancelled) return;
+      const initialFrame = requestAnimationFrame(() => {
+        if (initialHash) scrollToHash(initialHash, true);
+        else selectClosest();
+      });
+      scope.trackAnimationFrame(initialFrame);
+    });
+    const cleanup = () => {
+      cancelled = true;
+      observer.disconnect();
+      resizeObserver.disconnect();
+      root.removeAttribute('data-gallery-observer');
       root.removeEventListener('load', scheduleSelection, true);
       window.removeEventListener('hashchange', onHistory);
       window.removeEventListener('popstate', onHistory);
-      root.removeAttribute('data-gallery-observer');
-      if (frame !== null) {
-        cancelAnimationFrame(frame);
-      }
-    });
-
-    const initialFrame = requestAnimationFrame(() => {
-      if (window.location.hash) {
-        scrollToHash(window.location.hash, true);
-      } else {
-        selectClosest();
-      }
-    });
-    scope.trackAnimationFrame(initialFrame);
+      if (frame !== null) cancelAnimationFrame(frame);
+    };
+    scope.addCleanup(cleanup);
+    return cleanup;
   }, [scope, scrollToHash, selectClosest]);
 
   const handleRailClick = (event: MouseEvent<HTMLAnchorElement>, id: string) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
     const target = rootRef.current?.querySelector<HTMLElement>(`[id="${id}"]`);
     if (!target) {
@@ -132,7 +135,7 @@ export function GallerySequence({ mediaIds }: GallerySequenceProps) {
   };
 
   return (
-    <section ref={rootRef} className="stills-gallery" aria-label="Project photography gallery" data-stills-gallery>
+    <section ref={rootRef} className={`stills-gallery stills-gallery-gap-${gap}`} aria-label="Project photography gallery" data-stills-gallery>
       <div className="stills-gallery-main">
         {mediaIds.map((mediaId, index) => {
           const id = String(index + 1);

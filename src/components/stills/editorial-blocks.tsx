@@ -12,6 +12,7 @@ function blockClass(block: ProjectBlock, extra?: string): string {
     `stills-block-${block.type}`,
     `stills-block-top-${block.topSpace ?? 'standard'}`,
     `stills-block-bottom-${block.bottomSpace ?? 'standard'}`,
+    `stills-block-theme-${block.theme ?? 'inherit'}`,
     extra,
   ].filter(Boolean).join(' ');
 }
@@ -129,7 +130,13 @@ export function EditorialBlock({
         </figure>
       );
     case 'imageSequence':
-      return renderSequence(block);
+      return block.activeRail ? renderSequence(block) : (
+        <section className={blockClass(block, `stills-sequence-${block.presentation} stills-block-gap-${block.gap}`)} aria-label="Photography sequence">
+          {block.mediaIds.map((mediaId, index) => (
+            <MediaPicture id={mediaId} className="stills-block-picture" imageClassName="stills-media-image" size="page-wide" key={`${mediaId}-${index}`} />
+          ))}
+        </section>
+      );
     case 'video':
       return <VideoBlock block={block} />;
     case 'caption':

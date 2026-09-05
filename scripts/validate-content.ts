@@ -35,6 +35,9 @@ for (const project of projects) {
 
   getMedia(project.seo.socialImageId);
   if (project.kind === 'stills') {
+    if (new Set(project.exploreMore).size !== project.exploreMore.length || project.exploreMore.some((slug) => slug === project.slug || !stillProjects.some((candidate) => candidate.slug === slug))) {
+      throw new Error(`Invalid Explore More references in ${project.slug}.`);
+    }
     const stillMediaIds = new Set<string>([project.coverId, ...project.index.mediaIds]);
     const blockIds = new Set<string>();
     let heroCount = 0;
@@ -48,6 +51,7 @@ for (const project of projects) {
         heroCount += 1;
       }
       if (block.type === 'imageSequence' && block.activeRail) {
+        if (block.presentation !== 'vertical') throw new Error(`Active rails require a vertical sequence: ${project.slug}/${block.id}`);
         activeRailCount += 1;
       }
       mediaIdsFromBlock(block).forEach((mediaId) => stillMediaIds.add(mediaId));

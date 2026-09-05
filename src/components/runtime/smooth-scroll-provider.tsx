@@ -43,7 +43,8 @@ export function SmoothScrollProvider({ children }: { readonly children: ReactNod
   const scrollToTarget = useCallback((target: HTMLElement, options?: { readonly duration?: number; readonly immediate?: boolean }) => {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (lenisRef.current && !reducedMotion) {
-      lenisRef.current.scrollTo(target, {
+      const position = window.scrollY + target.getBoundingClientRect().top - Math.max(80, (window.innerHeight - target.offsetHeight) / 2);
+      lenisRef.current.scrollTo(position, {
         duration: options?.duration ?? 0.5,
         immediate: options?.immediate ?? false,
         force: true,

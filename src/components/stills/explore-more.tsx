@@ -6,11 +6,13 @@ import { useEffect, useRef } from 'react';
 import { MediaPicture } from '@/components/media/media-picture';
 import { TransitionLink } from '@/components/primitives/transition-link';
 import { useRouteAnimationScope } from '@/components/runtime/route-animation-boundary';
+import { useRouteTransition } from '@/components/runtime/route-transition-provider';
 import type { StillProject } from '@/content';
 
 export function ExploreMore({ projects }: { readonly projects: readonly StillProject[] }) {
   const rootRef = useRef<HTMLDivElement>(null);
   const scope = useRouteAnimationScope();
+  const { navigate } = useRouteTransition();
 
   useEffect(() => {
     const root = rootRef.current;
@@ -35,8 +37,21 @@ export function ExploreMore({ projects }: { readonly projects: readonly StillPro
       },
     });
     splide.mount();
-    scope.addCleanup(() => splide.destroy(true));
-  }, [projects, scope]);
+    // Splide clones DOM nodes, not React event handlers.
+    const onCloneClick = (event: MouseEvent) => {
+      const link = (event.target as Element).closest<HTMLAnchorElement>('.splide__slide--clone a');
+      if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      navigate(link.pathname);
+    };
+    root.addEventListener('click', onCloneClick);
+    const cleanup = () => {
+      root.removeEventListener('click', onCloneClick);
+      splide.destroy(true);
+    };
+    scope.addCleanup(cleanup);
+    return cleanup;
+  }, [projects, scope, navigate]);
 
   if (projects.length === 0) {
     return null;
