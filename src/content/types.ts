@@ -64,26 +64,28 @@ export type MediaAsset = ImageMediaAsset | VideoMediaAsset;
 export type WidthPreset = 'viewport' | 'page-wide' | 'large' | 'medium' | 'small';
 export type Alignment = 'start' | 'center' | 'end';
 export type GapPreset = 'tight' | 'standard' | 'wide';
+export type MobileFlow = 'stack' | 'preserve-pair' | 'horizontal-scroll';
 
 interface ProjectBlockBase {
   readonly id: string;
+  readonly theme?: 'inherit' | 'dark' | 'light';
   readonly topSpace?: 'none' | 'small' | 'standard' | 'large';
   readonly bottomSpace?: 'none' | 'small' | 'standard' | 'large';
 }
 
 export type ProjectBlock =
-  | (ProjectBlockBase & { readonly type: 'hero'; readonly mediaId: MediaId; readonly height: 'viewport' | 'tall' | 'natural' })
-  | (ProjectBlockBase & { readonly type: 'fullBleed'; readonly mediaId: MediaId; readonly height: 'viewport' | 'tall' | 'natural' })
-  | (ProjectBlockBase & { readonly type: 'landscape'; readonly mediaId: MediaId; readonly width: WidthPreset; readonly align?: Alignment })
-  | (ProjectBlockBase & { readonly type: 'portrait'; readonly mediaId: MediaId; readonly width: 'large' | 'medium' | 'small'; readonly align: Alignment })
-  | (ProjectBlockBase & { readonly type: 'imagePair'; readonly mediaIds: readonly [MediaId, MediaId]; readonly gap: GapPreset })
-  | (ProjectBlockBase & { readonly type: 'imageTriptych'; readonly mediaIds: readonly [MediaId, MediaId, MediaId]; readonly gap: GapPreset })
-  | (ProjectBlockBase & { readonly type: 'offsetImage'; readonly mediaId: MediaId; readonly align: 'start' | 'end'; readonly offset: 'small' | 'medium' | 'large' })
-  | (ProjectBlockBase & { readonly type: 'smallImage'; readonly mediaId: MediaId; readonly align: Alignment })
-  | (ProjectBlockBase & { readonly type: 'imageSequence'; readonly mediaIds: readonly [MediaId, MediaId, ...MediaId[]]; readonly presentation: 'vertical' | 'filmstrip' | 'overlap' })
-  | (ProjectBlockBase & { readonly type: 'video'; readonly mediaId: MediaId; readonly mode: 'preview-loop' | 'film-player'; readonly width: WidthPreset })
-  | (ProjectBlockBase & { readonly type: 'caption'; readonly text: BilingualText; readonly align: Alignment })
-  | (ProjectBlockBase & { readonly type: 'text'; readonly heading?: BilingualText; readonly body: readonly BilingualText[]; readonly align: Alignment })
+  | (ProjectBlockBase & { readonly type: 'hero'; readonly mediaId: MediaId; readonly titleMode?: 'overlay' | 'below'; readonly height: 'viewport' | 'tall' | 'natural'; readonly treatment?: 'none' | 'theme-tint' })
+  | (ProjectBlockBase & { readonly type: 'fullBleed'; readonly mediaId: MediaId; readonly height: 'viewport' | 'tall' | 'natural'; readonly caption?: BilingualText })
+  | (ProjectBlockBase & { readonly type: 'landscape'; readonly mediaId: MediaId; readonly width: Exclude<WidthPreset, 'small'>; readonly align?: Alignment; readonly caption?: BilingualText })
+  | (ProjectBlockBase & { readonly type: 'portrait'; readonly mediaId: MediaId; readonly width: 'large' | 'medium' | 'small'; readonly align: Alignment; readonly caption?: BilingualText })
+  | (ProjectBlockBase & { readonly type: 'imagePair'; readonly mediaIds: readonly [MediaId, MediaId]; readonly ratio: 'equal' | 'left-wide' | 'right-wide'; readonly align: 'top' | 'center' | 'bottom'; readonly gap: GapPreset; readonly mobile: MobileFlow; readonly caption?: BilingualText })
+  | (ProjectBlockBase & { readonly type: 'imageTriptych'; readonly mediaIds: readonly [MediaId, MediaId, MediaId]; readonly arrangement: 'equal' | 'center-tall' | 'outer-tall'; readonly gap: GapPreset; readonly mobile: MobileFlow })
+  | (ProjectBlockBase & { readonly type: 'offsetImage'; readonly mediaId: MediaId; readonly width: 'large' | 'medium'; readonly align: 'start' | 'end'; readonly offset: 'small' | 'medium' | 'large'; readonly caption?: BilingualText })
+  | (ProjectBlockBase & { readonly type: 'smallImage'; readonly mediaId: MediaId; readonly align: Alignment; readonly offset?: 'none' | 'small'; readonly caption?: BilingualText })
+  | (ProjectBlockBase & { readonly type: 'imageSequence'; readonly mediaIds: readonly [MediaId, MediaId, ...MediaId[]]; readonly presentation: 'vertical' | 'filmstrip' | 'overlap'; readonly gap: GapPreset; readonly activeRail?: boolean })
+  | (ProjectBlockBase & { readonly type: 'video'; readonly mediaId: MediaId; readonly mode: 'preview-loop' | 'film-player'; readonly width: WidthPreset; readonly align?: Alignment; readonly caption?: BilingualText })
+  | (ProjectBlockBase & { readonly type: 'caption'; readonly text: BilingualText; readonly align: Alignment; readonly width: 'medium' | 'small' })
+  | (ProjectBlockBase & { readonly type: 'text'; readonly heading?: BilingualText; readonly body: readonly BilingualText[]; readonly align: Alignment; readonly width: 'large' | 'medium' | 'small' })
   | (ProjectBlockBase & { readonly type: 'spacer'; readonly size: 'small' | 'medium' | 'large' | 'viewport' });
 
 interface ProjectBase {
@@ -102,8 +104,14 @@ interface ProjectBase {
 export interface StillProject extends ProjectBase {
   readonly kind: 'stills';
   readonly coverId: MediaId;
-  readonly palette: readonly [string, string, ...string[]];
+  readonly index: {
+    readonly number: string;
+    readonly mediaIds: readonly [MediaId, MediaId];
+    readonly palette: readonly [string, string, ...string[]];
+    readonly featured: boolean;
+  };
   readonly blocks: readonly ProjectBlock[];
+  readonly exploreMore?: readonly string[];
 }
 
 export type MotionPlayback =

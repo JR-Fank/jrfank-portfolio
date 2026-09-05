@@ -9,6 +9,7 @@ import { getGsap, getScrollTrigger } from '@/animations/core/gsap';
 interface SmoothScrollContextValue {
   readonly setLocked: (reason: string, locked: boolean) => void;
   readonly scrollToTop: () => void;
+  readonly scrollToTarget: (target: HTMLElement, options?: { readonly duration?: number; readonly immediate?: boolean }) => void;
   readonly resize: () => void;
 }
 
@@ -37,6 +38,19 @@ export function SmoothScrollProvider({ children }: { readonly children: ReactNod
     } else {
       window.scrollTo({ top: 0, behavior: 'auto' });
     }
+  }, []);
+
+  const scrollToTarget = useCallback((target: HTMLElement, options?: { readonly duration?: number; readonly immediate?: boolean }) => {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (lenisRef.current && !reducedMotion) {
+      lenisRef.current.scrollTo(target, {
+        duration: options?.duration ?? 0.5,
+        immediate: options?.immediate ?? false,
+        force: true,
+      });
+      return;
+    }
+    target.scrollIntoView({ behavior: options?.immediate || reducedMotion ? 'auto' : 'smooth', block: 'center' });
   }, []);
 
   const resize = useCallback(() => {
@@ -99,7 +113,7 @@ export function SmoothScrollProvider({ children }: { readonly children: ReactNod
     };
   }, [resize]);
 
-  return <SmoothScrollContext.Provider value={{ setLocked, scrollToTop, resize }}>{children}</SmoothScrollContext.Provider>;
+  return <SmoothScrollContext.Provider value={{ setLocked, scrollToTop, scrollToTarget, resize }}>{children}</SmoothScrollContext.Provider>;
 }
 
 export function useSmoothScroll(): SmoothScrollContextValue {

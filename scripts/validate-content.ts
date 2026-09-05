@@ -34,6 +34,41 @@ for (const project of projects) {
   routeKeys.add(routeKey);
 
   getMedia(project.seo.socialImageId);
+  if (project.kind === 'stills') {
+    const stillMediaIds = new Set<string>([project.coverId, ...project.index.mediaIds]);
+    const blockIds = new Set<string>();
+    let heroCount = 0;
+    let activeRailCount = 0;
+    for (const block of project.blocks) {
+      if (blockIds.has(block.id)) {
+        throw new Error(`Duplicate block ID in ${project.slug}: ${block.id}`);
+      }
+      blockIds.add(block.id);
+      if (block.type === 'hero') {
+        heroCount += 1;
+      }
+      if (block.type === 'imageSequence' && block.activeRail) {
+        activeRailCount += 1;
+      }
+      mediaIdsFromBlock(block).forEach((mediaId) => stillMediaIds.add(mediaId));
+    }
+    if (heroCount !== 1 || project.blocks[0]?.type !== 'hero') {
+      throw new Error(`Stills project ${project.slug} requires exactly one first-position hero.`);
+    }
+    if (activeRailCount > 1) {
+      throw new Error(`Stills project ${project.slug} has more than one active gallery rail.`);
+    }
+    for (const mediaId of stillMediaIds) {
+      const asset = getMedia(mediaId);
+      if (asset.kind !== 'image') {
+        throw new Error(`Stills media must be an image: ${mediaId}`);
+      }
+      const formats = new Set(asset.variants.map((variant) => variant.format));
+      if (!formats.has('avif') || !formats.has('webp') || !formats.has('jpg')) {
+        throw new Error(`Stills image requires AVIF, WebP, and JPEG variants: ${mediaId}`);
+      }
+    }
+  }
   for (const block of project.blocks) {
     for (const mediaId of mediaIdsFromBlock(block)) {
       getMedia(mediaId);

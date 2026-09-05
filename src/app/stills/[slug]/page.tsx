@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { PlaceholderPage } from '@/components/sections/placeholder-page';
+import { StillsCaseExperience } from '@/components/stills/stills-case-experience';
 import { getStillProject, siteConfig, stillProjects } from '@/content';
 import { createPageMetadata } from '@/lib/metadata';
 
@@ -33,17 +33,9 @@ export default async function StillProjectPage({ params }: Props) {
   if (!project) {
     notFound();
   }
-  return (
-    <PlaceholderPage
-      site={siteConfig}
-      eyebrow="STILLS PROJECT"
-      title={project.title.en}
-      titleZh={project.title.zhHant ?? ''}
-      location={project.location.en}
-      locationZh={project.location.zhHant ?? ''}
-      mediaId={project.coverId}
-      portrait
-      cta={{ label: 'BACK TO STILLS', href: '/stills/' }}
-    />
-  );
+  const requested = project.exploreMore ?? [];
+  const exploreProjects = requested
+    .map((relatedSlug) => getStillProject(relatedSlug))
+    .filter((related): related is NonNullable<typeof related> => Boolean(related && related.slug !== project.slug));
+  return <StillsCaseExperience project={project} exploreProjects={exploreProjects} site={siteConfig} />;
 }
