@@ -47,7 +47,8 @@ export function GallerySequence({ mediaIds, gap }: GallerySequenceProps) {
   }, []);
 
   const scrollToHash = useCallback((hash: string, immediate = false) => {
-    const id = hash.replace(/^#/, '');
+    const value = hash.replace(/^#/, '');
+    const id = value === 'last' ? String(mediaIds.length) : value;
     if (!/^\d+$/.test(id)) {
       return;
     }
@@ -57,7 +58,7 @@ export function GallerySequence({ mediaIds, gap }: GallerySequenceProps) {
     }
     setActiveId(id);
     scrollToTarget(target, { duration: 0.5, immediate });
-  }, [scrollToTarget]);
+  }, [mediaIds.length, scrollToTarget]);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -76,12 +77,18 @@ export function GallerySequence({ mediaIds, gap }: GallerySequenceProps) {
       });
     };
     const items = Array.from(root.querySelectorAll<HTMLElement>('[data-gallery-item]'));
-    const observer = new IntersectionObserver(scheduleSelection, {
-      rootMargin: '-38% 0px -46% 0px',
-      threshold: [0, 0.01, 0.5],
-    });
-    items.forEach((item) => observer.observe(item));
-    scope.trackObserver(observer);
+    let observer: IntersectionObserver;
+    const observeFocusBand = () => {
+      observer?.disconnect();
+      observer = new IntersectionObserver(scheduleSelection, {
+        rootMargin: `-${window.innerHeight * 0.38}px 0px -${window.innerHeight * 0.46}px 0px`,
+        threshold: [0, 0.01, 0.5],
+      });
+      items.forEach((item) => observer.observe(item));
+      scheduleSelection();
+    };
+    observeFocusBand();
+    window.addEventListener('resize', observeFocusBand, { passive: true });
 
     const resizeObserver = new ResizeObserver(scheduleSelection);
     resizeObserver.observe(root);
@@ -93,7 +100,13 @@ export function GallerySequence({ mediaIds, gap }: GallerySequenceProps) {
     window.addEventListener('popstate', onHistory);
     let cancelled = false;
     const initialHash = window.location.hash;
-    void document.fonts.ready.then(() => {
+    let readinessTimer: ReturnType<typeof setTimeout>;
+    const initialId = initialHash === '#last' ? String(mediaIds.length) : initialHash.slice(1);
+    const initialImage = items.find((item) => item.id === initialId)?.querySelector('img');
+    if (initialImage) initialImage.loading = 'eager';
+    const ready = Promise.all([document.fonts.ready, initialImage?.decode().catch(() => undefined)]);
+    void Promise.race([ready, new Promise<void>((resolve) => { readinessTimer = setTimeout(resolve, 2500); })]).then(() => {
+      clearTimeout(readinessTimer);
       if (cancelled) return;
       const initialFrame = requestAnimationFrame(() => {
         if (initialHash) scrollToHash(initialHash, true);
@@ -103,8 +116,10 @@ export function GallerySequence({ mediaIds, gap }: GallerySequenceProps) {
     });
     const cleanup = () => {
       cancelled = true;
+      clearTimeout(readinessTimer);
       observer.disconnect();
       resizeObserver.disconnect();
+      window.removeEventListener('resize', observeFocusBand);
       root.removeAttribute('data-gallery-observer');
       root.removeEventListener('load', scheduleSelection, true);
       window.removeEventListener('hashchange', onHistory);
@@ -113,7 +128,7 @@ export function GallerySequence({ mediaIds, gap }: GallerySequenceProps) {
     };
     scope.addCleanup(cleanup);
     return cleanup;
-  }, [scope, scrollToHash, selectClosest]);
+  }, [mediaIds.length, scope, scrollToHash, selectClosest]);
 
   const handleRailClick = (event: MouseEvent<HTMLAnchorElement>, id: string) => {
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;

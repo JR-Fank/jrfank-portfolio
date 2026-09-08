@@ -34,8 +34,12 @@ function setupIndexStage(section: HTMLElement): void {
         invalidateOnRefresh: true,
       },
     })
-    .fromTo(left, { x: () => closeOffset(left), yPercent: 102, rotate: -2.8 }, { x: leftExit, yPercent: -18, rotate: -0.6, ease: 'none', duration: 1 }, 0)
-    .fromTo(right, { x: () => -closeOffset(right), yPercent: 112, rotate: 2.6 }, { x: rightExit, yPercent: -10, rotate: 0.8, ease: 'none', duration: 1 }, 0)
+    .fromTo(left, { x: () => closeOffset(left), rotate: -2.8 }, { x: leftExit, rotate: -0.6, ease: 'none', duration: 1 }, 0)
+    .fromTo(right, { x: () => -closeOffset(right), rotate: 2.6 }, { x: rightExit, rotate: 0.8, ease: 'none', duration: 1 }, 0)
+    .fromTo(left, { yPercent: 102 }, { yPercent: 0, duration: 0.42, ease: 'none' }, 0)
+    .fromTo(right, { yPercent: 112 }, { yPercent: 0, duration: 0.46, ease: 'none' }, 0)
+    .to(left, { yPercent: -18, duration: 0.58, ease: 'none' }, 0.42)
+    .to(right, { yPercent: -10, duration: 0.54, ease: 'none' }, 0.46)
     .fromTo(center, { opacity: 0.12, scale: 0.975 }, { opacity: 1, scale: 1, duration: 0.22, ease: 'none' }, 0.18)
     .to(center, { opacity: 0.12, scale: 0.98, duration: 0.2, ease: 'none' }, 0.76);
 }

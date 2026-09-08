@@ -431,7 +431,7 @@ aside.stills-block-caption p + p { margin-top: 10px; }
 .stills-hero-height-natural .stills-case-hero-layer-base,
 .stills-hero-height-natural .stills-case-hero-layer-base picture { position: relative; }
 .stills-hero-height-natural .stills-case-hero-layer-base img { height: auto; }
-.stills-hero-treatment-theme-tint .stills-case-hero-frame::after { position: absolute; inset: 0; z-index: 2; background: var(--page-bg); opacity: 0.12; content: ''; pointer-events: none; }
+.stills-hero-treatment-theme-tint .stills-case-hero-frame::after { position: absolute; inset: 0; z-index: 2; background: var(--canvas); opacity: 0.12; content: ''; pointer-events: none; }
 
 .stills-gallery {
   position: relative;
