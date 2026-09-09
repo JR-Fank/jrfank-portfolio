@@ -51,7 +51,8 @@ for (const project of projects) {
         heroCount += 1;
       }
       if (block.type === 'imageSequence' && block.activeRail) {
-        if (block.presentation !== 'vertical') throw new Error(`Active rails require a vertical sequence: ${project.slug}/${block.id}`);
+        const sequenceId = block.id;
+        if (block.presentation !== 'vertical') throw new Error(`Active rails require a vertical sequence: ${project.slug}/${sequenceId}`);
         activeRailCount += 1;
       }
       mediaIdsFromBlock(block).forEach((mediaId) => stillMediaIds.add(mediaId));

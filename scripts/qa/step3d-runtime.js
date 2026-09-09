@@ -36,6 +36,10 @@ async (page) => {
     return value;
   };
   const navigate = async (locator, path) => {
+    await locator.evaluate((element) => element.closest('.stills-explore')?.scrollIntoView({ block: 'center' }));
+    await page.waitForTimeout(700);
+    await locator.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(700);
     await locator.click();
     await page.waitForURL(`http://localhost:3000${path}`);
     await settle();
@@ -58,9 +62,11 @@ async (page) => {
     await state(`cycle-${cycle}-case-b`);
     await navigate(page.locator('.site-header a[href="/stills/"]'), '/stills/');
     await state(`cycle-${cycle}-index-return`);
+    await navigate(page.locator('.site-header a[href="/about/"]'), '/about/');
+    await state(`cycle-${cycle}-about`);
     await navigate(page.locator('.site-wordmark'), '/');
   }
-  await page.goBack(); await settle(); await state('back-index');
+  await page.goBack(); await settle(); await state('back-about');
   await page.goForward(); await settle(); await state('forward-home');
   for (const hash of ['1', '3', 'last']) {
     await page.goto(`http://localhost:3000/stills/quiet-current/#${hash}`);
@@ -68,7 +74,7 @@ async (page) => {
     const current = await state(`direct-${hash}`);
     if (current.active !== `#${hash === 'last' ? 5 : hash}`) throw new Error(`Direct hash mismatch: ${hash}`);
   }
-  const widths = [1440, 1180, 992, 991, 820, 768, 767, 600, 479, 390, 360];
+  const widths = [1440, 1180, 1024, 992, 991, 820, 768, 767, 600, 479, 430, 390, 360];
   for (const width of [...widths, ...widths.slice(0, -1).reverse()]) {
     await page.setViewportSize({ width, height: width < 768 ? 844 : 900 });
     await page.waitForTimeout(400);
