@@ -321,9 +321,9 @@
   .motion-index-intro-copy p:first-child { font-size: clamp(1.42rem, 6.6vw, 1.7rem); }
 
   .motion-project-stage {
-    height: 72svh;
-    min-height: 560px;
-    max-height: 650px;
+    height: 88svh;
+    min-height: 680px;
+    max-height: 840px;
   }
 
   .motion-project-composition { height: min(48vh, 400px); }
@@ -333,7 +333,7 @@
   .motion-project-cta { height: 30px; padding: 0 11px; }
   .motion-project-satellite-1 { left: -11vw; width: 35vw; }
   .motion-project-satellite-2 { right: -10vw; width: 33vw; }
-  .motion-project-satellite-3 { left: 7vw; width: 41vw; }
+  .motion-project-satellite-3 { bottom: 12%; left: 7vw; width: 41vw; }
 }
 
 @media (prefers-reduced-motion: reduce) {

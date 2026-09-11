@@ -4,8 +4,10 @@ import { MediaPicture } from '@/components/media/media-picture';
 import { TransitionLink } from '@/components/primitives/transition-link';
 import type { MotionProject } from '@/content';
 
+export type MotionIndexProject = Pick<MotionProject, 'slug' | 'identity' | 'index'>;
+
 interface MotionProjectStageProps {
-  readonly project: MotionProject;
+  readonly project: MotionIndexProject;
   readonly index: number;
 }
 
@@ -50,7 +52,6 @@ export function MotionProjectStage({ project, index }: MotionProjectStageProps) 
               imageClassName="motion-project-image"
               size="page-wide"
               loading={index === 0 ? 'eager' : 'lazy'}
-              alt={project.identity.title.en}
             />
             <span className="motion-project-play-glow" aria-hidden="true" />
             <span className="motion-project-play" data-motion-index-play aria-hidden="true">

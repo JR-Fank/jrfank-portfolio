@@ -11,5 +11,6 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 export default function MotionPage() {
-  return <MotionIndexExperience projects={motionProjects} site={siteConfig} />;
+  const indexProjects = motionProjects.map(({ slug, identity, index }) => ({ slug, identity, index }));
+  return <MotionIndexExperience projects={indexProjects} site={siteConfig} />;
 }
