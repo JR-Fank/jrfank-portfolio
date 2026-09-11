@@ -6,6 +6,7 @@ import '@fontsource/cormorant-garamond/latin-400.css';
 import '@fontsource/ibm-plex-sans/latin-500.css';
 import '@fontsource/ibm-plex-sans/latin-700.css';
 import '@fontsource/noto-sans-tc/chinese-traditional-500.css';
+import '@splidejs/splide/css/core';
 
 import { GlobalExperience } from '@/components/runtime/global-experience';
 import { siteConfig } from '@/content';
@@ -17,6 +18,7 @@ import '@/styles/typography.css';
 import '@/styles/globals.css';
 import '@/styles/home.css';
 import '@/styles/about.css';
+import '@/styles/stills.css';
 
 const defaultDescription = 'A bilingual editorial photography and film portfolio foundation.';
 

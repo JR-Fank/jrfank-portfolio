@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "generatedAt": "2026-09-02T00:00:00.000Z",
-  "sourceFingerprint": "step-3c-r3-about-authorized-mock-v1",
+  "generatedAt": "2026-09-04T00:00:00.000Z",
+  "sourceFingerprint": "step-3d-stills-owned-mock-v1",
   "assets": {
     "site.home-hero": {
       "kind": "image",
@@ -213,6 +213,168 @@
       "dominantColor": "#27465a",
       "variants": [
         { "width": 1200, "format": "jpg", "key": "site/social/social-default-1200-mockv1.jpg", "bytes": 0, "hash": "mockv1" }
+      ]
+    },
+    "stills.mock.reservoir": {
+      "kind": "image",
+      "id": "stills.mock.reservoir",
+      "width": 1122,
+      "height": 1402,
+      "aspectRatio": 0.8002853067,
+      "alt": "A solitary figure facing a mist-covered reservoir at dawn",
+      "dominantColor": "#516775",
+      "focalPoint": { "x": 0.5, "y": 0.58 },
+      "variants": [
+        { "width": 640, "format": "avif", "key": "stills/step3d/reservoir/reservoir-640-mockstep3d.avif", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 1122, "format": "avif", "key": "stills/step3d/reservoir/reservoir-1122-mockstep3d.avif", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 640, "format": "webp", "key": "stills/step3d/reservoir/reservoir-640-mockstep3d.webp", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 1122, "format": "webp", "key": "stills/step3d/reservoir/reservoir-1122-mockstep3d.webp", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 640, "format": "jpg", "key": "stills/step3d/reservoir/reservoir-640-mockstep3d.jpg", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 1122, "format": "jpg", "key": "stills/step3d/reservoir/reservoir-1122-mockstep3d.jpg", "bytes": 0, "hash": "mockstep3d" }
+      ]
+    },
+    "stills.mock.tidal-flats": {
+      "kind": "image",
+      "id": "stills.mock.tidal-flats",
+      "width": 1536,
+      "height": 1024,
+      "aspectRatio": 1.5,
+      "alt": "Silver tidal channels winding through ochre flats with two distant figures",
+      "dominantColor": "#8b8068",
+      "focalPoint": { "x": 0.58, "y": 0.52 },
+      "variants": [
+        { "width": 640, "format": "avif", "key": "stills/step3d/tidal-flats/tidal-flats-640-mockstep3d.avif", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 1280, "format": "avif", "key": "stills/step3d/tidal-flats/tidal-flats-1280-mockstep3d.avif", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 640, "format": "webp", "key": "stills/step3d/tidal-flats/tidal-flats-640-mockstep3d.webp", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 1280, "format": "webp", "key": "stills/step3d/tidal-flats/tidal-flats-1280-mockstep3d.webp", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 640, "format": "jpg", "key": "stills/step3d/tidal-flats/tidal-flats-640-mockstep3d.jpg", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 1280, "format": "jpg", "key": "stills/step3d/tidal-flats/tidal-flats-1280-mockstep3d.jpg", "bytes": 0, "hash": "mockstep3d" }
+      ]
+    },
+    "stills.mock.rain-passage": {
+      "kind": "image",
+      "id": "stills.mock.rain-passage",
+      "width": 1122,
+      "height": 1402,
+      "aspectRatio": 0.8002853067,
+      "alt": "A cyclist crossing the blue-hour opening of a rain-darkened city passage",
+      "dominantColor": "#213442",
+      "focalPoint": { "x": 0.56, "y": 0.55 },
+      "variants": [
+        { "width": 640, "format": "avif", "key": "stills/step3d/rain-passage/rain-passage-640-mockstep3d.avif", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 1122, "format": "avif", "key": "stills/step3d/rain-passage/rain-passage-1122-mockstep3d.avif", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 640, "format": "webp", "key": "stills/step3d/rain-passage/rain-passage-640-mockstep3d.webp", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 1122, "format": "webp", "key": "stills/step3d/rain-passage/rain-passage-1122-mockstep3d.webp", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 640, "format": "jpg", "key": "stills/step3d/rain-passage/rain-passage-640-mockstep3d.jpg", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 1122, "format": "jpg", "key": "stills/step3d/rain-passage/rain-passage-1122-mockstep3d.jpg", "bytes": 0, "hash": "mockstep3d" }
+      ]
+    },
+    "stills.mock.deep-water": {
+      "kind": "image",
+      "id": "stills.mock.deep-water",
+      "width": 1536,
+      "height": 1024,
+      "aspectRatio": 1.5,
+      "alt": "Dark coastal water folding into parallel waves",
+      "dominantColor": "#263c50",
+      "focalPoint": { "x": 0.5, "y": 0.5 },
+      "variants": [
+        { "width": 640, "format": "avif", "key": "stills/step3d/deep-water/deep-water-640-mockstep3d.avif", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 1280, "format": "avif", "key": "stills/step3d/deep-water/deep-water-1280-mockstep3d.avif", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 640, "format": "webp", "key": "stills/step3d/deep-water/deep-water-640-mockstep3d.webp", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 1280, "format": "webp", "key": "stills/step3d/deep-water/deep-water-1280-mockstep3d.webp", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 640, "format": "jpg", "key": "stills/step3d/deep-water/deep-water-640-mockstep3d.jpg", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 1280, "format": "jpg", "key": "stills/step3d/deep-water/deep-water-1280-mockstep3d.jpg", "bytes": 0, "hash": "mockstep3d" }
+      ]
+    },
+    "stills.mock.ice-drift": {
+      "kind": "image",
+      "id": "stills.mock.ice-drift",
+      "width": 1152,
+      "height": 1439,
+      "aspectRatio": 0.8005559416,
+      "alt": "A small boat moving across still water below a drifting ice formation",
+      "dominantColor": "#768b9a",
+      "focalPoint": { "x": 0.5, "y": 0.48 },
+      "variants": [
+        { "width": 640, "format": "avif", "key": "stills/step3d/ice-drift/ice-drift-640-mockstep3d.avif", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 1152, "format": "avif", "key": "stills/step3d/ice-drift/ice-drift-1152-mockstep3d.avif", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 640, "format": "webp", "key": "stills/step3d/ice-drift/ice-drift-640-mockstep3d.webp", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 1152, "format": "webp", "key": "stills/step3d/ice-drift/ice-drift-1152-mockstep3d.webp", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 640, "format": "jpg", "key": "stills/step3d/ice-drift/ice-drift-640-mockstep3d.jpg", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 1152, "format": "jpg", "key": "stills/step3d/ice-drift/ice-drift-1152-mockstep3d.jpg", "bytes": 0, "hash": "mockstep3d" }
+      ]
+    },
+    "stills.mock.warm-tree": {
+      "kind": "image",
+      "id": "stills.mock.warm-tree",
+      "width": 1152,
+      "height": 1439,
+      "aspectRatio": 0.8005559416,
+      "alt": "A solitary tree mirrored in a narrow pool at sunset",
+      "dominantColor": "#a05d2c",
+      "focalPoint": { "x": 0.42, "y": 0.46 },
+      "variants": [
+        { "width": 640, "format": "avif", "key": "stills/step3d/warm-tree/warm-tree-640-mockstep3d.avif", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 1152, "format": "avif", "key": "stills/step3d/warm-tree/warm-tree-1152-mockstep3d.avif", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 640, "format": "webp", "key": "stills/step3d/warm-tree/warm-tree-640-mockstep3d.webp", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 1152, "format": "webp", "key": "stills/step3d/warm-tree/warm-tree-1152-mockstep3d.webp", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 640, "format": "jpg", "key": "stills/step3d/warm-tree/warm-tree-640-mockstep3d.jpg", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 1152, "format": "jpg", "key": "stills/step3d/warm-tree/warm-tree-1152-mockstep3d.jpg", "bytes": 0, "hash": "mockstep3d" }
+      ]
+    },
+    "stills.mock.waterfall": {
+      "kind": "image",
+      "id": "stills.mock.waterfall",
+      "width": 1152,
+      "height": 1439,
+      "aspectRatio": 0.8005559416,
+      "alt": "A narrow waterfall descending into a moss-lined forest pool",
+      "dominantColor": "#1e3a28",
+      "focalPoint": { "x": 0.58, "y": 0.48 },
+      "variants": [
+        { "width": 640, "format": "avif", "key": "stills/step3d/waterfall/waterfall-640-mockstep3d.avif", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 1152, "format": "avif", "key": "stills/step3d/waterfall/waterfall-1152-mockstep3d.avif", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 640, "format": "webp", "key": "stills/step3d/waterfall/waterfall-640-mockstep3d.webp", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 1152, "format": "webp", "key": "stills/step3d/waterfall/waterfall-1152-mockstep3d.webp", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 640, "format": "jpg", "key": "stills/step3d/waterfall/waterfall-640-mockstep3d.jpg", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 1152, "format": "jpg", "key": "stills/step3d/waterfall/waterfall-1152-mockstep3d.jpg", "bytes": 0, "hash": "mockstep3d" }
+      ]
+    },
+    "stills.mock.rain-window": {
+      "kind": "image",
+      "id": "stills.mock.rain-window",
+      "width": 1536,
+      "height": 864,
+      "aspectRatio": 1.7777777778,
+      "alt": "Two passengers seen through a rain-streaked night window",
+      "dominantColor": "#25323a",
+      "focalPoint": { "x": 0.48, "y": 0.5 },
+      "variants": [
+        { "width": 640, "format": "avif", "key": "stills/step3d/rain-window/rain-window-640-mockstep3d.avif", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 1280, "format": "avif", "key": "stills/step3d/rain-window/rain-window-1280-mockstep3d.avif", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 640, "format": "webp", "key": "stills/step3d/rain-window/rain-window-640-mockstep3d.webp", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 1280, "format": "webp", "key": "stills/step3d/rain-window/rain-window-1280-mockstep3d.webp", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 640, "format": "jpg", "key": "stills/step3d/rain-window/rain-window-640-mockstep3d.jpg", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 1280, "format": "jpg", "key": "stills/step3d/rain-window/rain-window-1280-mockstep3d.jpg", "bytes": 0, "hash": "mockstep3d" }
+      ]
+    },
+    "stills.mock.salt-flat": {
+      "kind": "image",
+      "id": "stills.mock.salt-flat",
+      "width": 1536,
+      "height": 1024,
+      "aspectRatio": 1.5,
+      "alt": "Pale mineral flats meeting reflective water beneath a white sky",
+      "dominantColor": "#d9dce0",
+      "focalPoint": { "x": 0.52, "y": 0.58 },
+      "variants": [
+        { "width": 640, "format": "avif", "key": "stills/step3d/salt-flat/salt-flat-640-mockstep3d.avif", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 1280, "format": "avif", "key": "stills/step3d/salt-flat/salt-flat-1280-mockstep3d.avif", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 640, "format": "webp", "key": "stills/step3d/salt-flat/salt-flat-640-mockstep3d.webp", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 1280, "format": "webp", "key": "stills/step3d/salt-flat/salt-flat-1280-mockstep3d.webp", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 640, "format": "jpg", "key": "stills/step3d/salt-flat/salt-flat-640-mockstep3d.jpg", "bytes": 0, "hash": "mockstep3d" },
+        { "width": 1280, "format": "jpg", "key": "stills/step3d/salt-flat/salt-flat-1280-mockstep3d.jpg", "bytes": 0, "hash": "mockstep3d" }
       ]
     }
   }

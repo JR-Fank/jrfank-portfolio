@@ -1,0 +1,52 @@
+
+> editorial-photography-portfolio@0.1.0 check
+> npm run typecheck && npm run build
+
+
+> editorial-photography-portfolio@0.1.0 typecheck
+> tsc --noEmit
+
+
+> editorial-photography-portfolio@0.1.0 build
+> npm run validate && next build
+
+
+> editorial-photography-portfolio@0.1.0 validate
+> tsx scripts/validate-content.ts
+
+Validated 5 placeholder projects and 22 media assets.
+▲ Next.js 16.3.3 (Turbopack)
+✓ Running next.config.ts took 18.3s
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 12.2min
+  Running TypeScript ...
+  Finished TypeScript in 16.8min ...
+  Collecting page data using 11 workers ...
+  Generating static pages using 11 workers (0/14) ...
+  Generating static pages using 11 workers (3/14)
+  Generating static pages using 11 workers (6/14)
+  Generating static pages using 11 workers (10/14)
+✓ Generating static pages using 11 workers (14/14) in 72s
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /about
+├ ○ /icon.svg
+├ ○ /motion
+├   /motion/[slug]
+│ └ ● /motion/project-01
+├ ○ /robots.txt
+├ ○ /sitemap.xml
+├ ○ /stills
+└   /stills/[slug]
+  ├ ● /stills/quiet-current
+  ├ ● /stills/tidal-archive
+  ├ ● /stills/after-rain
+  └ ● /stills/stone-light
+
+
+○  (Static)  prerendered as static content
+●  (SSG)     prerendered as static HTML (uses generateStaticParams)

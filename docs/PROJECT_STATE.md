@@ -1,14 +1,16 @@
 # Project State
 
-Updated for the GitHub handoff after STEP 3C-R4.
+Stable-baseline update: STEP 3D has passed human review and is approved and squash-merged into `main`. The Home/About measurements below remain historical validation evidence.
 
 ## Current status
 
-- STEP 3C-R4 is complete and validated.
-- STEP 3D has not started and must not begin without explicit instruction.
-- Validated functional baseline: `e4cf461f6e0b4f437a28f04629ae07864d86a67b`.
-- Stable tag: `step3c-r4-responsive`.
-- A later `main` commit may contain documentation and repository-handoff changes only; the R4 tag remains the exact functional baseline.
+- **STEP 3D — STILLS: APPROVED**.
+- Approved source branch: `step3d-stills`.
+- Approved candidate: `2b146ad14ecb3d093aea3d0797798b2c2b555b2d`.
+- Stable baseline: the `main` squash-promotion commit `feat: approve step 3d stills experience`, tagged `step3d-stills`.
+- The source branch retains the implementation, WIP and checkpoint history. Promotion preserves the approved application files without further implementation or visual changes.
+- STEP 3C-R4 remains the historical Home/About baseline at `e4cf461f6e0b4f437a28f04629ae07864d86a67b`, tagged `step3c-r4-responsive`.
+- `../outputs/STEP3D_STILLS_SUMMARY.md` and `../outputs/STEP3D_STILLS_FIDELITY.md` retain the approved candidate's validation evidence. Their candidate/awaiting-approval wording is historical; this approval record supersedes it.
 
 ## Completed phases
 
@@ -22,6 +24,22 @@ Updated for the GitHub handoff after STEP 3C-R4.
 8. STEP 3C-R2 — Motion correction
 9. STEP 3C-R3 — First-entry, hover, and About
 10. STEP 3C-R4 — Fluid responsive behavior and live resize
+11. STEP 3D — Stills (human-approved and merged)
+
+## Approved STEP 3D systems
+
+- Stills index.
+- Four placeholder Stills cases and the editorial case renderer.
+- Asymmetric galleries and sticky mini rail.
+- Active IntersectionObserver tracking.
+- Numeric and `#last` hash navigation with history restoration.
+- Explore More carousel and case navigation.
+- Fluid responsive behavior, including live resize.
+- Reduced-motion fallback.
+- Lifecycle validation.
+- Static export.
+
+Existing approved browser evidence remains authoritative: 13 Stills index viewports, four desktop/mobile cases, direct hash and history checks, desktop drag/mobile touch swipe, and a 25-sample no-reload 1440→360→1440 resize sweep. The existing desktop/mobile recordings are preserved; promotion does not repeat browser validation.
 
 ## Validated Home behavior
 
@@ -72,6 +90,8 @@ See `../outputs/STEP3C_R4_RESPONSIVE_FIDELITY.md` for formulas, the viewport mat
 | --- | ---: | ---: | ---: | ---: |
 | Home | 1 | 1 | 1 | 5 |
 | About | 1 | 1 | 1 | 2 |
+| Stills index | 1 | 1 | 1 | 4 |
+| Stills case | 1 | 1 | 1 | 1 |
 | Reduced motion | 0 | 0 | 1 | 0 |
 
 Repeated route and resize cycles showed no lifecycle growth. Menu, route overlay, F-stop theme persistence, Back/Forward restoration, and reduced-motion behavior are validated global systems.
@@ -80,10 +100,9 @@ Repeated route and resize cycles showed no lifecycle growth. Menu, route overlay
 
 - `npm run check`: passes.
 - Static export: passes.
-- Exported routes: 11/11.
-- Production console errors/warnings: 0.
-- Runtime exceptions: 0.
-- Hydration errors: 0.
+- Static pages generated: 14/14, including all four Stills cases (the historical R4 export generated 11/11).
+- Approved STEP 3D browser samples: 0 page errors and 0 collected console errors in the recorded checks.
+- Historical R4 browser evidence: 0 production console errors/warnings, runtime exceptions and hydration errors. These counts are preserved from the R4 validation, not re-certified during promotion.
 
 ## Current known issues
 
@@ -93,15 +112,19 @@ Repeated route and resize cycles showed no lifecycle growth. Menu, route overlay
 
 ### P2
 
-- The display and UI fonts are legal substitutes; the final licensed display-font decision remains open.
-- Final bilingual copy is not approved.
-- The final photography archive has not been supplied.
+- Final licensed display and UI fonts remain unresolved; current fonts are legal substitutes.
+- Final bilingual identity and copy remain unapproved.
+- The user's final photography archive has not been supplied.
+- Stills palette and grain polish remains.
+- Asset-specific hero layering remains.
+- Case crop and spacing polish remains.
+- The approved evidence does not fully certify live OS reduced-motion switching or cold-network first-frame behavior; these validation limits remain recorded in the STEP 3D fidelity report.
 
 ### P3
 
-- Final asset-dependent micro-spacing remains.
+- Final asset-dependent micro-spacing and crops remain.
 - Project-owned mock-media subjects differ from Reference photography.
-- Validation recordings may use a lower frame rate than the Reference capture.
+- STEP 3D validation recordings use 25 fps, below the Reference capture cadence; continuous micro-easing has qualitative human approval rather than a new quantitative timing certification.
 
 Do not omit or silently redefine these limitations in future phase reports.
 
@@ -122,7 +145,10 @@ Do not omit or silently redefine these limitations in future phase reports.
 - `REFERENCE_AUDIT.md` and `INTERACTIONS.md` — authoritative Reference evidence.
 - `DEPLOYMENT.md` and `MEDIA_ARCHITECTURE.md` — planned Pages/R2 topology.
 - `../outputs/STEP3C_R4_RESPONSIVE_FIDELITY.md` — latest Home/About fidelity validation.
+- `../outputs/STEP3D_STILLS_SUMMARY.md` and `../outputs/STEP3D_STILLS_FIDELITY.md` — approved STEP 3D candidate evidence and remaining limitations.
 
 ## Next major phase
 
-The next planned major phase is STEP 3D — STILLS. It must not start until the user explicitly requests it, and it should be implemented on a dedicated phase branch followed by validation and human review before merging to `main`.
+STEP 3D — STILLS is approved and merged into `main`. The next major phase is STEP 3E. STEP 3E must not begin in this promotion conversation; start it only in a fresh session with explicit user authorization and a dedicated phase branch.
+
+The unchanged AGENTS.md sentence that STEP 3D has not started describes the original R4 baseline and is superseded by this approved project-state record. The historical candidate reports remain evidence, not the current approval status.
