@@ -44,9 +44,9 @@ export function ExploreMore({ projects }: { readonly projects: readonly StillPro
       event.preventDefault();
       navigate(link.pathname);
     };
-    root.addEventListener('click', onCloneClick);
+    root.addEventListener('click', onCloneClick, true);
     const cleanup = () => {
-      root.removeEventListener('click', onCloneClick);
+      root.removeEventListener('click', onCloneClick, true);
       splide.destroy(true);
     };
     scope.addCleanup(cleanup);

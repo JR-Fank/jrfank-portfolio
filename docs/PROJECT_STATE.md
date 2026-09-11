@@ -1,11 +1,11 @@
 # Project State
 
-Updated for the GitHub handoff after STEP 3C-R4.
+Phase-branch update: STEP 3D candidate, awaiting human approval. The Home/About baseline below remains historical validation evidence.
 
 ## Current status
 
 - STEP 3C-R4 is complete and validated.
-- STEP 3D has not started and must not begin without explicit instruction.
+- STEP 3D implementation exists on `step3d-stills`; this branch contains a validation candidate awaiting human approval. See `../outputs/STEP3D_STILLS_SUMMARY.md` and `../outputs/STEP3D_STILLS_FIDELITY.md`.
 - Validated functional baseline: `e4cf461f6e0b4f437a28f04629ae07864d86a67b`.
 - Stable tag: `step3c-r4-responsive`.
 - A later `main` commit may contain documentation and repository-handoff changes only; the R4 tag remains the exact functional baseline.
@@ -125,4 +125,4 @@ Do not omit or silently redefine these limitations in future phase reports.
 
 ## Next major phase
 
-The next planned major phase is STEP 3D — STILLS. It must not start until the user explicitly requests it, and it should be implemented on a dedicated phase branch followed by validation and human review before merging to `main`.
+STEP 3D — STILLS is implemented on this phase branch and awaits human visual approval of the candidate. Continue from the current branch state and reports; do not restart it. Do not merge to `main` or begin STEP 3E without explicit authorization. The unchanged AGENTS.md sentence that STEP 3D has not started describes the original R4 baseline and is superseded for branch status by this section.

@@ -22,10 +22,12 @@ This repository is the durable source of truth. A new Codex session must not rel
 
 Known P1/P2/P3 limitations are recorded in `docs/PROJECT_STATE.md` and must remain visible in future work.
 
-## Next phase
+## Current phase branch
 
-The next planned major phase is STEP 3D — STILLS. Do not begin it until explicitly instructed.
+**STEP 3D CANDIDATE — AWAITING HUMAN APPROVAL**
 
-Create a dedicated phase branch, for example `step3d-stills`. Perform implementation, validation, human review, and corrections on that branch. Merge to `main` only after approval; `main` must remain the latest human-approved stable state.
+`step3d-stills` already contains the Stills index, four cases, gallery rail/hash navigation, Explore More and validation work. Read `../outputs/STEP3D_STILLS_SUMMARY.md` and `../outputs/STEP3D_STILLS_FIDELITY.md` for evidence, candidate identity, local recordings and remaining issues. Continue from this branch; do not restart STEP 3D.
+
+This is a phase-branch status update, not human approval. `main` remains the approved R4/handoff baseline. Do not merge, deploy or start STEP 3E automatically. The historical not-started sentence in unchanged AGENTS.md does not describe the current phase-branch implementation.
 
 For a fresh session, the user should only need to say: open `jrfank-portfolio`, read `AGENTS.md`, `docs/PROJECT_STATE.md`, and `docs/CODEX_HANDOFF.md`, inspect Git, and execute the requested STEP. The historical transcript is not required.
