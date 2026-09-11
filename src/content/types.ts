@@ -114,15 +114,95 @@ export interface StillProject extends ProjectBase {
   readonly exploreMore?: readonly string[];
 }
 
-export type MotionPlayback =
-  | { readonly provider: 'unconfigured' }
-  | { readonly provider: 'vimeo'; readonly videoId: string }
-  | { readonly provider: 'r2'; readonly mediaId: MediaId };
+export type MotionIndexLayout = 'title-above' | 'title-below' | 'title-split';
 
-export interface MotionProject extends ProjectBase {
-  readonly kind: 'motion';
+export type MotionAccent =
+  | 'warm-amber'
+  | 'water-blue'
+  | 'forest-green'
+  | 'rain-violet'
+  | 'mineral-silver';
+
+export type MotionAudioPolicy =
+  | 'muted-preview-user-gesture-full-audio'
+  | 'muted-preview-muted-full';
+
+interface MotionPlaybackBase {
   readonly posterId: MediaId;
   readonly previewId?: MediaId;
-  readonly playback: MotionPlayback;
-  readonly blocks: readonly ProjectBlock[];
+  readonly fullFilmId?: MediaId;
+  readonly audioPolicy: MotionAudioPolicy;
+  readonly allowSharedPreviewAndFull?: true;
+}
+
+export type MotionPlayback =
+  | (MotionPlaybackBase & {
+      readonly assetPolicy: 'temporary-development';
+      readonly durationSeconds?: number;
+      readonly replacementNote: BilingualText;
+    })
+  | (MotionPlaybackBase & {
+      readonly assetPolicy: 'production-ready';
+      readonly previewId: MediaId;
+      readonly fullFilmId: MediaId;
+      readonly durationSeconds: number;
+    });
+
+export interface MotionCredit {
+  readonly role: BilingualText;
+  readonly name: string;
+  readonly url?: string;
+}
+
+export interface MotionFilmstripRow {
+  readonly id: string;
+  readonly direction: 'forward' | 'reverse';
+  readonly mediaIds: readonly [MediaId, MediaId, MediaId, ...MediaId[]];
+}
+
+export interface MotionProjectInput {
+  readonly kind: 'motion';
+  readonly slug: string;
+  readonly identity: {
+    readonly title: BilingualText;
+    readonly location: BilingualText;
+    readonly year: string;
+    readonly date: BilingualText;
+  };
+  readonly index: {
+    readonly number: string;
+    readonly description: BilingualText;
+    readonly posterId: MediaId;
+    readonly satelliteMediaIds: readonly [MediaId, MediaId, MediaId];
+    readonly layout: MotionIndexLayout;
+    readonly accent?: MotionAccent;
+    readonly featured: boolean;
+  };
+  readonly caseStudy: {
+    readonly hero: MotionPlayback;
+    readonly synopsis: BilingualText;
+    readonly filmstripRows: readonly [MotionFilmstripRow, MotionFilmstripRow];
+    readonly credits: readonly [MotionCredit, ...MotionCredit[]];
+    readonly behindTheScenes: {
+      readonly heading: BilingualText;
+      readonly mediaIds: readonly [MediaId, MediaId, MediaId, MediaId, MediaId, MediaId, MediaId, MediaId];
+      readonly arrangement: 'audited-long-scroll';
+    };
+    readonly exploreMore: readonly string[];
+  };
+  readonly seo: {
+    readonly title: string;
+    readonly description: string;
+    readonly socialImageId: MediaId;
+  };
+}
+
+export interface MotionProject extends MotionProjectInput {
+  /** Read aliases retained until the STEP 3E-B route renderer adopts the nested Motion contract. */
+  readonly title: BilingualText;
+  readonly location: BilingualText;
+  readonly year: string;
+  readonly date: BilingualText;
+  readonly summary: BilingualText;
+  readonly posterId: MediaId;
 }
