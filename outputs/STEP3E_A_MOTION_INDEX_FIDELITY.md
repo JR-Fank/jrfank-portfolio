@@ -1,12 +1,12 @@
-# STEP 3E-A Motion Index fidelity review
+# STEP 3E-A Motion Index fidelity approval
 
-**STEP 3E-A CANDIDATE — AWAITING HUMAN APPROVAL**
+**STEP 3E-A — MOTION INDEX: HUMAN APPROVED**
 
 ## Review basis
 
 This review compares the local Motion Index with the audited Reference architecture and captured desktop/mobile sequences. It does not compare project photography subject matter: all local images are authorized development media, while Reference production media must not be copied. Functional browser passes are evidence of behavior, not proof of visual identity or human approval.
 
-**STEP 3E-A-R1 — pacing correction:** human review accepted the structure and requested additional project-stage breathing room. R1 changes vertical duration only; the intro, media dimensions, satellite placement, title preset system, play/CTA treatment, mobile bleed, content/schema and global runtime architecture remain unchanged.
+**STEP 3E-A-R1 — pacing correction:** human review accepted the structure, requested additional project-stage breathing room, and approved the corrected desktop/mobile recordings. R1 changes vertical duration only; the intro, media dimensions, satellite placement, title preset system, play/CTA treatment, mobile bleed, content/schema and global runtime architecture remain unchanged.
 
 The relevant Reference architecture is a centered editorial introduction followed by five observed project stages (M02–M06). Each stage combines one dominant roughly 16:9 poster, three smaller offset parallax frames, date/location metadata, a large title, play treatment and a direct case-study CTA. Metadata/title/composition trade vertical position between stages. Mobile is a separate composition with a roughly 109 vw main image, persistent satellite frames and direct touch CTA. The index remains poster-based and does not autoplay video.
 
@@ -21,7 +21,7 @@ The relevant Reference architecture is a centered editorial introduction followe
 | Scroll trajectory | Transform-first continuous parallax; central media dominates while satellites move independently. Motion is long, ease-out/settled and never springy. | One scrubbed GSAP timeline per stage moves main y/scale and three satellite x/y/rotation vectors. R1 preserves the approved travel geometry by measuring it from the unchanged inner frame while the outer stage provides the longer active range. All 30 focused sequences moved continuously and reversed correctly. `invalidateOnRefresh` recalculates current geometry. | **Functional match. P3 open:** continuous micro-easing/settling remains a human-eye judgment. |
 | Mobile bleed | First-stage main image extends beyond both viewport edges; satellites stay visible and CTA stays direct. | Main poster is 109 vw with negative/edge satellite offsets. The page clips composition overflow without document overflow. All five compact stages retained main poster, three satellites and CTA; 390×844 recording confirms the recomposition across multiple projects. | **Matched. P3 open:** final media may change the preferred bleed/focal position. |
 | Play treatment | Hover scales play icon 1→1.1; glow reaches opacity 1 with 12 px blur over 200 ms using the audited cubic-bezier. CTA remains available on touch. | Measured hover/focus values are play 1→1.1 and glow 1→1.08, opacity 0→1, blur 12 px. Desktop play is 58 px and mobile 50 px; poster and CTA are semantic links, so hover is not required for entry. | **Matched behavior. P3 open:** icon weight and glow intensity require visual sign-off. |
-| Stage duration | Audited total Motion index height: 6,436 px at 1440×900 and 5,281 px at 390×844. Long spans are part of the site's identity. | Corrected production export measures **6,463 px at 1440×900** and **5,269 px at 390×844**: +27 px/+0.42% desktop and -12 px/-0.23% mobile versus Reference. The five outer stages carry the added distance; intro/footer are unchanged and the inner visual frame retains its accepted dimensions. | **Target met:** both measurements are inside the requested ±2% tolerance. Human pacing approval remains pending. |
+| Stage duration | Audited total Motion index height: 6,436 px at 1440×900 and 5,281 px at 390×844. Long spans are part of the site's identity. | Corrected production export measures **6,463 px at 1440×900** and **5,269 px at 390×844**: +27 px/+0.42% desktop and -12 px/-0.23% mobile versus Reference. The five outer stages carry the added distance; intro/footer are unchanged and the inner visual frame retains its accepted dimensions. | **Target met and human-approved:** both measurements are inside the requested ±2% tolerance. |
 
 ## Responsive and runtime fidelity
 
@@ -39,18 +39,18 @@ None. No broken route, missing stage, horizontal overflow, invalid transform, au
 
 ### P1
 
-Final project-owned preview/full-film media and approved audio behavior are absent by design. The schema makes that status explicit, and the index never requests those sources. STEP 3E-A can be reviewed as a poster-only foundation, but the broader Motion experience cannot be called production-ready until those assets exist and are validated in the future case-study phase.
+Final project-owned preview/full-film media and approved audio behavior are absent by design. The schema makes that status explicit, and the index never requests those sources. STEP 3E-A is approved as a poster-only foundation, but the broader Motion experience cannot be called production-ready until those assets exist and are validated in the future case-study phase.
 
 ### P2
 
-- R1 meets the numeric duration tolerance, but human review must still decide whether the corrected handoff cadence has the intended breathing room without feeling slow.
+- R1 meets the numeric duration tolerance and the corrected handoff cadence is human-approved.
 - Licensed display/sans fonts are unavailable, so exact word width, stroke contrast and optical baselines cannot match the Reference yet.
 - Bilingual identity/copy, dates, locations, credits and final media sequence remain provisional.
 - Final poster/satellite assets will require crop, focal-point, luminance and possibly per-project position recalibration.
 
 ### P3
 
-- Human review should assess scrub cadence, the moment each satellite clears the main poster and the visual handoff between adjacent stages.
+- Current scrub cadence, satellite clearance and adjacent-stage handoff are human-approved; reassess only if final replacement media changes the composition materially.
 - Play icon weight, glow density, title optical centering and asset-dependent micro-spacing remain polish.
 - Chrome automation and 25 fps WebM recordings are review evidence, not physical iOS/Safari or pixel-identical certification.
 
@@ -58,13 +58,13 @@ Final project-owned preview/full-film media and approved audio behavior are abse
 
 - Generic Motion placeholder removed: **pass**.
 - Five data-driven project stages: **pass**.
-- Main poster plus three correctly persistent satellites: **pass in functional/responsive evidence; visual approval pending**.
+- Main poster plus three correctly persistent satellites: **pass and human-approved**.
 - No autoplay/video on index: **pass**.
 - Continuous forward and reverse motion: **pass**.
-- Deliberate mobile recomposition: **pass; visual approval pending**.
+- Deliberate mobile recomposition: **pass and human-approved**.
 - No horizontal page overflow: **pass**.
 - Stable global lifecycle: **pass**.
 - All Motion routes statically exported: **pass**.
 - No Reference media or commercial fonts copied: **pass**.
 
-Stop at STEP 3E-A human review. This report does not authorize merging `main` or beginning STEP 3E-B.
+STEP 3E-A is human-approved at candidate `9bd2b2a1a320e348a2650cca0dd171db86c43d01`. Poster-only index behavior remains authoritative; the five Motion projects remain temporary development content and the P1 final films/audio policy remains unresolved. STEP 3E-B is next but has not started. This approval does not authorize merging `main`.

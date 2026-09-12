@@ -1,6 +1,6 @@
-# STEP 3E-A Motion Index candidate
+# STEP 3E-A Motion Index approval
 
-**STEP 3E-A CANDIDATE — AWAITING HUMAN APPROVAL**
+**STEP 3E-A — MOTION INDEX: HUMAN APPROVED**
 
 ## Identity and scope
 
@@ -10,9 +10,10 @@
 - Motion Index checkpoint: `4031bf2846778584671bd12975fc616d753a1ebf`.
 - Compact composition correction: `9e3027c07794c7ca4ea29a7892747100eafc6235`.
 - STEP 3E-A report checkpoint: `5e3701f953a3703283cb14148068db67d5b1646d`.
-- STEP 3E-A-R1 pacing correction: the phase-branch commit containing this updated report.
-- Candidate HEAD: the phase-branch commit containing this report. Resolve it with `git log -1 --format=%H -- outputs/STEP3E_A_MOTION_INDEX_SUMMARY.md`; a commit cannot embed its own final hash.
+- Human-approved STEP 3E-A-R1 candidate: `9bd2b2a1a320e348a2650cca0dd171db86c43d01`.
+- Approval/handoff checkpoint: the phase-branch commit containing this updated report. Resolve it with `git log -1 --format=%H -- outputs/STEP3E_A_MOTION_INDEX_SUMMARY.md`; a commit cannot embed its own hash.
 - Validation finalized 2026-09-12, Asia/Shanghai.
+- Final human visual review approved the Motion Index structure and R1 pacing from the corrected desktop/mobile recordings.
 - Scope is STEP 3E-A only: Motion content foundation and Motion Index. STEP 3D was not reopened, approved global systems were not refactored, and STEP 3E-B was not started.
 
 ## Content and schema foundation
@@ -49,7 +50,7 @@ The compact composition correction moved the third satellite away from the CTA, 
 
 ## STEP 3E-A-R1 — pacing correction
 
-Human review accepted the Motion composition and requested only more project-to-project breathing room. R1 lengthens the five outer project stages while keeping each inner visual frame at its previously accepted height and vertically centered. Parallax travel remains derived from that inner frame, so poster scale/travel, satellite geometry, title presets, CTA, intro and mobile bleed are unchanged; the same transform trajectory now resolves over a longer active scroll range without an empty spacer or frozen hold.
+Human review accepted the Motion composition and requested only more project-to-project breathing room. R1 lengthens the five outer project stages while keeping each inner visual frame at its previously accepted height and vertically centered. Parallax travel remains derived from that inner frame, so poster scale/travel, satellite geometry, title presets, CTA, intro and mobile bleed are unchanged; the same transform trajectory now resolves over a longer active scroll range without an empty spacer or frozen hold. The corrected pacing is human-approved.
 
 Outer stage duration changed from 100→114 svh on desktop, 90→102 svh at the 991 px tablet range, 76→83 svh at the 767 px mobile range and 88→96 svh at the 479 px compact range, with corresponding measured min/max bounds. Content, schema, media, global runtime systems and trigger count are unchanged.
 
@@ -90,8 +91,8 @@ The five expected `temporary-development` notices identify missing/replacement f
 
 - **P0:** none.
 - **P1:** final project-owned Motion preview/full-film sources and approved sound policy are not supplied. They are intentionally not requested or rendered by the Motion Index, but production readiness cannot be claimed without them.
-- **P2:** final bilingual titles, locations, descriptions, credits, poster/satellite selections, crops and licensed display/sans font choices still require owner approval. R1 resolves the measured document-duration gap; continuous pacing still awaits human sign-off.
-- **P3:** asset-dependent satellite offsets, title optical alignment, play-glow nuance and continuous scrub/easing cadence remain human-review polish. Browser automation and recordings do not establish pixel-identical fidelity.
+- **P2:** final bilingual titles, locations, descriptions, credits, poster/satellite selections, crops and licensed display/sans font choices still require owner approval. R1 resolves the measured document-duration gap and its pacing is human-approved.
+- **P3:** the current mock-media composition, play treatment and continuous scrub/easing cadence are human-approved. Final asset replacement may require asset-dependent micro-spacing/crop review; browser automation and recordings are not physical-device certification.
 
 ## Local review artifacts
 
@@ -99,4 +100,4 @@ The five expected `temporary-development` notices identify missing/replacement f
 - Mobile Chrome recording: `/Users/jr-fank/Code/jrfank-portfolio/output/playwright/step3e-a/STEP3E_A_MOTION_INDEX_MOBILE_390x844.webm` — corrected R1 pacing, 390×844 viewport, 29.40 s; three project stages, two forward handoffs and reverse. Playwright's recorder proportionally encodes the capture at 368×800.
 - Detailed screenshots, numeric results, CLI logs and QA scripts remain under `/Users/jr-fank/Code/jrfank-portfolio/output/playwright/step3e-a/` and are excluded from Git.
 
-Stop here for human review. Do not merge `main`, deploy, or begin STEP 3E-B automatically.
+STEP 3E-A is human-approved on `step3e-motion`. The poster-only Motion Index policy remains authoritative, all five Motion projects remain temporary development content, and final films/audio policy remains unresolved. STEP 3E-B is the next subphase; do not merge `main`, deploy, or begin it without a fresh explicitly authorized session.
