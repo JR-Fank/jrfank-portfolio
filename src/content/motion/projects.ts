@@ -46,7 +46,10 @@ export const motionProjects: readonly MotionProject[] = [
       hero: {
         assetPolicy: 'temporary-development',
         posterId: 'motion.project-01.poster',
-        audioPolicy: 'muted-preview-user-gesture-full-audio',
+        previewId: 'motion.development.preview',
+        fullFilmId: 'motion.development.full-film',
+        audioPolicy: 'muted-preview-muted-full',
+        durationSeconds: 8,
         replacementNote: { zhHant: '正式預覽與完整影片尚待專案自有素材取代。', en: 'The preview and full film await final project-owned footage.', order: 'en-zh' },
       },
       synopsis: {
@@ -89,7 +92,10 @@ export const motionProjects: readonly MotionProject[] = [
       hero: {
         assetPolicy: 'temporary-development',
         posterId: 'stills.mock.tidal-flats',
-        audioPolicy: 'muted-preview-user-gesture-full-audio',
+        previewId: 'motion.development.preview',
+        fullFilmId: 'motion.development.full-film',
+        audioPolicy: 'muted-preview-muted-full',
+        durationSeconds: 8,
         replacementNote: { zhHant: '正式潮汐影片與聲音尚未提供。', en: 'Final tidal footage and sound have not yet been supplied.', order: 'en-zh' },
       },
       synopsis: {
@@ -136,7 +142,10 @@ export const motionProjects: readonly MotionProject[] = [
       hero: {
         assetPolicy: 'temporary-development',
         posterId: 'stills.mock.rain-passage',
+        previewId: 'motion.development.preview',
+        fullFilmId: 'motion.development.full-film',
         audioPolicy: 'muted-preview-muted-full',
+        durationSeconds: 8,
         replacementNote: { zhHant: '正式夜景影片仍在等待專案素材。', en: 'The final night film is still awaiting project footage.', order: 'en-zh' },
       },
       synopsis: {
@@ -183,8 +192,10 @@ export const motionProjects: readonly MotionProject[] = [
       hero: {
         assetPolicy: 'temporary-development',
         posterId: 'stills.mock.ice-drift',
-        previewId: 'home.r1.hero-video',
-        audioPolicy: 'muted-preview-user-gesture-full-audio',
+        previewId: 'motion.development.preview',
+        fullFilmId: 'motion.development.full-film',
+        audioPolicy: 'muted-preview-muted-full',
+        durationSeconds: 8,
         replacementNote: { zhHant: '目前預覽只作開發測試；正式預覽與完整影片均待取代。', en: 'The current preview is development-only; both preview and full film await replacement.', order: 'en-zh' },
       },
       synopsis: {
@@ -231,7 +242,10 @@ export const motionProjects: readonly MotionProject[] = [
       hero: {
         assetPolicy: 'temporary-development',
         posterId: 'stills.mock.salt-flat',
-        audioPolicy: 'muted-preview-user-gesture-full-audio',
+        previewId: 'motion.development.preview',
+        fullFilmId: 'motion.development.full-film',
+        audioPolicy: 'muted-preview-muted-full',
+        durationSeconds: 8,
         replacementNote: { zhHant: '正式景觀影片、聲音與時長尚待確認。', en: 'Final landscape film, sound, and duration remain to be confirmed.', order: 'en-zh' },
       },
       synopsis: {
