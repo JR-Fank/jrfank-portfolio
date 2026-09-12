@@ -33,5 +33,14 @@ export default async function MotionProjectPage({ params }: Props) {
   if (!project) {
     notFound();
   }
-  return <MotionCaseExperience project={project} site={siteConfig} />;
+  const exploreProjects = project.caseStudy.exploreMore
+    .map((relatedSlug) => getMotionProject(relatedSlug))
+    .filter((related): related is NonNullable<typeof related> => Boolean(related && related.slug !== project.slug))
+    .map((related) => ({
+      slug: related.slug,
+      title: related.identity.title,
+      location: related.identity.location,
+      posterId: related.caseStudy.hero.posterId,
+    }));
+  return <MotionCaseExperience project={project} exploreProjects={exploreProjects} site={siteConfig} />;
 }

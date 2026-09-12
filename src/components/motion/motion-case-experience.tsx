@@ -3,15 +3,20 @@ import { MediaPicture } from '@/components/media/media-picture';
 import type { MotionProject, SiteConfig } from '@/content/types';
 import { getVideoSources } from '@/lib/media';
 
+import { MotionBehindScenes } from './motion-behind-scenes';
 import { MotionCaseBoundary } from './motion-case-boundary';
+import { MotionCredits } from './motion-credits';
+import { MotionExploreMore, type MotionExploreProject } from './motion-explore-more';
 import { MotionFilmHero } from './motion-film-hero';
+import { MotionFilmstrip } from './motion-filmstrip';
 
 interface MotionCaseExperienceProps {
   readonly project: MotionProject;
+  readonly exploreProjects: readonly MotionExploreProject[];
   readonly site: SiteConfig;
 }
 
-export function MotionCaseExperience({ project, site }: MotionCaseExperienceProps) {
+export function MotionCaseExperience({ project, exploreProjects, site }: MotionCaseExperienceProps) {
   const playback = project.caseStudy.hero;
   if (!playback.previewId || !playback.fullFilmId) {
     throw new Error(`Motion case playback sources are incomplete: ${project.slug}`);
@@ -56,6 +61,14 @@ export function MotionCaseExperience({ project, site }: MotionCaseExperienceProp
           </div>
         </section>
 
+        <MotionFilmstrip rows={project.caseStudy.filmstripRows} projectSlug={project.slug} />
+        <MotionCredits credits={project.caseStudy.credits} projectSlug={project.slug} />
+        <MotionBehindScenes
+          heading={project.caseStudy.behindTheScenes.heading}
+          mediaIds={project.caseStudy.behindTheScenes.mediaIds}
+          projectSlug={project.slug}
+        />
+        <MotionExploreMore projects={exploreProjects} />
         <SiteFooter site={site} />
       </main>
     </MotionCaseBoundary>
