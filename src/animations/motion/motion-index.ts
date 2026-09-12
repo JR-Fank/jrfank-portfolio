@@ -28,6 +28,7 @@ const SATELLITE_MOTION: readonly SatelliteMotion[] = [
 
 function setupProjectStage(section: HTMLElement, context: MotionIndexContext): void {
   const gsap = getGsap();
+  const stageFrame = section.querySelector<HTMLElement>('.motion-project-stage-inner');
   const main = section.querySelector<HTMLElement>('[data-motion-index-main]');
   const satellites = gsap.utils.toArray<HTMLElement>('[data-motion-index-satellite]', section);
   if (!main || satellites.length !== 3) {
@@ -36,7 +37,7 @@ function setupProjectStage(section: HTMLElement, context: MotionIndexContext): v
 
   const travelScale = context.desktop ? 1 : context.tablet ? 0.84 : context.mobile ? 0.7 : 0.62;
   const stageWidth = () => section.clientWidth * travelScale;
-  const stageHeight = () => section.clientHeight;
+  const stageHeight = () => stageFrame?.clientHeight ?? section.clientHeight;
 
   const timeline = gsap.timeline({
     scrollTrigger: {
