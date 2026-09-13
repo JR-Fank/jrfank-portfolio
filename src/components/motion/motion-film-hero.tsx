@@ -36,7 +36,7 @@ export function MotionFilmHero({
   audioPolicy,
 }: MotionFilmHeroProps) {
   const playback = useMotionPlaybackController({ previewSrc, fullFilmSrc, audioPolicy });
-  const isFilmPresentation = playback.state.startsWith('film-') || playback.state === 'error';
+  const isFilmPresentation = playback.hasFilmStarted && playback.state !== 'error';
   const isLoadingFilm = playback.state === 'film-loading';
   const showWatch = playback.state === 'poster' || playback.state.startsWith('preview-');
   const showRetry = playback.state === 'error';
