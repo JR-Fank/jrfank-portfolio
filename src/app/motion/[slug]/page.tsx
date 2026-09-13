@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { PlaceholderPage } from '@/components/sections/placeholder-page';
+import { MotionCaseExperience } from '@/components/motion/motion-case-experience';
 import { getMotionProject, motionProjects, siteConfig } from '@/content';
 import { createPageMetadata } from '@/lib/metadata';
 
@@ -33,16 +33,14 @@ export default async function MotionProjectPage({ params }: Props) {
   if (!project) {
     notFound();
   }
-  return (
-    <PlaceholderPage
-      site={siteConfig}
-      eyebrow="MOTION PROJECT"
-      title={project.title.en}
-      titleZh={project.title.zhHant ?? ''}
-      location={project.location.en}
-      locationZh={project.location.zhHant ?? ''}
-      mediaId={project.posterId}
-      cta={{ label: 'BACK TO MOTION', href: '/motion/' }}
-    />
-  );
+  const exploreProjects = project.caseStudy.exploreMore
+    .map((relatedSlug) => getMotionProject(relatedSlug))
+    .filter((related): related is NonNullable<typeof related> => Boolean(related && related.slug !== project.slug))
+    .map((related) => ({
+      slug: related.slug,
+      title: related.identity.title,
+      location: related.identity.location,
+      posterId: related.caseStudy.hero.posterId,
+    }));
+  return <MotionCaseExperience project={project} exploreProjects={exploreProjects} site={siteConfig} />;
 }

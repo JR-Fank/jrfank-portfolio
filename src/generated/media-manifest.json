@@ -73,6 +73,30 @@
       "posterId": "motion.project-01.poster",
       "variants": []
     },
+    "motion.development.preview": {
+      "kind": "video",
+      "id": "motion.development.preview",
+      "width": 960,
+      "height": 540,
+      "aspectRatio": 1.7777777778,
+      "duration": 4,
+      "posterId": "motion.project-01.poster",
+      "variants": [
+        { "width": 960, "format": "mp4", "key": "motion/development-video/motion-preview-owned-mock-b1.mp4", "bytes": 15744, "hash": "76413bf78c78bb125c69ef96f4ef1833080f10f0af29cb401b0610d5acb6fbb8" }
+      ]
+    },
+    "motion.development.full-film": {
+      "kind": "video",
+      "id": "motion.development.full-film",
+      "width": 960,
+      "height": 540,
+      "aspectRatio": 1.7777777778,
+      "duration": 8,
+      "posterId": "home.r1.rain-film",
+      "variants": [
+        { "width": 960, "format": "mp4", "key": "motion/development-video/motion-full-film-owned-mock-b1.mp4", "bytes": 170074, "hash": "37417ae73e461e81ae7a8fadfcefd733e2d911af93f55d88a9f1f15dcce1b1aa" }
+      ]
+    },
     "about.portrait": {
       "kind": "image",
       "id": "about.portrait",
