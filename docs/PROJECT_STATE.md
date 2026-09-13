@@ -1,18 +1,22 @@
 # Project State
 
-Branch-state update: STEP 3E-A — MOTION INDEX has passed final human visual review on `step3e-motion`. `main` remains the approved STEP 3D baseline; STEP 3E-A has not been merged. The Home/About measurements below remain historical validation evidence.
+Stable-state update: STEP 3E — MOTION EXPERIENCE has passed final human visual review. The approved `step3e-motion` source branch is squash-promoted to `main`; its detailed implementation and checkpoint history remains on the phase branch. The Home/About measurements below remain historical validation evidence.
 
 ## Current status
 
+- **STEP 3E — MOTION EXPERIENCE: HUMAN APPROVED**.
 - **STEP 3E-A — MOTION INDEX: HUMAN APPROVED**.
-- Approved branch: `step3e-motion`.
-- Human-approved candidate: `9bd2b2a1a320e348a2650cca0dd171db86c43d01`.
+- **STEP 3E-B — MOTION CASES: HUMAN APPROVED**.
+- Approved source branch: `step3e-motion`.
+- Human-approved STEP 3E-A candidate: `9bd2b2a1a320e348a2650cca0dd171db86c43d01`.
+- Human-approved STEP 3E-B candidate: `6801ea21446dddd27d4e3120713d52a614a72c93`.
 - Motion Index structure and STEP 3E-A-R1 pacing are approved.
 - Final measured Motion Index height: 6,463 px at 1440×900 and 5,269 px at 390×844.
 - The poster-only Motion Index policy remains authoritative: no index autoplay/video, iframe or full-film request.
 - All five Motion projects remain explicitly temporary development content.
+- Motion cases, playback, filmstrips, credits, Behind the Scenes and Explore More behavior are approved.
 - P1 final project-owned films and approved audio policy remain unresolved.
-- `main` remains at the approved STEP 3D promotion commit `f2fd298f295ea1862cec45f10f204d429379bfc0`.
+- Stable baseline: the `main` squash-promotion commit `feat: approve step 3e motion experience`, tagged `step3e-motion`.
 - **STEP 3D — STILLS: APPROVED**.
 - Approved source branch: `step3d-stills`.
 - Approved candidate: `2b146ad14ecb3d093aea3d0797798b2c2b555b2d`.
@@ -34,9 +38,10 @@ Branch-state update: STEP 3E-A — MOTION INDEX has passed final human visual re
 9. STEP 3C-R3 — First-entry, hover, and About
 10. STEP 3C-R4 — Fluid responsive behavior and live resize
 11. STEP 3D — Stills (human-approved and merged)
-12. STEP 3E-A — Motion content foundation and Motion Index (human-approved on `step3e-motion`; not merged)
+12. STEP 3E-A — Motion content foundation and Motion Index (human-approved)
+13. STEP 3E-B — Motion cases (human-approved and merged as part of STEP 3E)
 
-## Approved STEP 3E-A systems
+## Approved STEP 3E systems
 
 - Independent typed Motion content/schema foundation and validator.
 - Five data-driven temporary-development Motion projects and static routes.
@@ -47,8 +52,16 @@ Branch-state update: STEP 3E-A — MOTION INDEX has passed final human visual re
 - Continuous reversible parallax and STEP 3E-A-R1 stage pacing.
 - Final production document heights of 6,463 px at 1440×900 and 5,269 px at 390×844.
 - Responsive/live-resize, reduced-motion, lifecycle and 18/18 static-export validation.
+- Five shared data-driven Motion case-study routes.
+- One native poster/preview/full-film playback controller; full-film source assignment is deferred until Watch.
+- Native-event-driven Watch, Pause, Resume and Retry behavior with route-leave media cleanup.
+- Two opposed filmstrip rows and content-driven bilingual credits.
+- One pinned Behind the Scenes stage with one eight-beat master timeline.
+- Reduced-motion Behind the Scenes content in normal document flow.
+- Motion Explore More with two desktop cards and one mobile card, including authored and cloned route-transition links.
+- Motion case responsive/live-resize behavior and lifecycle/resource cleanup.
 
-The approved STEP 3E-A implementation candidate is `9bd2b2a1a320e348a2650cca0dd171db86c43d01`. The approval is branch-scoped and does not promote it to `main`. See `../outputs/STEP3E_A_MOTION_INDEX_SUMMARY.md` and `../outputs/STEP3E_A_MOTION_INDEX_FIDELITY.md` for the preserved validation and fidelity evidence.
+The approved STEP 3E-A implementation candidate is `9bd2b2a1a320e348a2650cca0dd171db86c43d01`; the approved STEP 3E-B candidate is `6801ea21446dddd27d4e3120713d52a614a72c93`. See the STEP 3E-A and STEP 3E-B reports in `../outputs/` for preserved validation and fidelity evidence. The phase branch retains the detailed A/B/checkpoint history; the stable `main` promotion is one squash commit containing the approved application tree.
 
 ## Approved STEP 3D systems
 
@@ -115,6 +128,7 @@ See `../outputs/STEP3C_R4_RESPONSIVE_FIDELITY.md` for formulas, the viewport mat
 | Home | 1 | 1 | 1 | 5 |
 | About | 1 | 1 | 1 | 2 |
 | Motion index | 1 | 1 | 1 | 5 |
+| Motion case | 1 | 1 | 1 | 2 |
 | Stills index | 1 | 1 | 1 | 4 |
 | Stills case | 1 | 1 | 1 | 1 |
 | Reduced motion | 0 | 0 | 1 | 0 |
@@ -123,9 +137,9 @@ Repeated route and resize cycles showed no lifecycle growth. Menu, route overlay
 
 ## Build baseline
 
-- `npm run check`: passes at the approved STEP 3E-A branch candidate.
+- `npm run check`: passes at the approved STEP 3E-B candidate and on the stable STEP 3E `main` promotion.
 - Static export: passes.
-- Static pages generated on `step3e-motion`: 18/18, including the Motion Index and all five temporary Motion routes. The approved `main` STEP 3D baseline generated 14/14.
+- Static pages generated: 18/18, including the Motion Index and all five temporary Motion routes.
 - Approved STEP 3D browser samples: 0 page errors and 0 collected console errors in the recorded checks.
 - Historical R4 browser evidence: 0 production console errors/warnings, runtime exceptions and hydration errors. These counts are preserved from the R4 validation, not re-certified during promotion.
 
@@ -134,14 +148,15 @@ Repeated route and resize cycles showed no lifecycle growth. Menu, route overlay
 ### P1
 
 - Temporary project-owned Hero footage must be replaced by the user's real footage before production release.
-- Final project-owned Motion preview/full-film sources and the approved audio policy remain unresolved. The approved Motion Index does not request them.
+- Final project-owned Motion preview/full-film sources remain unresolved.
+- The owner-approved per-project Motion audio policy remains unresolved.
 
 ### P2
 
 - Final licensed display and UI fonts remain unresolved; current fonts are legal substitutes.
-- Final bilingual identity and copy remain unapproved.
+- Final bilingual Motion identity, copy and credits remain unapproved.
 - The user's final photography archive has not been supplied.
-- All five Motion projects remain temporary development content; their final bilingual identity, credits, poster/satellite selections and production media are not supplied.
+- All five Motion projects remain temporary development content; their final media selections and production sources are not supplied.
 - Stills palette and grain polish remains.
 - Asset-specific hero layering remains.
 - Case crop and spacing polish remains.
@@ -149,7 +164,9 @@ Repeated route and resize cycles showed no lifecycle growth. Menu, route overlay
 
 ### P3
 
-- Final asset-dependent micro-spacing and crops remain.
+- Final asset-dependent crops, micro-spacing and cadence polish remain.
+- The brief covered frame during the approved global route transition remains polish.
+- Physical iOS/Safari validation remains required before production launch.
 - Project-owned mock-media subjects differ from Reference photography.
 - STEP 3D validation recordings use 25 fps, below the Reference capture cadence; continuous micro-easing has qualitative human approval rather than a new quantitative timing certification.
 
@@ -174,9 +191,10 @@ Do not omit or silently redefine these limitations in future phase reports.
 - `../outputs/STEP3C_R4_RESPONSIVE_FIDELITY.md` — latest Home/About fidelity validation.
 - `../outputs/STEP3D_STILLS_SUMMARY.md` and `../outputs/STEP3D_STILLS_FIDELITY.md` — approved STEP 3D candidate evidence and remaining limitations.
 - `../outputs/STEP3E_A_MOTION_INDEX_SUMMARY.md` and `../outputs/STEP3E_A_MOTION_INDEX_FIDELITY.md` — human-approved STEP 3E-A structure, R1 pacing, measurements and remaining Motion production limitations.
+- `../outputs/STEP3E_B_MOTION_CASES_SUMMARY.md` and `../outputs/STEP3E_B_MOTION_CASES_FIDELITY.md` — human-approved STEP 3E-B implementation, validation, fidelity evidence and remaining production limitations.
 
-## Next subphase
+## Next phase
 
-STEP 3E-A — MOTION INDEX is human-approved on `step3e-motion` at candidate `9bd2b2a1a320e348a2650cca0dd171db86c43d01`. STEP 3E-B is the next subphase. It must begin only in a fresh session with explicit user authorization, after reading the repository documentation and verifying the current branch/HEAD. Continue from the approval/handoff tip of `step3e-motion`; do not restart STEP 3E-A, merge `main`, or silently treat temporary films/audio as production-ready.
+STEP 3E — MOTION EXPERIENCE is complete and human-approved. No subsequent phase is authorized. A future phase must begin only with explicit user authorization after reading the repository documentation and verifying the current branch/HEAD. Do not restart STEP 3E, silently treat temporary films/audio as production-ready, or deploy automatically.
 
-The unchanged AGENTS.md sentence that STEP 3D has not started describes the original R4 baseline and is superseded by this approved project-state record. The STEP 3D and STEP 3E-A reports remain durable evidence; their status is superseded by the explicit approval records above where applicable.
+The unchanged AGENTS.md sentence that STEP 3D has not started describes the original R4 baseline and is superseded by this approved project-state record. The STEP 3D and STEP 3E reports remain durable evidence; their status is superseded by the explicit approval records above where applicable.

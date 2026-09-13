@@ -1,6 +1,6 @@
-# STEP 3E-B Motion case-study candidate
+# STEP 3E-B Motion case-study approval summary
 
-**STEP 3E-B CANDIDATE — AWAITING HUMAN APPROVAL**
+**STEP 3E-B — HUMAN APPROVED**
 
 ## Identity and scope
 
@@ -9,7 +9,7 @@
 - Starting approval/handoff commit: `f24c466affbba4ddaa892519c0fda7857cb28bb6`.
 - B1 playback-foundation checkpoint: `08eab961fcccafb2fd64881159c01c988c0093a8`.
 - B2 complete-case checkpoint: `3bbb4704cf638296e20372574d21a7a27cfd3fba`.
-- Final B3 candidate checkpoint: the commit containing this report; resolve with `git log -1 --format=%H -- outputs/STEP3E_B_MOTION_CASES_SUMMARY.md`.
+- Human-approved B3 candidate: `6801ea21446dddd27d4e3120713d52a614a72c93`.
 - Validation finalized 2026-09-13, Asia/Shanghai.
 - Scope is STEP 3E-B only. The human-approved STEP 3E-A Motion Index was not reopened or recalibrated, `main` was not merged, and no later phase was started.
 
@@ -111,4 +111,4 @@ The single final-candidate `npm run check` passed without retry:
 - Mobile Chrome recording: `/Users/jr-fank/Code/jrfank-portfolio/output/playwright/step3e-b/STEP3E_B_MOTION_CASES_MOBILE_390x844.webm` — 390×844, 25 fps, 31.48 seconds.
 - Full ignored QA evidence and reproduction scripts: `/Users/jr-fank/Code/jrfank-portfolio/output/playwright/step3e-b/`.
 
-STEP 3E-B is a candidate awaiting human review. Do not merge `main`, mark this phase human-approved, or begin another phase from this report.
+STEP 3E-B passed final human visual review at candidate `6801ea21446dddd27d4e3120713d52a614a72c93`. Together with the previously approved STEP 3E-A Motion Index, STEP 3E — MOTION EXPERIENCE is human-approved. This approval does not certify temporary film/audio as production assets or authorize another phase.

@@ -1,6 +1,6 @@
 # STEP 3E-B Motion case-study fidelity review
 
-**STEP 3E-B CANDIDATE — AWAITING HUMAN APPROVAL**
+**STEP 3E-B — HUMAN APPROVED**
 
 ## Review basis
 
@@ -74,4 +74,4 @@ The single final `npm run check` passed without retry: TypeScript, content valid
 - Mobile recording: `/Users/jr-fank/Code/jrfank-portfolio/output/playwright/step3e-b/STEP3E_B_MOTION_CASES_MOBILE_390x844.webm`.
 - Full local QA evidence: `/Users/jr-fank/Code/jrfank-portfolio/output/playwright/step3e-b/`.
 
-STEP 3E-B remains a candidate awaiting human approval. This review does not merge `main`, certify temporary film/audio as production assets, or authorize another phase.
+STEP 3E-B passed final human visual review at candidate `6801ea21446dddd27d4e3120713d52a614a72c93`. Together with the previously approved STEP 3E-A Motion Index, STEP 3E — MOTION EXPERIENCE is human-approved. This review does not certify temporary film/audio as production assets or authorize another phase.
