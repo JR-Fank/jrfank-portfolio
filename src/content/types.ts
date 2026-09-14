@@ -56,6 +56,9 @@ export interface VideoMediaAsset extends MediaAssetBase {
   readonly kind: 'video';
   readonly duration: number;
   readonly posterId: MediaId;
+  readonly role?: 'preview' | 'full-film';
+  readonly audioPolicy?: MotionAudioPolicy;
+  readonly hasAudio?: boolean;
   readonly variants: readonly MediaVariant[];
 }
 

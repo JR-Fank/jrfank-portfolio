@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "manifestPath": "src/generated/media-manifest.json",
+  "objects": [
+    {
+      "key": "v1/site/validation/social/site-validation-social-default-1200-3cc65f6a5032.jpg",
+      "localPath": "public/mock-media/site/social/social-default-1200-mockv1.jpg",
+      "bytes": 3123,
+      "sha256": "3cc65f6a5032c93b39fd101ca769a4c2fdade6175bd6aa7339957e23201ee8ae",
+      "contentType": "image/jpeg",
+      "cacheControl": "public, max-age=31536000, immutable"
+    }
+  ]
+}
