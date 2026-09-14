@@ -7,6 +7,8 @@ import {
   CACHE_CONTROL,
   IMAGE_FORMATS,
   IMAGE_WIDTHS,
+  assertSafeGeneratedPath,
+  assertSafeMediaSource,
   assertSemanticSource,
   cliString,
   mimeForExtension,
@@ -80,6 +82,7 @@ async function prepareImage(
 ): Promise<{ entry?: ManifestAsset; objects: UploadObject[]; sourceHash: string }> {
   assertSemanticSource(asset.source);
   const sourcePath = repositoryPath(asset.source);
+  assertSafeMediaSource(asset.source, dryRun);
   const sourceBytes = await readFile(sourcePath);
   const sourceHash = sha256(sourceBytes);
   const metadata = await sharp(sourceBytes, { failOn: 'error' }).metadata();
@@ -103,6 +106,7 @@ async function prepareImage(
       const hash = sha256(output);
       const key = `${objectPrefix(asset)}/${semanticLeaf(asset.id)}-${targetWidth}-${hash.slice(0, 12)}.${format}`;
       const localPath = `${outputRoot}/${key}`;
+      assertSafeGeneratedPath(localPath);
       await mkdir(dirname(repositoryPath(localPath)), { recursive: true });
       await writeFile(repositoryPath(localPath), output);
       variants.push({ width: targetWidth, format, key, bytes: output.byteLength, hash });
@@ -128,6 +132,7 @@ async function prepareVideo(
   assertSemanticSource(asset.source);
   if (extname(asset.source).toLowerCase() !== '.mp4') throw new Error(`${asset.id} must reference a prepared MP4 derivative.`);
   const sourcePath = repositoryPath(asset.source);
+  assertSafeMediaSource(asset.source, dryRun);
   const sourceBytes = await readFile(sourcePath);
   const sourceHash = sha256(sourceBytes);
   console.log(`${dryRun ? '[dry-run] ' : ''}${asset.id}: prepared ${asset.role} MP4, ${asset.width}x${asset.height}, ${asset.duration}s, audio=${asset.hasAudio}.`);
@@ -139,6 +144,7 @@ async function prepareVideo(
   await validatePreparedVideo(sourcePath, asset);
   const key = `${objectPrefix(asset)}/${semanticLeaf(asset.id)}-${asset.width}-${sourceHash.slice(0, 12)}.mp4`;
   const localPath = `${outputRoot}/${key}`;
+  assertSafeGeneratedPath(localPath);
   await mkdir(dirname(repositoryPath(localPath)), { recursive: true });
   await writeFile(repositoryPath(localPath), sourceBytes);
   const variant: ManifestVariant = { width: asset.width, format: 'mp4', key, bytes: sourceBytes.byteLength, hash: sourceHash };
@@ -160,6 +166,11 @@ async function main(): Promise<void> {
   const manifestPath = cliString(args, 'manifest', '.media-work/media-manifest.candidate.json');
   const planPath = cliString(args, 'plan', '.media-work/upload-plan.json');
   const dryRun = args.has('dry-run');
+  if (!dryRun) {
+    assertSafeGeneratedPath(`${outputRoot}/v1/.path-check`);
+    assertSafeGeneratedPath(manifestPath);
+    assertSafeGeneratedPath(planPath);
+  }
   const catalog = await readCatalog(catalogPath);
   const baseManifest = JSON.parse(await readFile(repositoryPath(catalog.baseManifest), 'utf8')) as MediaManifest;
   const assets = { ...baseManifest.assets };

@@ -4,7 +4,7 @@ import { readFile, stat } from 'node:fs/promises';
 import { HeadObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { z } from 'zod';
 
-import { CACHE_CONTROL, assertRepositoryRelative, cliString, parseCliArgs, repositoryPath, sha256 } from './contracts';
+import { CACHE_CONTROL, assertRepositoryRelative, assertSafeGeneratedPath, cliString, parseCliArgs, repositoryPath, sha256 } from './contracts';
 
 const uploadObjectSchema = z.object({
   key: z.string().startsWith('v1/'),
@@ -33,8 +33,15 @@ function isMissing(error: unknown): boolean {
   return candidate.name === 'NotFound' || candidate.name === 'NoSuchKey' || candidate.$metadata?.httpStatusCode === 404;
 }
 
-async function verifyLocalObject(object: UploadObject): Promise<void> {
+function isPreconditionConflict(error: unknown): boolean {
+  if (!error || typeof error !== 'object') return false;
+  const candidate = error as { name?: string; $metadata?: { httpStatusCode?: number } };
+  return candidate.name === 'PreconditionFailed' || candidate.$metadata?.httpStatusCode === 412;
+}
+
+async function verifyLocalObject(object: UploadObject, apply: boolean): Promise<void> {
   assertRepositoryRelative(object.localPath, 'Upload localPath');
+  if (apply) assertSafeGeneratedPath(object.localPath);
   assertRepositoryRelative(object.key, 'Upload key');
   const file = await readFile(repositoryPath(object.localPath));
   if (!object.key.includes(object.sha256.slice(0, 12))) throw new Error(`Upload key does not contain its content-hash prefix: ${object.key}`);
@@ -61,7 +68,7 @@ async function main(): Promise<void> {
   assertRepositoryRelative(plan.manifestPath, 'Manifest path');
   await stat(repositoryPath(plan.manifestPath));
   if (new Set(plan.objects.map((object) => object.key)).size !== plan.objects.length) throw new Error('Upload plan contains duplicate object keys.');
-  for (const object of plan.objects) await verifyLocalObject(object);
+  for (const object of plan.objects) await verifyLocalObject(object, apply);
 
   console.log(`${apply ? '[apply]' : '[dry-run]'} immutable R2 upload plan: ${plan.objects.length} object(s).`);
   for (const object of plan.objects) {
@@ -69,7 +76,7 @@ async function main(): Promise<void> {
   }
   if (!apply) {
     console.log('[dry-run] No credentials were read and no network request was made.');
-    console.log('[dry-run] Apply mode would HEAD every key, upload only missing keys, and HEAD-verify bytes, type, cache policy, and sha256 metadata.');
+    console.log('[dry-run] Apply mode would HEAD every key, atomically create only missing keys with If-None-Match: *, and HEAD-verify bytes, type, cache policy, and sha256 metadata.');
     return;
   }
 
@@ -96,15 +103,23 @@ async function main(): Promise<void> {
       console.log(`verified existing immutable object: ${object.key}`);
       continue;
     }
-    await client.send(new PutObjectCommand({
-      Bucket: bucket,
-      Key: object.key,
-      Body: createReadStream(repositoryPath(object.localPath)),
-      ContentLength: object.bytes,
-      ContentType: object.contentType,
-      CacheControl: object.cacheControl,
-      Metadata: { sha256: object.sha256 },
-    }));
+    try {
+      await client.send(new PutObjectCommand({
+        Bucket: bucket,
+        Key: object.key,
+        Body: createReadStream(repositoryPath(object.localPath)),
+        ContentLength: object.bytes,
+        ContentType: object.contentType,
+        CacheControl: object.cacheControl,
+        Metadata: { sha256: object.sha256 },
+        IfNoneMatch: '*',
+      }));
+    } catch (error) {
+      if (!isPreconditionConflict(error)) throw error;
+      await verifyRemoteHead(client, bucket, object);
+      console.log(`verified concurrently created immutable object: ${object.key}`);
+      continue;
+    }
     await verifyRemoteHead(client, bucket, object);
     console.log(`uploaded and verified immutable object: ${object.key}`);
   }

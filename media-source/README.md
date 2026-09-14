@@ -13,6 +13,8 @@ The catalog records semantic facts only:
 
 Allowed roles are `hero`, `cover`, `gallery`, `rail`, `poster`, `satellite`, `filmstrip`, `bts`, `preview`, `full-film`, `about`, and `social`. Layout coordinates, percentages, CSS, animation values, camera filenames, and absolute local paths are rejected.
 
+Non-dry-run sources must live in an explicitly ignored intake/work root (`media-source/masters/`, `media-source/prepared/`, `.media-work/`, or `work/`) and pass `git check-ignore`. Prepared output, candidate manifests, and upload plans are likewise limited to ignored roots. The checked-in `public/mock-media/` fixture is accepted only for dry-run inspection.
+
 `generatedAt` is deliberately authored rather than generated from the wall clock, so identical catalog/source inputs produce identical derivatives, object keys, fingerprints, and candidate manifests. `baseManifest` lets a release replace named entries without making the application query R2.
 
 The checked-in examples are non-production fixtures:
@@ -30,6 +32,8 @@ npm run media:publish -- --plan .media-work/upload-plan.json --dry-run
 # Only after owner authorization and secrets are present:
 npm run media:publish -- --plan .media-work/upload-plan.json --apply
 ```
+
+For a local browser preview, use `--output public/mock-media`. The generated immutable keys are staged below ignored `public/mock-media/v1/`; development `/mock-media` URLs therefore resolve them without R2. Temporarily place the candidate manifest/content references in the working tree, run `npm run dev`, and commit only approved metadata—not the staged binaries.
 
 Image preparation normalizes orientation, converts to sRGB, strips source metadata, prevents upscaling, and writes AVIF/WebP/JPEG derivatives at the approved 640/1280/1920/2560 ladder. 3200 px is opt-in per asset. It never sharpens, denoises, or performs a generative edit.
 

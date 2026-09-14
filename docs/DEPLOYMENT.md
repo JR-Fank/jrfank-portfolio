@@ -49,17 +49,18 @@ All project slugs are generated from `src/content/`. Media uses pre-generated va
 
 ## 4. Package scripts and build gates
 
-Conceptual scripts for the implementation phase:
+Implemented repository scripts:
 
 ```json
 {
   "scripts": {
     "dev": "next dev",
-    "validate": "content and manifest validation",
+    "validate": "content validation + media:validate",
     "build": "npm run validate && next build",
-    "test": "unit tests",
-    "test:e2e": "Playwright suite",
-    "check": "lint + typecheck + unit tests + build"
+    "check": "typecheck + build + client-secret scan + tracked-binary guard",
+    "media:prepare": "typed Sharp preparation + manifest/upload-plan generation",
+    "media:validate": "catalog and manifest validation",
+    "media:publish": "credential-free dry-run or explicitly authorized atomic R2 publish"
   }
 }
 ```
@@ -68,7 +69,7 @@ Cloudflare production build:
 
 ```text
 Install: npm ci
-Build:   npm run build
+Build:   npm run check
 Output:  out
 Branch:  main
 ```
@@ -113,7 +114,7 @@ There are no secrets in the Pages build for normal operation. R2 credentials are
 1. Create/import the GitHub repository in Workers & Pages.
 2. Select **Next.js (Static HTML Export)**.
 3. Set production branch to `main`.
-4. Set build command to `npm run build` and build directory to `out`.
+4. Set build command to `npm run check` and build directory to `out`.
 5. Add the environment variables above separately for production and previews.
 6. Deploy to the generated `*.pages.dev` URL and run the smoke suite.
 7. Add the final custom domain through the Pages project's Custom domains flow.

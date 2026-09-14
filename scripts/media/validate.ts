@@ -1,5 +1,6 @@
 import { readFile } from 'node:fs/promises';
 
+import { loadEnvConfig } from '@next/env';
 import { z } from 'zod';
 
 import { IMAGE_FORMATS, IMAGE_WIDTHS, assertRepositoryRelative, cliString, parseCliArgs, readCatalog, repositoryPath } from './contracts';
@@ -46,7 +47,10 @@ const manifestSchema = z.object({
 function assertEnvironmentContract(): void {
   const publicMedia = process.env.NEXT_PUBLIC_MEDIA_BASE_URL;
   const canonicalMedia = process.env.MEDIA_URL;
-  if (publicMedia && canonicalMedia && publicMedia !== canonicalMedia) {
+  if (Boolean(publicMedia) !== Boolean(canonicalMedia)) {
+    throw new Error('NEXT_PUBLIC_MEDIA_BASE_URL and MEDIA_URL must either both be set or both be absent.');
+  }
+  if (publicMedia !== canonicalMedia) {
     throw new Error('NEXT_PUBLIC_MEDIA_BASE_URL and MEDIA_URL must resolve to the same media base URL.');
   }
   for (const key of Object.keys(process.env)) {
@@ -68,6 +72,7 @@ async function main(): Promise<void> {
   const catalogPath = cliString(args, 'catalog', 'media-source/catalog.json');
   const production = args.has('production');
   assertRepositoryRelative(manifestPath, 'Manifest');
+  loadEnvConfig(process.cwd());
   assertEnvironmentContract();
   await readCatalog(catalogPath);
 

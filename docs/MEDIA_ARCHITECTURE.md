@@ -18,7 +18,7 @@ Production photography, video, and derived variants do not enter Git. Git contai
 - content metadata;
 - a generated manifest with object keys, formats, dimensions, sizes, hashes, and accessibility metadata;
 - tiny representative mock assets under `public/mock-media/`;
-- preparation and validation scripts once those are implemented.
+- repository-owned preparation, validation, video, publish, and safety-check scripts.
 
 ## 2. Environment contract
 

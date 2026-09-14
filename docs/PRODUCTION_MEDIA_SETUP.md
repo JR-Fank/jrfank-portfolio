@@ -73,7 +73,11 @@ Cache-Control: public, max-age=31536000, immutable
 x-amz-meta-sha256: <full SHA-256 from upload plan>
 ```
 
-The publisher performs `HEAD`, uploads only missing keys, refuses mismatched existing objects, and performs a second `HEAD` after upload. Never overwrite a hashed object. Configure/cache through the custom media domain, then verify image responses plus MP4 progressive start, seek, range responses, MIME type, CORS, and cache headers through that hostname.
+The publisher performs `HEAD`, uses atomic `If-None-Match: *` creation for a missing key, resolves a concurrent `412 Precondition Failed` only by verifying the winner, and performs a second `HEAD` after its own upload. It never issues an unconditional write and refuses every existing-object mismatch.
+
+After the custom domain is active, open **Rules → Cache Rules** for its zone and create a rule scoped only to `Hostname equals <confirmed-media-hostname>`. Set cache eligibility to **Eligible for cache**, make Edge TTL honor the origin `Cache-Control` header, and keep Browser TTL respecting the existing header. Do not use a broad site-wide cache-everything rule. Request the same immutable object twice through the custom hostname and confirm `Cache-Control: public, max-age=31536000, immutable`; confirm the later response has an expected Cloudflare cache status/age before publishing the full set.
+
+Then verify images plus MP4 progressive start, seek, range responses, MIME type, CORS, and cache headers through that hostname. Purge only when a configuration change such as CORS requires it; content-hashed objects normally do not need purging.
 
 ## 6. Cloudflare Pages project
 
@@ -102,6 +106,12 @@ NEXT_PUBLIC_SITE_INDEXABLE=false
 ```
 
 7. Confirm the build emits all 18 static entries to `out/` and creates no Function/Worker/runtime artifact.
+
+### Local candidate preview without committed binaries
+
+Keep development mode at `/mock-media`. To preview prepared `v1/` candidates locally, run preparation with `--output public/mock-media`; generated files land under ignored `public/mock-media/v1/`, so a manifest key such as `v1/stills/...` resolves at `/mock-media/v1/stills/...` during `npm run dev`. Review the generated candidate, then place its metadata in the working-tree `src/generated/media-manifest.json` and update content IDs as reviewable, uncommitted changes. Do not commit the staged binary directory. After review, restore or commit only the approved manifest/content changes and remove the ignored local staging copies.
+
+This preview path is not an environment switch and does not affect the current 24-entry mock manifest or current routes. A candidate manifest entry cannot display until a working-tree content reference selects its media ID.
 
 ## 7. Owner publish sequence
 

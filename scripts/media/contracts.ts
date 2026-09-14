@@ -1,4 +1,5 @@
 import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 import { isAbsolute, normalize, resolve } from 'node:path';
 
@@ -139,6 +140,41 @@ export function repositoryPath(path: string): string {
   return resolve(process.cwd(), path);
 }
 
+const ignoredMediaRoots = ['.media-work/', 'work/', 'media-source/masters/', 'media-source/prepared/'];
+const ignoredGeneratedRoots = ['.media-work/', 'work/', 'media-source/prepared/', 'public/mock-media/v1/'];
+
+function hasRoot(path: string, roots: readonly string[]): boolean {
+  const normalized = normalize(path).replaceAll('\\', '/').replace(/^\.\//, '');
+  return roots.some((root) => normalized.startsWith(root));
+}
+
+function assertGitIgnored(path: string, label: string): void {
+  try {
+    execFileSync('git', ['check-ignore', '--quiet', '--no-index', path], { stdio: 'ignore' });
+  } catch {
+    throw new Error(`${label} must be covered by the repository ignore policy: ${path}`);
+  }
+}
+
+export function assertSafeMediaSource(path: string, allowTrackedMock = false): void {
+  assertRepositoryRelative(path, 'Media source');
+  const normalized = normalize(path).replaceAll('\\', '/').replace(/^\.\//, '');
+  if (allowTrackedMock && normalized.startsWith('public/mock-media/') && !normalized.startsWith('public/mock-media/v1/')) return;
+  if (!hasRoot(normalized, ignoredMediaRoots)) {
+    throw new Error(`Production media source must be inside an ignored intake/work root: ${path}`);
+  }
+  assertGitIgnored(normalized, 'Production media source');
+}
+
+export function assertSafeGeneratedPath(path: string): void {
+  assertRepositoryRelative(path, 'Generated media path');
+  const normalized = normalize(path).replaceAll('\\', '/').replace(/^\.\//, '');
+  if (!hasRoot(normalized, ignoredGeneratedRoots)) {
+    throw new Error(`Generated media must stay inside an ignored preparation/preview root: ${path}`);
+  }
+  assertGitIgnored(normalized, 'Generated media path');
+}
+
 export async function readCatalog(path: string): Promise<MediaCatalog> {
   assertRepositoryRelative(path, 'Catalog');
   const raw = JSON.parse(await readFile(repositoryPath(path), 'utf8')) as unknown;
@@ -154,7 +190,6 @@ export function semanticLeaf(id: string): string {
 }
 
 export function assertSemanticSource(source: string): void {
-  assertRepositoryRelative(source, 'Media source');
   const filename = source.split('/').at(-1) ?? source;
   if (/(?:^|[-_.])(img|dsc)[-_.]?\d+/i.test(filename)) {
     throw new Error(`Camera filename is not permitted in media intake: ${filename}`);
