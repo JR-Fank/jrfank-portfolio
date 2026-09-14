@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "generatedAt": "2026-09-14T00:00:00.000Z",
+  "release": "foundation-dry-run",
+  "baseManifest": "src/generated/media-manifest.json",
+  "assets": [
+    {
+      "kind": "image",
+      "id": "site.validation.social-default",
+      "scope": "site",
+      "project": "validation",
+      "role": "social",
+      "source": "public/mock-media/site/social/social-default-1200-mockv1.jpg",
+      "title": {
+        "en": "Foundation validation asset",
+        "zhHant": "基礎驗證素材"
+      },
+      "description": {
+        "en": "Existing project-owned mock copied only for safe dry-run inspection.",
+        "zhHant": "只用現有專案自有示意素材進行安全的 dry-run 檢查。"
+      },
+      "alt": "Project-owned blue portfolio field used to validate the production image pipeline",
+      "focalPoint": { "x": 0.5, "y": 0.5 },
+      "dominantColor": "#27465a",
+      "order": 0,
+      "allow3200": false
+    }
+  ]
+}

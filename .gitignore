@@ -12,6 +12,14 @@ out/
 
 # Temporary validation artifacts and local caches
 work/
+.media-work/
+# Production masters and prepared derivatives never belong in Git. The catalog
+# and examples remain tracked; only binary intake/output locations are ignored.
+/media-source/masters/
+/media-source/prepared/
+/public/production-media/
+# Local candidate preview copies keep their v1/ keys but remain mock-served and untracked.
+/public/mock-media/v1/
 .playwright-cli/
 /outputs/*.mp4
 /outputs/**/*.mp4

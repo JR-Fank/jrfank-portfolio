@@ -1,9 +1,15 @@
 # Project State
 
+Stable-state update: **PRODUCTION MEDIA FOUNDATION — APPROVED**. The human-approved `production-media` candidate at `e628abf2a0b73282e217d440faef5661ad5aef46` is squash-promoted to `main` as `feat: establish production media foundation`. The repository now contains the approved typed media intake, deterministic image/manifest preparation, video validation, immutable R2 publishing, safety guards, and Cloudflare/Admin architecture contracts. No Cloudflare resource was created, no R2 request was made, no production binary was committed, and no route or content selection was switched away from `/mock-media` during promotion.
+
 Stable-state update: STEP 3E — MOTION EXPERIENCE has passed final human visual review. The approved `step3e-motion` source branch is squash-promoted to `main`; its detailed implementation and checkpoint history remains on the phase branch. The Home/About measurements below remain historical validation evidence.
 
 ## Current status
 
+- **PRODUCTION MEDIA FOUNDATION — APPROVED and squash-promoted to `main`.**
+- Approved source branch: `production-media`; approved candidate: `e628abf2a0b73282e217d440faef5661ad5aef46`.
+- Foundation verification passes `npm run check`, including the unchanged 18/18 static export, manifest/content validation, client secret scan, and production-binary tracking guard.
+- Real Cloudflare resources/domains, final production media, an actual R2 publish, the final content switch, and the future protected Online Admin remain unresolved.
 - **STEP 3E — MOTION EXPERIENCE: HUMAN APPROVED**.
 - **STEP 3E-A — MOTION INDEX: HUMAN APPROVED**.
 - **STEP 3E-B — MOTION CASES: HUMAN APPROVED**.
@@ -40,6 +46,23 @@ Stable-state update: STEP 3E — MOTION EXPERIENCE has passed final human visual
 11. STEP 3D — Stills (human-approved and merged)
 12. STEP 3E-A — Motion content foundation and Motion Index (human-approved)
 13. STEP 3E-B — Motion cases (human-approved and merged as part of STEP 3E)
+14. Production Media Foundation (human-approved and squash-promoted)
+
+## Approved Production Media Foundation systems
+
+- Typed, Git-tracked media intake catalog with constrained roles and bilingual metadata.
+- Sharp image preparation with orientation normalization, sRGB conversion, private metadata removal, and no upscaling.
+- Semantic immutable object keys containing content hashes.
+- AVIF, WebP, and JPEG production derivatives on the approved width ladder.
+- Deterministic production manifest candidate and upload-plan tooling.
+- H.264/yuv420p/faststart video command planning and ffprobe validation with explicit audio policy.
+- Credential-free R2 publish dry-run.
+- Conditional immutable R2 publishing with atomic `If-None-Match: *` creation and exact remote verification.
+- Client-output secret scanning and repository binary tracking guards.
+- Cloudflare Pages/R2 owner operations documentation.
+- Separate future protected Online Admin architecture contract.
+
+The foundation approval does not create or configure Cloudflare resources, publish media, supply final production assets, switch current content away from `/mock-media`, or authorize the Online Admin subphase. `../outputs/PRODUCTION_MEDIA_FOUNDATION_SUMMARY.md` preserves the approved candidate evidence; its awaiting-review label is historical and is superseded by this approval record.
 
 ## Approved STEP 3E systems
 
@@ -195,6 +218,6 @@ Do not omit or silently redefine these limitations in future phase reports.
 
 ## Next phase
 
-STEP 3E — MOTION EXPERIENCE is complete and human-approved. No subsequent phase is authorized. A future phase must begin only with explicit user authorization after reading the repository documentation and verifying the current branch/HEAD. Do not restart STEP 3E, silently treat temporary films/audio as production-ready, or deploy automatically.
+The Production Media Foundation is complete and human-approved. No subsequent production-media operation is authorized. Do not create/change Cloudflare resources, publish to R2, switch content to production media, or begin the Online Admin subphase without fresh explicit authorization. STEP 3E remains complete and human-approved; do not restart it or silently treat temporary films/audio as production-ready.
 
 The unchanged AGENTS.md sentence that STEP 3D has not started describes the original R4 baseline and is superseded by this approved project-state record. The STEP 3D and STEP 3E reports remain durable evidence; their status is superseded by the explicit approval records above where applicable.

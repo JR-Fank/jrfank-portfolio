@@ -2,6 +2,8 @@
 
 This repository is the durable source of truth. A new Codex session must not rely on previous chat history.
 
+Current stable state: **PRODUCTION MEDIA FOUNDATION — APPROVED and squash-promoted to `main`.** The approved source candidate is `production-media` at `e628abf2a0b73282e217d440faef5661ad5aef46`; its repository-only implementation created no Cloudflare resource, made no R2 request, committed no production binary, and changed no approved route or current `/mock-media` content selection. Read `outputs/PRODUCTION_MEDIA_FOUNDATION_SUMMARY.md`, `docs/PRODUCTION_MEDIA_SETUP.md`, and `docs/ADMIN_MEDIA_ARCHITECTURE.md` before any continuation. The report's awaiting-review label is historical and superseded by this approval record.
+
 ## Before editing
 
 1. Read `AGENTS.md`.
@@ -13,6 +15,10 @@ This repository is the durable source of truth. A new Codex session must not rel
 
 ## Current baseline
 
+- **PRODUCTION MEDIA FOUNDATION — APPROVED and squash-promoted to `main`.**
+- Approved source branch: `production-media`; approved candidate: `e628abf2a0b73282e217d440faef5661ad5aef46`.
+- Completed foundation: typed media intake catalog; Sharp image preparation; immutable hashed object keys; AVIF/WebP/JPEG production derivatives; production manifest tooling; video planning/validation; credential-free R2 dry-run; conditional immutable R2 publishing; client/repository secret and binary guards; Cloudflare Pages/R2 operations documentation; and the future Admin architecture contract.
+- Foundation verification passes `npm run check` with the unchanged 18/18 static export.
 - **STEP 3E — MOTION EXPERIENCE: HUMAN APPROVED and squash-promoted to `main`.**
 - **STEP 3E-A — MOTION INDEX: HUMAN APPROVED.**
 - **STEP 3E-B — MOTION CASES: HUMAN APPROVED.**
@@ -44,6 +50,10 @@ Known P1/P2/P3 limitations are recorded in `docs/PROJECT_STATE.md` and must rema
 
 ## Unresolved production items
 
+- Real Cloudflare resources and final site/media domains are not configured.
+- Final production media has not been supplied or published to R2.
+- Current content still resolves through the approved `/mock-media` behavior; the final production content/manifest switch is not authorized.
+- The protected Online Admin remains an unimplemented later subphase.
 - P1: temporary Home Hero footage must be replaced with the user's final footage before production release.
 - P1: final project-owned Motion preview/full-film sources and the approved audio policy remain unresolved.
 - P2: final licensed display/UI fonts; final bilingual Motion identity/copy/credits; user photography archive; Stills palette/grain polish; asset-specific hero layering; case crop/spacing polish.
@@ -53,7 +63,7 @@ Approval does not resolve these items or the P3 asset-dependent crops/micro-spac
 
 ## Next phase
 
-STEP 3E is complete. No subsequent phase is authorized. A future phase must start only in a fresh explicitly authorized session after reading the required project documents and verifying Git. Do not restart or redesign the approved Motion experience, mark temporary films/audio production-ready, or deploy automatically.
+The Production Media Foundation and STEP 3E are complete. No subsequent phase or production-media operation is authorized. A future phase must start only in a fresh explicitly authorized session after reading the required project documents and verifying Git. Do not create Cloudflare resources, publish to R2, switch final content, begin the Online Admin, restart or redesign the approved Motion experience, mark temporary films/audio production-ready, or deploy automatically.
 
 Read the STEP 3E-A and STEP 3E-B summary/fidelity reports in `../outputs/` for the human-approved structure, measurements, recordings and remaining Motion production issues. STEP 3D evidence remains in its corresponding reports. The historical not-started sentence in unchanged `AGENTS.md` is superseded by `docs/PROJECT_STATE.md`.
 

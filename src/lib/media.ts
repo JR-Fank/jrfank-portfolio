@@ -31,6 +31,9 @@ const videoAssetSchema = z.object({
   aspectRatio: z.number().positive(),
   duration: z.number().nonnegative(),
   posterId: z.string().min(1),
+  role: z.enum(['preview', 'full-film']).optional(),
+  audioPolicy: z.enum(['muted-preview-user-gesture-full-audio', 'muted-preview-muted-full']).optional(),
+  hasAudio: z.boolean().optional(),
   variants: z.array(mediaVariantSchema),
 });
 
