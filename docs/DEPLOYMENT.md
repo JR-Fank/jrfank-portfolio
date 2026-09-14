@@ -1,6 +1,6 @@
 # Deployment Specification
 
-Status: Step 2 specification only  
+Status: production-media repository foundation implemented; Cloudflare resources and production domains remain owner setup
 Production topology: GitHub → Cloudflare Pages → custom site domain; media → Cloudflare R2 → custom media domain
 
 ## 1. Does Cloudflare Pages fully fit?
@@ -333,4 +333,3 @@ Until then, adding a Worker or server is unnecessary complexity.
 - Cloudflare R2 CORS: <https://developers.cloudflare.com/r2/buckets/cors/>
 - Cloudflare R2 upload objects: <https://developers.cloudflare.com/r2/objects/upload-objects/>
 - Cloudflare Cache with R2: <https://developers.cloudflare.com/cache/interaction-cloudflare-products/r2/>
-

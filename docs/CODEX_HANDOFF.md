@@ -2,6 +2,8 @@
 
 This repository is the durable source of truth. A new Codex session must not rely on previous chat history.
 
+Current branch-scoped phase: **PRODUCTION MEDIA FOUNDATION CANDIDATE — AWAITING REVIEW** on `production-media`. The implementation is repository-only and has not created Cloudflare resources, contacted R2, committed production binaries, changed approved routes, or merged to `main`. Read `outputs/PRODUCTION_MEDIA_FOUNDATION_SUMMARY.md`, `docs/PRODUCTION_MEDIA_SETUP.md`, and `docs/ADMIN_MEDIA_ARCHITECTURE.md` before any continuation. Publishing, Cloudflare setup, final-media replacement, merge, and the future Admin require separate authorization.
+
 ## Before editing
 
 1. Read `AGENTS.md`.

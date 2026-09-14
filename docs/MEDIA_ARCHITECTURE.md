@@ -1,6 +1,6 @@
 # Media Architecture Specification
 
-Status: Step 2 specification only  
+Status: production-media foundation implemented; final assets/domain and owner-run R2 setup pending
 Goal: keep code and media independent while preserving deterministic layout, responsive delivery, and static hosting
 
 ## 1. Architecture decision
@@ -210,7 +210,7 @@ Layout CSS and the `sizes` mapping must be changed together. Visual regression a
 
 ## 7. Image preparation pipeline
 
-This section specifies later scripts; it does not implement them.
+This pipeline is implemented by the repository-owned `media:*` scripts and the typed catalog under `media-source/`. Production execution remains owner-authorized; normal checks are credential-free.
 
 ```text
 owned master
@@ -228,12 +228,12 @@ owned master
   → HEAD/GET verify custom-domain responses
 ```
 
-Recommended implementation tools for Step 3:
+Implemented foundation tools:
 
 - Node/TypeScript + Sharp/libvips for raster processing;
-- `exiftool` or Sharp metadata inspection for privacy checks;
-- a perceptual QA contact sheet for each project;
-- AWS S3 SDK, `rclone`, or Wrangler for R2 upload.
+- ffmpeg command plans plus ffprobe validation for video;
+- AWS S3 SDK for immutable, verified R2 upload;
+- human visual review remains required for each final asset/contact sheet.
 
 Starting quality values—not immutable rules—may be AVIF 55, WebP 78, and JPEG 84. Photography must be compared at 100% and at final display size. Gradients, fine foliage, skin texture, and dark noise may require per-asset overrides recorded in source metadata, not hidden in the processing script.
 
@@ -398,4 +398,3 @@ Never delete objects merely because they are absent from the newest manifest. A 
 - R2 CORS: <https://developers.cloudflare.com/r2/buckets/cors/>
 - R2 upload methods and metadata: <https://developers.cloudflare.com/r2/objects/upload-objects/>
 - Cloudflare cache with R2: <https://developers.cloudflare.com/cache/interaction-cloudflare-products/r2/>
-
