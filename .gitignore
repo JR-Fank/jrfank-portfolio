@@ -9,6 +9,7 @@ out/
 !.env.example
 .dev.vars
 .dev.vars.*
+!admin/.dev.vars.example
 
 # Temporary validation artifacts and local caches
 work/
@@ -32,6 +33,7 @@ work/
 .turbo/
 .vercel/
 .wrangler/
+/admin/dist/
 coverage/
 playwright-report/
 test-results/

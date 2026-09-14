@@ -1,0 +1,7 @@
+# Safe local-only mock mode. Copy to .dev.vars; never commit .dev.vars.
+ADMIN_ENVIRONMENT=local
+ADMIN_AUTH_MODE=local-mock
+
+# Required bindings use deliberately invalid placeholders in local mock mode.
+TEAM_DOMAIN=https://replace-with-team.cloudflareaccess.com
+POLICY_AUD=replace-with-access-application-audience

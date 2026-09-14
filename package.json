@@ -2,6 +2,9 @@
   "name": "editorial-photography-portfolio",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "admin"
+  ],
   "scripts": {
     "dev": "next dev",
     "validate": "tsx scripts/validate-content.ts && npm run media:validate",
@@ -14,7 +17,9 @@
     "media:video:plan": "tsx scripts/media/video.ts plan",
     "media:video:validate": "tsx scripts/media/video.ts validate",
     "media:verify-client": "tsx scripts/media/verify-client.ts",
-    "media:verify-repository": "tsx scripts/media/verify-repository.ts"
+    "media:verify-repository": "tsx scripts/media/verify-repository.ts",
+    "admin:dev": "npm run dev --workspace @jrfank/online-admin",
+    "admin:check": "npm run check --workspace @jrfank/online-admin"
   },
   "dependencies": {
     "@fontsource/cormorant-garamond": "^5.3.0",
